@@ -1,3 +1,7 @@
+/* Google-hosted display fonts. Swap for bundled .woff2 files here if the
+   deployed game must run fully offline. */
+@import url("https://fonts.googleapis.com/css2?family=MedievalSharp&family=Silkscreen:wght@400;700&display=swap");
+
 /* ============================================================
    MISSION: REINFORCEABLE — WOOD / SCROLL RPG SKIN
    Visual-only layer. JavaScript IDs and game behavior stay intact.
@@ -21,6 +25,8 @@
   --green-dark: #14732c;
   --button-edge: #f1df67;
   --cream: #fff1cd;
+  --font-fantasy: "MedievalSharp", "Copperplate", Georgia, serif;
+  --font-pixel: "Silkscreen", "Courier New", monospace;
 }
 
 *,
@@ -268,6 +274,70 @@ h2,
 #story-text::before { left: -17px; }
 #story-text::after { right: -17px; }
 
+.landing-welcome {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  white-space: normal;
+}
+
+.landing-wizard-portrait {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  padding: 4px;
+  overflow: hidden;
+  background: rgba(38, 27, 59, .88);
+  border: 3px solid #6a3915;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .25);
+}
+
+.landing-wizard-portrait img {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.landing-welcome-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.landing-welcome-heading {
+  color: #2a180c;
+  font-size: 1.08em;
+  letter-spacing: -.035em;
+  text-shadow: 0 1px rgba(255, 244, 201, .65);
+}
+
+.landing-welcome-body {
+  font-size: .84em;
+  line-height: 1.35;
+}
+
+.landing-mission-prompt {
+  color: #44240f;
+  font-size: .91em;
+}
+
+.landing-wizard-line {
+  font-size: .84em;
+  font-weight: 700;
+  opacity: .78;
+}
+
 /* Three mission scrolls */
 #choices {
   width: 100%;
@@ -508,6 +578,16 @@ body.playing-mission #choices > button {
     padding: 20px 22px;
   }
 
+  .landing-welcome {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .landing-wizard-portrait {
+    width: 68px;
+    height: 68px;
+  }
+
   .mission-intro {
     margin: 0 12px;
   }
@@ -574,45 +654,49 @@ body.playing-mission #choices > button {
   }
 }
 
-/* Compact desktop landing composition. The :has() guard keeps these
+/* Compact desktop landing composition. The explicit body class keeps these
    proportions off gameplay answer screens and progress/detail views. */
+body.start-screen #feedback {
+  display: none;
+}
+
 @media (min-width: 901px) {
-  body:has(#choices > .mission-intro .mission-grid) #game-container {
+  body.start-screen #game-container {
     padding: 9px 38px 12px;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) h1 {
+  body.start-screen h1 {
     font-size: clamp(1.75rem, 2.65vw, 2.3rem);
     line-height: .9;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) #scenario-title {
+  body.start-screen #scenario-title {
     margin: 0 auto 2px;
     font-size: clamp(.92rem, 1.45vw, 1.22rem);
   }
 
-  body:has(#choices > .mission-intro .mission-grid) #toolbar {
+  body.start-screen #toolbar {
     position: relative;
     display: block;
-    min-height: 110px;
-    margin: 0 0 6px;
+    min-height: 48px;
+    margin: 0 0 4px;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) #hearts-display {
+  body.start-screen #hearts-display {
     position: absolute;
     top: -43px;
     left: 2px;
     min-height: 40px;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) .zelda-heart {
+  body.start-screen .zelda-heart {
     width: 34px;
     height: 31px;
     flex-basis: 34px;
   }
 
   /* Cosmetic status meter; no game state is attached yet. */
-  body:has(#choices > .mission-intro .mission-grid) #toolbar::after {
+  body.start-screen #toolbar::after {
     content: "";
     position: absolute;
     top: -35px;
@@ -630,71 +714,341 @@ body.playing-mission #choices > button {
       0 0 14px rgba(61, 232, 255, .65);
   }
 
-  body:has(#choices > .mission-intro .mission-grid) #feedback {
-    position: absolute;
-    top: 25px;
-    right: 26px;
-    width: min(620px, 52vw);
-    min-height: 68px;
-    padding: 6px 12px;
-  }
-
-  body:has(#choices > .mission-intro .mission-grid) #coach-icon {
-    width: 52px;
-    height: 52px;
-    flex-basis: 52px;
-  }
-
-  body:has(#choices > .mission-intro .mission-grid) #feedback-text {
-    font-size: clamp(.84rem, 1.15vw, 1rem);
-  }
-
-  body:has(#choices > .mission-intro .mission-grid) #story-text {
-    min-height: 112px;
-    margin: 0 14px 18px;
-    padding: 14px 27px;
+  body.start-screen #story-text {
+    min-height: 116px;
+    margin: 0 14px 16px;
+    padding: 11px 27px;
     font-size: clamp(.9rem, 1.25vw, 1.08rem);
-    line-height: 1.3;
+    line-height: 1.25;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) .mission-intro {
+  body.start-screen .landing-welcome {
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 17px;
+  }
+
+  body.start-screen .landing-wizard-portrait {
+    width: 82px;
+    height: 82px;
+  }
+
+  body.start-screen .mission-intro {
     margin: 0 18px;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) .mission-grid {
+  body.start-screen .mission-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(25px, 3.2vw, 42px);
   }
 
-  body:has(#choices > .mission-intro .mission-grid) .mission-card {
+  body.start-screen .mission-card {
     min-height: 112px;
     padding: 13px 15px 12px;
     gap: 8px;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) .mission-card h3 {
+  body.start-screen .mission-card h3 {
     font-size: clamp(1rem, 1.48vw, 1.3rem);
   }
 
-  body:has(#choices > .mission-intro .mission-grid) .mission-card .action button {
+  body.start-screen .mission-card .action button {
     min-height: 44px;
     padding: 6px 9px;
     font-size: clamp(.76rem, 1.08vw, 1rem);
   }
 
-  body:has(#choices > .mission-intro .mission-grid) #bottom-action-slot {
+  body.start-screen #bottom-action-slot {
     width: min(660px, 58%);
     margin-top: 24px;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) #bottom-action-slot .utility-actions {
+  body.start-screen #bottom-action-slot .utility-actions {
     gap: 26px;
   }
 
-  body:has(#choices > .mission-intro .mission-grid) #bottom-action-slot .ghost {
+  body.start-screen #bottom-action-slot .ghost {
     min-height: 46px;
     padding-top: 6px;
     padding-bottom: 6px;
+  }
+}
+
+/* ============================================================
+   HIGH-FIDELITY START-SCREEN ART PASS
+   These layers deliberately behave like UI sprites: frame pieces,
+   carved surfaces, inset highlights, and pixel-depth states.
+   ============================================================ */
+@media (min-width: 901px) {
+  body.start-screen #game-container {
+    font-family: var(--font-pixel);
+    background:
+      radial-gradient(ellipse at 50% 48%, transparent 35%, rgba(0, 0, 0, .5) 100%),
+      repeating-linear-gradient(0deg, transparent 0 28px, rgba(255, 195, 116, .025) 29px 30px),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, .08) 0 2px, transparent 2px 48px),
+      linear-gradient(90deg, #160c08, #2a170e 16%, #201109 50%, #2b180f 84%, #140b07);
+    border: 11px solid #22222a;
+    border-image: repeating-linear-gradient(
+      90deg,
+      #17171c 0 10px,
+      #5d5d68 11px 18px,
+      #2b2b34 19px 62px,
+      #111116 63px 69px,
+      #494952 70px 77px
+    ) 11;
+    box-shadow:
+      inset 0 0 0 3px #08080b,
+      inset 0 0 0 6px rgba(123, 123, 137, .42),
+      inset 0 0 48px 15px rgba(0, 0, 0, .72),
+      0 0 0 3px #050505,
+      0 14px 42px rgba(0, 0, 0, .88);
+  }
+
+  body.start-screen #game-container::before {
+    inset: -7px;
+    width: auto;
+    height: auto;
+    border: 0;
+    clip-path: none;
+    background:
+      linear-gradient(135deg, #ffe88c 0 15%, #bf7a20 16% 31%, #5f350c 32% 38%, transparent 39%) top left / 52px 52px no-repeat,
+      linear-gradient(225deg, #ffe88c 0 15%, #bf7a20 16% 31%, #5f350c 32% 38%, transparent 39%) top right / 52px 52px no-repeat,
+      linear-gradient(45deg, #ffe88c 0 15%, #bf7a20 16% 31%, #5f350c 32% 38%, transparent 39%) bottom left / 52px 52px no-repeat,
+      linear-gradient(315deg, #ffe88c 0 15%, #bf7a20 16% 31%, #5f350c 32% 38%, transparent 39%) bottom right / 52px 52px no-repeat;
+    box-shadow: none;
+  }
+
+  body.start-screen #game-container::after {
+    inset: 4px;
+    width: auto;
+    height: auto;
+    border: 2px solid rgba(126, 126, 140, .52);
+    border-radius: 0;
+    clip-path: none;
+    background: transparent;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .65);
+  }
+
+  body.start-screen h1 {
+    color: #edc268;
+    font-family: var(--font-fantasy);
+    font-weight: 400;
+    letter-spacing: .015em;
+    text-shadow:
+      0 1px 0 #fff0a8,
+      0 3px 0 #5e330e,
+      0 5px 0 #090604,
+      0 0 14px rgba(241, 190, 75, .28);
+  }
+
+  body.start-screen #scenario-title {
+    color: #f0c968;
+    font-family: var(--font-pixel);
+    font-weight: 400;
+    letter-spacing: -.045em;
+    text-shadow: 0 2px 0 #3f210c, 0 3px 0 #000;
+  }
+
+  body.start-screen .zelda-heart {
+    image-rendering: pixelated;
+    filter:
+      drop-shadow(0 2px 0 #000)
+      drop-shadow(0 4px 0 #090606)
+      drop-shadow(0 0 6px rgba(255, 48, 38, .62));
+  }
+
+  body.start-screen #toolbar::after {
+    border: 3px solid #bffaff;
+    border-radius: 4px;
+    background:
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, .38) 0 3px, transparent 3px 11px),
+      linear-gradient(180deg, #65f7ff 0 18%, #25bfe8 19% 56%, #176ad2 57% 82%, #0a2a79 83% 100%);
+    outline: 3px solid #07121b;
+    box-shadow:
+      inset 0 0 0 3px #174ea0,
+      inset 0 4px 0 rgba(255, 255, 255, .23),
+      0 3px 0 #020609,
+      0 0 13px rgba(65, 231, 255, .72);
+  }
+
+  body.start-screen #story-text {
+    overflow: visible;
+    color: #201208;
+    background:
+      radial-gradient(circle at 3% 18%, rgba(91, 45, 14, .2) 0 2px, transparent 3px),
+      radial-gradient(circle at 82% 76%, rgba(109, 58, 20, .16) 0 2px, transparent 4px),
+      repeating-linear-gradient(0deg, transparent 0 7px, rgba(102, 52, 17, .025) 8px),
+      linear-gradient(90deg, rgba(103, 50, 13, .22), transparent 8%, transparent 92%, rgba(103, 50, 13, .23)),
+      linear-gradient(180deg, #f8d99c 0%, #efc77f 56%, #daa35d 100%);
+    border: 4px solid #5a2c0d;
+    outline: 2px solid #241206;
+    box-shadow:
+      inset 0 0 0 3px rgba(255, 239, 190, .5),
+      inset 0 8px 12px rgba(91, 44, 12, .12),
+      inset 0 -9px 13px rgba(75, 34, 8, .2),
+      0 7px 0 #0d0603,
+      0 12px 22px rgba(0, 0, 0, .42);
+  }
+
+  body.start-screen #story-text::before,
+  body.start-screen #story-text::after {
+    top: -10px;
+    bottom: -10px;
+    width: 24px;
+    border: 3px solid #3d1d08;
+    border-radius: 5px;
+    background:
+      linear-gradient(90deg, #4a230b 0 13%, #a66529 14% 34%, #efc57d 35% 54%, #8c501e 55% 82%, #3b1b07 83%),
+      repeating-linear-gradient(0deg, transparent 0 11px, rgba(52, 23, 5, .38) 12px 14px);
+    box-shadow:
+      inset 0 0 0 2px rgba(255, 224, 155, .18),
+      0 -5px 0 -2px #bf7a2d,
+      0 5px 0 -2px #63300e,
+      0 4px 0 rgba(0, 0, 0, .48);
+  }
+
+  body.start-screen #story-text::before { left: -18px; }
+  body.start-screen #story-text::after { right: -18px; }
+
+  body.start-screen .landing-wizard-portrait {
+    isolation: isolate;
+    padding: 3px;
+    background:
+      radial-gradient(circle at 50% 36%, rgba(111, 83, 255, .42), transparent 52%),
+      linear-gradient(180deg, #1f1747, #090921);
+    border: 3px solid #f0c36c;
+    border-radius: 3px;
+    outline: 3px solid #4d280c;
+    box-shadow:
+      inset 0 0 0 2px #fff0ac,
+      inset 0 0 16px rgba(5, 3, 24, .8),
+      4px 5px 0 rgba(70, 34, 9, .32);
+  }
+
+  body.start-screen .landing-wizard-portrait::after {
+    content: "✦";
+    position: absolute;
+    z-index: 3;
+    top: 5px;
+    right: 7px;
+    color: #fff2a3;
+    font: 700 13px/1 var(--font-pixel);
+    text-shadow: 0 0 7px #ffe45d;
+  }
+
+  body.start-screen .landing-welcome-copy {
+    gap: 5px;
+    font-family: var(--font-pixel);
+  }
+
+  body.start-screen .landing-welcome-heading {
+    color: #241205;
+    font-size: clamp(.82rem, 1.05vw, 1rem);
+    text-shadow: 0 1px #ffe9b2;
+  }
+
+  body.start-screen .landing-welcome-body,
+  body.start-screen .landing-mission-prompt {
+    font-size: clamp(.67rem, .82vw, .79rem);
+    line-height: 1.35;
+  }
+
+  body.start-screen .landing-mission-prompt {
+    color: #52260d;
+  }
+
+  body.start-screen .landing-wizard-line {
+    color: #6d3b1a;
+    font-size: clamp(.57rem, .7vw, .68rem);
+    letter-spacing: -.025em;
+  }
+
+  body.start-screen .mission-card {
+    background:
+      radial-gradient(circle at 10px 10px, #e8b76f 0 2px, #4c250c 3px 4px, transparent 5px),
+      radial-gradient(circle at calc(100% - 10px) 10px, #e8b76f 0 2px, #4c250c 3px 4px, transparent 5px),
+      repeating-linear-gradient(0deg, transparent 0 14px, rgba(56, 24, 7, .1) 15px 16px),
+      linear-gradient(180deg, #a76438 0%, #8b4a26 54%, #633018 100%);
+    border: 5px solid #2a1206;
+    border-radius: 2px;
+    outline: 2px solid #080402;
+    box-shadow:
+      inset 0 0 0 3px #c27b49,
+      inset 0 6px 0 rgba(255, 211, 153, .12),
+      inset 0 -8px 12px rgba(43, 15, 4, .3),
+      0 7px 0 #0a0402,
+      0 12px 19px rgba(0, 0, 0, .38);
+  }
+
+  body.start-screen .mission-card::before,
+  body.start-screen .mission-card::after {
+    top: -10px;
+    bottom: -10px;
+    width: 21px;
+    border: 3px solid #3e1d08;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #4b2109, #d39751 38%, #f2c77c 50%, #854719 72%, #3a1907);
+    box-shadow: inset 0 0 0 2px rgba(255, 224, 159, .18), 0 4px 0 rgba(0, 0, 0, .42);
+  }
+
+  body.start-screen .mission-card h3 {
+    font-family: var(--font-pixel);
+    letter-spacing: -.055em;
+    text-shadow: 0 2px 0 #000, -1px 0 #000, 1px 0 #000, 0 0 7px rgba(255, 220, 168, .2);
+  }
+
+  body.start-screen .mission-card h3::before {
+    content: "◆";
+    margin-right: 7px;
+    color: #efc56d;
+    font-size: .68em;
+    text-shadow: 0 2px #3a1c08;
+  }
+
+  body.start-screen .mission-card .action button,
+  body.start-screen #bottom-action-slot .ghost {
+    position: relative;
+    isolation: isolate;
+    color: #fff;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, .24) 0 10%, transparent 11% 72%, rgba(0, 0, 0, .18) 73%),
+      linear-gradient(180deg, #75ef4f 0%, #44c93c 48%, #16822e 100%);
+    border: 3px solid #f4df69;
+    border-radius: 0;
+    outline: 3px solid #201006;
+    clip-path: polygon(0 6px, 6px 6px, 6px 0, calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px));
+    box-shadow:
+      inset 0 0 0 3px #176e28,
+      inset 0 5px 0 rgba(217, 255, 178, .35),
+      inset 0 -6px 0 rgba(8, 74, 27, .45),
+      0 5px 0 #071f0d,
+      0 8px 0 #050302;
+    font-family: var(--font-pixel);
+    font-weight: 700;
+    letter-spacing: -.065em;
+    text-shadow:
+      -2px -2px 0 #10200d,
+      2px -2px 0 #10200d,
+      -2px 2px 0 #10200d,
+      2px 2px 0 #10200d,
+      0 3px 0 #071006;
+    transition: transform 90ms steps(2, end), filter 90ms linear, box-shadow 90ms linear;
+  }
+
+  body.start-screen .mission-card .action button:hover,
+  body.start-screen #bottom-action-slot .ghost:hover {
+    filter: brightness(1.13) saturate(1.08);
+    transform: translateY(-2px);
+  }
+
+  body.start-screen .mission-card .action button:active,
+  body.start-screen #bottom-action-slot .ghost:active {
+    transform: translateY(4px);
+    box-shadow:
+      inset 0 0 0 3px #155d24,
+      inset 0 4px 0 rgba(217, 255, 178, .22),
+      inset 0 -3px 0 rgba(8, 74, 27, .34),
+      0 1px 0 #071f0d,
+      0 3px 0 #050302;
   }
 }

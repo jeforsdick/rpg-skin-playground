@@ -609,6 +609,7 @@ function pickScenario(pool, rnd) { return sample(pool, 1, rnd)[0]; }
 
 function renderIntroCards() {
   setPlayMode(false);
+  document.body.classList.add('start-screen');
   
   if (storyText) storyText.classList.remove('same-day-return');
   if (storyText) storyText.style.display = 'block';
@@ -617,7 +618,18 @@ function renderIntroCards() {
   if (scenarioTitle) scenarioTitle.textContent = "Behavior Intervention Simulator";
 
   if (storyText) {
-    storyText.innerHTML = `Welcome to Mission: Reinforceable.\nYou'll step through short scenarios based on your student's Behavior Plan.\n\n<strong>Choose your mission below.</strong>`;
+    storyText.innerHTML = `
+      <div class="landing-welcome">
+        <div class="landing-wizard-portrait">
+          <img src="${WIZ.meh}" alt="MR Wizard">
+        </div>
+        <div class="landing-welcome-copy">
+          <strong class="landing-welcome-heading">Welcome to Mission: Reinforceable.</strong>
+          <span class="landing-welcome-body">You'll step through short scenarios based on your student's Behavior Plan.</span>
+          <strong class="landing-mission-prompt">Choose your mission below.</strong>
+          <em class="landing-wizard-line">*The Wizard will chime in after every move.*</em>
+        </div>
+      </div>`;
   }
 
   const menu = document.createElement('div');
@@ -777,6 +789,7 @@ function newId() { return NEXT_ID++; }
 function startDynamicMission(modeLabel, scn) {
   if (!scn) return;
 
+  document.body.classList.remove('start-screen');
   setPlayMode(true);
 
   currentScenario = scn;

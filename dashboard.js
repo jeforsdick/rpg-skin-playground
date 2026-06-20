@@ -455,6 +455,7 @@ async function openProgressDashboard() {
   const storyText = document.getElementById("story-text");
   const scenarioTitle = document.getElementById("scenario-title");
 
+  document.body.classList.remove("start-screen");
   hideDashboardTopFeedback();
 
   if (storyText) storyText.style.display = "none";
