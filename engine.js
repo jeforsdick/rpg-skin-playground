@@ -611,10 +611,6 @@ function renderIntroCards() {
   setPlayMode(false);
   document.body.classList.add('start-screen');
   const useQuestHub = document.body.classList.contains('skin-quest-hub');
-
-  if (coachImgEl && useQuestHub) {
-    coachImgEl.src = '../wizard-guide.png';
-  }
   
   if (storyText) storyText.classList.remove('same-day-return');
   if (storyText) storyText.style.display = 'block';
@@ -628,7 +624,9 @@ function renderIntroCards() {
       <section class="quest-hero" aria-labelledby="quest-hero-title">
         <div class="quest-hero-art">
           <img src="../quest-map-hero.png" alt="Magical classroom kingdom quest map">
-          <span class="quest-map-label">Classroom Quest Map</span>
+          <div class="quest-map-wizard" aria-label="Wizard guide marker">
+            <img src="../wizard-guide.png" alt="">
+          </div>
         </div>
         <div class="quest-hero-copy">
           <span class="quest-eyebrow">Teacher Quest Hub</span>
