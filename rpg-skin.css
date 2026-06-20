@@ -662,3 +662,206 @@ body.playing-mission #choices > button:hover {
     width: 96vw !important;
   }
 }
+
+/* ============================================================
+   MATCHING WIZARD ICON STYLE
+   ============================================================ */
+
+/* Hide the old wizard image everywhere */
+#coach-img,
+.choice-wizard-icon img,
+.wizard-modal-icon img,
+.wizard-summary-icon img {
+  display: none !important;
+}
+
+/* Make all wizard icon boxes match the "icon card" look */
+#coach-icon,
+.choice-wizard-icon,
+.wizard-modal-icon,
+.wizard-summary-icon {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(180deg, rgba(32, 46, 108, .98), rgba(10, 16, 48, .98)) !important;
+  border: 3px solid var(--rpg-gold) !important;
+  border-radius: 14px !important;
+  box-shadow:
+    0 0 0 2px var(--rpg-gold-dark),
+    inset 0 0 14px rgba(0,0,0,.25),
+    0 8px 18px rgba(0,0,0,.28) !important;
+  overflow: hidden;
+}
+
+/* Use a simple matching icon instead of the old sprite */
+#coach-icon::before,
+.choice-wizard-icon::before,
+.wizard-modal-icon::before,
+.wizard-summary-icon::before {
+  content: "✦";
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  color: #fff4d3;
+  text-shadow:
+    0 2px 0 #000,
+    0 0 14px rgba(231,184,90,.45);
+  line-height: 1;
+}
+
+/* Add a small label so it feels intentional */
+#coach-icon::after,
+.choice-wizard-icon::after,
+.wizard-modal-icon::after,
+.wizard-summary-icon::after {
+  content: "GUIDE";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .52rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  color: var(--rpg-cream);
+  opacity: .9;
+}
+
+/* ============================================================
+   ONE-SCREEN DESKTOP HOMEPAGE
+   ============================================================ */
+
+@media (min-width: 1000px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body.start-screen {
+    overflow: hidden;
+  }
+
+  #game-container {
+    height: calc(100vh - 18px) !important;
+    max-height: calc(100vh - 18px) !important;
+    margin: 9px auto !important;
+    padding: 12px 14px 10px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  /* Top banner smaller */
+  #game-container::before {
+    margin: -4px -2px 8px !important;
+    padding: 10px 16px !important;
+    font-size: 1.2rem !important;
+  }
+
+  h1 {
+    margin: 0 0 4px !important;
+    font-size: clamp(1.85rem, 3vw, 2.6rem) !important;
+  }
+
+  h2,
+  #scenario-title {
+    margin: 0 auto 8px !important;
+    padding: 6px 18px !important;
+    font-size: 1.05rem !important;
+  }
+
+  #toolbar {
+    gap: 8px !important;
+    margin: 0 0 8px !important;
+  }
+
+  #teacher-badge,
+  #score-badge {
+    min-height: 48px !important;
+    padding: 6px 12px !important;
+    font-size: 1rem !important;
+  }
+
+  #hearts-display {
+    min-height: 42px !important;
+    padding: 4px 8px !important;
+  }
+
+  #feedback {
+    min-height: 74px !important;
+    padding: 10px 14px !important;
+  }
+
+  #coach-icon {
+    width: 86px !important;
+    height: 86px !important;
+    flex: 0 0 86px !important;
+  }
+
+  #feedback-text {
+    font-size: 1rem !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Intro/story block smaller */
+  #story-text {
+    padding: 18px 20px !important;
+    margin: 0 0 8px !important;
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Tighten mission section */
+  .mission-intro {
+    margin: 8px 0 !important;
+  }
+
+  .mission-grid {
+    gap: 12px !important;
+  }
+
+  .mission-card {
+    min-height: 168px !important;
+    padding: 12px 10px 10px !important;
+  }
+
+  .mission-card h3 {
+    font-size: 1rem !important;
+    margin: 0 !important;
+  }
+
+  .mission-card p {
+    font-size: .82rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .mission-card:nth-child(1) h3::before,
+  .mission-card:nth-child(2) h3::before,
+  .mission-card:nth-child(3) h3::before {
+    font-size: 2.2rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .mission-card .action button {
+    min-height: 46px !important;
+    font-size: .9rem !important;
+    padding: 8px 10px !important;
+  }
+
+  /* Bottom buttons tighter */
+  #bottom-action-slot {
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+  }
+
+  #bottom-action-slot .utility-actions {
+    gap: 12px !important;
+  }
+
+  #bottom-action-slot .ghost {
+    min-height: 48px !important;
+    padding: 8px 14px !important;
+    font-size: .95rem !important;
+  }
+}
