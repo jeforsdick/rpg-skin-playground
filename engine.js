@@ -46,6 +46,10 @@ const storyText      = document.getElementById('story-text');
 const choicesDiv     = document.getElementById('choices');
 const scenarioTitle  = document.getElementById('scenario-title');
 const pointsEl       = document.getElementById('points');
+const scoreBadgeEl   = document.getElementById('score-badge');
+const questProgressEl = document.querySelector('.quest-progress-stat');
+const questProgressValueEl = document.getElementById('quest-progress-value');
+const questProgressFillEl = document.querySelector('.quest-progress-meter i');
 const feedbackEl     = document.getElementById('feedback');
 const feedbackTextEl = document.getElementById('feedback-text');
 const coachImgEl     = document.getElementById('coach-img');
@@ -88,7 +92,7 @@ function renderHearts() {
     const fillPercent = Math.round(fill * 100);
 
     html += `
-      <span class="zelda-heart" aria-hidden="true" style="--heart-fill: ${fillPercent}%">
+      <span class="zelda-heart ${fill >= 1 ? 'is-full' : fill > 0 ? 'is-partial' : 'is-empty'}" aria-hidden="true" data-fill="${fill}" style="--heart-fill: ${fillPercent}%">
         <img class="heart-icon heart-icon-empty" src="../assets/ui/heart-icon.png" alt="">
         <span class="heart-icon-fill">
           <img class="heart-icon" src="../assets/ui/heart-icon.png" alt="">
@@ -99,6 +103,8 @@ function renderHearts() {
 
   el.innerHTML = html;
   el.setAttribute('aria-label', `${hearts} out of ${maxHearts} hearts`);
+  el.dataset.hearts = String(hearts);
+  el.dataset.maxHearts = String(maxHearts);
 
   el.classList.remove('flash-hearts');
   requestAnimationFrame(() => el.classList.add('flash-hearts'));
@@ -111,17 +117,17 @@ function updateHearts(delta, countsForHearts = true) {
   const before = hearts;
 
   if (delta >= 10) {
-    // Correct answer: no heart change
-    hearts = hearts;
+    // Correct answer: restore half a heart, up to the five-heart maximum.
+    hearts = Math.min(maxHearts, hearts + 0.5);
   } else if (delta >= 5) {
-    // Neutral/meh answer: lose 1/2 heart
-    hearts = Math.max(0, hearts - 0.5);
+    // Partial answer: lose one quarter heart.
+    hearts = Math.max(0, hearts - 0.25);
   } else {
-    // Incorrect/nope answer: lose whole heart
-    hearts = Math.max(0, hearts - 1.0);
+    // Incorrect answer: lose half a heart.
+    hearts = Math.max(0, hearts - 0.5);
   }
 
-  hearts = Math.round(hearts * 4) / 4;
+  hearts = Math.min(maxHearts, Math.max(0, Math.round(hearts * 4) / 4));
 
   console.log(`HEARTS: ${before} → ${hearts}, score: ${delta}`);
 
@@ -130,6 +136,66 @@ function updateHearts(delta, countsForHearts = true) {
 /* -------- Scoring -------- */
 let points     = 0;
 let maxPossible = 0;
+let completedDecisionNodes = 0;
+let totalDecisionNodes = 0;
+
+function countMissionDecisionNodes(scn) {
+  if (!scn || !scn.start || !scn.steps) return 0;
+
+  const memo = new Map();
+  const visiting = new Set();
+
+  function longestPathFrom(stepKey) {
+    if (!stepKey || !scn.steps[stepKey]) return 0;
+    if (memo.has(stepKey)) return memo.get(stepKey);
+    if (visiting.has(stepKey)) return 0;
+
+    visiting.add(stepKey);
+    const choices = Object.values(scn.steps[stepKey].choices || {});
+    const longestRemaining = choices.reduce((longest, choice) => {
+      const nextLength = choice.next ? longestPathFrom(choice.next) : 0;
+      return Math.max(longest, nextLength);
+    }, 0);
+    visiting.delete(stepKey);
+
+    const pathLength = 1 + longestRemaining;
+    memo.set(stepKey, pathLength);
+    return pathLength;
+  }
+
+  return longestPathFrom(scn.start);
+}
+
+function updateGameplayHud(isComplete = false) {
+  const completed = isComplete
+    ? totalDecisionNodes
+    : Math.min(completedDecisionNodes, totalDecisionNodes);
+  const questPercent = totalDecisionNodes > 0
+    ? Math.round((completed / totalDecisionNodes) * 100)
+    : 0;
+  const behaviorXpPercent = maxPossible > 0
+    ? Math.round((points / maxPossible) * 100)
+    : 0;
+  const hudVisible = document.body.classList.contains('playing-mission')
+    || document.body.classList.contains('mission-summary');
+
+  if (questProgressEl) {
+    questProgressEl.hidden = !hudVisible;
+    questProgressEl.dataset.completedDecisions = String(completed);
+    questProgressEl.dataset.totalDecisions = String(totalDecisionNodes);
+    questProgressEl.dataset.progress = String(questPercent);
+    questProgressEl.setAttribute('aria-label', `Quest Progress ${questPercent}%`);
+  }
+  if (questProgressValueEl) questProgressValueEl.textContent = `${questPercent}%`;
+  if (questProgressFillEl) questProgressFillEl.style.width = `${questPercent}%`;
+
+  if (scoreBadgeEl) {
+    scoreBadgeEl.dataset.behaviorXp = String(behaviorXpPercent);
+    scoreBadgeEl.dataset.behaviorXpLabel = `${behaviorXpPercent}%`;
+    scoreBadgeEl.style.setProperty('--behavior-xp-percent', `${behaviorXpPercent}%`);
+    scoreBadgeEl.setAttribute('aria-label', `Behavior XP ${behaviorXpPercent}%`);
+  }
+}
 
 function setPoints(v) {
   points = v;
@@ -149,6 +215,8 @@ function addPoints(delta) {
 function resetGame() {
   points = 0;
   maxPossible = 0;
+  completedDecisionNodes = 0;
+  totalDecisionNodes = 0;
 
   hearts = HEARTS_START;
   maxHearts = HEARTS_START;
@@ -159,6 +227,8 @@ function resetGame() {
 
   setPoints(0);
   renderHearts();
+  document.body.classList.remove('mission-summary');
+  updateGameplayHud();
   showFeedback('', null, 5);
 
   if (scenarioTitle) scenarioTitle.textContent = "Behavior Intervention Simulator";
@@ -526,6 +596,7 @@ saveTodayResult(payload);
 }
 function setPlayMode(isPlaying) {
   document.body.classList.toggle("playing-mission", !!isPlaying);
+  if (isPlaying) document.body.classList.remove('mission-summary');
 }
 /* -------- Utilities -------- */
 function shuffledOptions(options) { return (options || []).map(o => ({...o})).sort(() => Math.random() - 0.5); }
@@ -815,6 +886,9 @@ function startDynamicMission(modeLabel, scn) {
 
   currentScenario = scn;
   DYN = { nodes: [], ids: [] };
+  completedDecisionNodes = 0;
+  totalDecisionNodes = countMissionDecisionNodes(scn);
+  updateGameplayHud();
 
   const stepIds   = {};
   const endingIds = {};
@@ -918,6 +992,9 @@ function showNode(id) {
 
 if (node.feedback) {
   setPlayMode(false);
+  document.body.classList.add('mission-summary');
+  completedDecisionNodes = totalDecisionNodes;
+  updateGameplayHud(true);
   if (storyText) storyText.style.display = 'none';
 
     const pct = percentScore();
@@ -1024,6 +1101,8 @@ const options = shuffledOptions(node.options);
 
   if (!node.feedback && typeof opt.delta === 'number') {
     addPoints(opt.delta);
+    completedDecisionNodes = Math.min(completedDecisionNodes + 1, totalDecisionNodes);
+    updateGameplayHud();
 
     const isContinueButton = /^continue\.?$/i.test((opt.text || '').trim());
 
