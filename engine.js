@@ -623,16 +623,11 @@ function renderIntroCards() {
       ? `
       <section class="quest-hero" aria-labelledby="quest-hero-title">
         <div class="quest-hero-art">
-          <img src="../quest-map-hero.png" alt="Magical classroom kingdom quest map">
-          <div class="quest-map-wizard" aria-label="Wizard guide marker">
-            <img src="../wizard-guide.png" alt="">
+          <img src="../assets/ui/map-quest-background.png" alt="Magical classroom kingdom quest map">
+          <div class="quest-map-caption">
+            <h3 id="quest-hero-title">Your Classroom Kingdom</h3>
+            <button type="button" class="quest-hero-cta">Start Daily Quest</button>
           </div>
-        </div>
-        <div class="quest-hero-copy">
-          <span class="quest-eyebrow">Teacher Quest Hub</span>
-          <h3 id="quest-hero-title">Your Classroom Quest, Mastered.</h3>
-          <p>Practice short behavior-support decisions before the school day.</p>
-          <button type="button" class="quest-hero-cta">Start Daily Quest</button>
         </div>
       </section>`
       : `
@@ -654,7 +649,7 @@ function renderIntroCards() {
   menu.innerHTML = useQuestHub
     ? `
     <article class="quest-card quest-card-daily">
-      <div class="quest-card-icon"><img src="../daily-quest-icon.png" alt=""></div>
+      <div class="quest-card-icon"><img src="../assets/ui/daily-mission-icon.png" alt=""></div>
       <div class="quest-card-copy">
         <span class="quest-card-kicker">Plan Your Day</span>
         <h3>Daily Quest</h3>
@@ -663,7 +658,7 @@ function renderIntroCards() {
       <div class="action"><button id="btn-drill">View Quest</button></div>
     </article>
     <article class="quest-card quest-card-crisis">
-      <div class="quest-card-icon"><img src="../crisis-mission-icon.png" alt=""></div>
+      <div class="quest-card-icon"><img src="../assets/ui/crisis-mission-icon.png" alt=""></div>
       <div class="quest-card-copy">
         <span class="quest-card-kicker">Steady the Moment</span>
         <h3>Crisis Mission</h3>
@@ -672,7 +667,7 @@ function renderIntroCards() {
       <div class="action"><button id="btn-crisis">View Quest</button></div>
     </article>
     <article class="quest-card quest-card-mystery">
-      <div class="quest-card-icon"><img src="../mystery-quest-icon.png" alt=""></div>
+      <div class="quest-card-icon"><img src="../assets/ui/mystery-mission-icon.png" alt=""></div>
       <div class="quest-card-copy">
         <span class="quest-card-kicker">Wildcard Challenge</span>
         <h3>Mystery Quest</h3>
