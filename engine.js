@@ -375,15 +375,20 @@ function showWizardPopup(opt, onContinue) {
   document.body.appendChild(modal);
 
   const continueBtn = document.getElementById('wizard-continue-btn');
+  const continueFromWizard = () => {
+    if (!modal.isConnected) return;
+    modal.remove();
+    document.body.classList.remove('modal-open');
+    onContinue();
+  };
+
   if (continueBtn) {
     continueBtn.focus();
-
-    continueBtn.addEventListener('click', () => {
-      modal.remove();
-      document.body.classList.remove('modal-open');
-      onContinue();
-    });
+    continueBtn.addEventListener('click', continueFromWizard);
   }
+
+  modal.querySelector('.wizard-modal-icon')?.addEventListener('click', continueFromWizard);
+  modal.querySelector('.wizard-modal-body')?.addEventListener('click', continueFromWizard);
 }
 
 function showBipBriefingPopup(scn, briefingText, onContinue) {
@@ -414,7 +419,7 @@ function showBipBriefingPopup(scn, briefingText, onContinue) {
     <div class="wizard-modal-card" role="dialog" aria-modal="true" aria-labelledby="wizard-modal-title">
       <div class="wizard-modal-top">
         <div class="wizard-modal-icon">
-          <img src="${WIZ.plus}" alt="MR Wizard">
+          <img src="../assets/characters/wizard-guide.png" alt="MR Wizard">
         </div>
         <div>
           <h2 id="wizard-modal-title">BIP Briefing</h2>
@@ -430,7 +435,7 @@ function showBipBriefingPopup(scn, briefingText, onContinue) {
       </div>
 
       <button id="wizard-continue-btn" class="wizard-continue-btn">
-        Start Mission ▶
+        Begin Mission ▶
       </button>
     </div>
   `;
@@ -1064,7 +1069,7 @@ if (!node.feedback) {
   wizardPrompt.className = 'choice-wizard-card';
   wizardPrompt.innerHTML = `
     <div class="choice-wizard-icon">
-      <img src="${WIZ.meh}" alt="MR Wizard">
+      <img src="../assets/characters/wizard-guide.png" alt="MR Wizard">
     </div>
     <div class="choice-wizard-text">
       <strong>Wizard Check</strong>

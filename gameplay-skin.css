@@ -1,0 +1,641 @@
+/* ============================================================
+   MISSION: REINFORCEABLE — 16-BIT ACTIVE GAMEPLAY SKIN
+   Presentation only. Scoped away from the landing quest hub.
+   ============================================================ */
+
+body.skin-quest-hub.playing-mission,
+body.skin-quest-hub.mission-summary {
+  --game-night: #070b1d;
+  --game-panel: #111833;
+  --game-panel-hi: #1b2547;
+  --game-line: #8197b0;
+  --game-gold: #e4b94e;
+  --game-gold-hi: #fff09a;
+  --game-gold-lo: #684315;
+  --game-cream: #fff6d8;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: #040714;
+  font-family: var(--font-pixel, "Courier New", monospace);
+}
+
+body.skin-quest-hub.playing-mission #game-container,
+body.skin-quest-hub.mission-summary #game-container {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(430px, 1.05fr);
+  grid-template-rows: 84px minmax(0, 1fr) 64px;
+  grid-template-areas:
+    "toolbar toolbar"
+    "story choices"
+    "nav nav";
+  gap: 14px 18px;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  margin: 0;
+  padding: 7px 20px 0;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(5, 11, 28, .84), rgba(4, 8, 22, .9)),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(75, 105, 128, .22) 32px 34px),
+    repeating-linear-gradient(90deg, #152b35 0 47px, #0e222c 48px 50px);
+  border: 4px solid #050713;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px #7188a4, inset 0 0 40px rgba(0, 0, 0, .62);
+}
+
+body.skin-quest-hub.playing-mission #game-container::before,
+body.skin-quest-hub.playing-mission #game-container::after,
+body.skin-quest-hub.mission-summary #game-container::before,
+body.skin-quest-hub.mission-summary #game-container::after {
+  display: none;
+}
+
+body.skin-quest-hub.playing-mission h1,
+body.skin-quest-hub.playing-mission #scenario-title,
+body.skin-quest-hub.mission-summary h1,
+body.skin-quest-hub.mission-summary #scenario-title {
+  display: none;
+}
+
+/* Compact persistent HUD */
+body.skin-quest-hub.playing-mission #toolbar,
+body.skin-quest-hub.mission-summary #toolbar {
+  grid-area: toolbar;
+  display: grid;
+  grid-template-columns: 29% 35.5% 35.5%;
+  grid-template-areas: "hearts quest xp";
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 7px 22px;
+  background: linear-gradient(180deg, #151b39, #0a1027);
+  border: 3px solid #080b18;
+  box-shadow: inset 0 0 0 2px #7189a5, inset 0 -7px 14px rgba(0, 0, 0, .34), 0 3px 0 #02030a;
+}
+
+body.skin-quest-hub.playing-mission #teacher-badge,
+body.skin-quest-hub.playing-mission #feedback,
+body.skin-quest-hub.playing-mission .scenario-progress-stat,
+body.skin-quest-hub.mission-summary #teacher-badge,
+body.skin-quest-hub.mission-summary #feedback,
+body.skin-quest-hub.mission-summary .scenario-progress-stat {
+  display: none !important;
+}
+
+body.skin-quest-hub.playing-mission #hearts-display,
+body.skin-quest-hub.mission-summary #hearts-display {
+  grid-area: hearts;
+  justify-content: flex-start;
+  gap: 7px;
+  min-height: 0;
+  padding: 2px 0;
+}
+
+body.skin-quest-hub.playing-mission .zelda-heart,
+body.skin-quest-hub.mission-summary .zelda-heart {
+  width: 43px;
+  height: 39px;
+  flex-basis: 43px;
+}
+
+body.skin-quest-hub.playing-mission .quest-progress-stat,
+body.skin-quest-hub.mission-summary .quest-progress-stat,
+body.skin-quest-hub.playing-mission #score-badge,
+body.skin-quest-hub.mission-summary #score-badge {
+  grid-template-columns: 46px minmax(0, 1fr);
+  grid-template-rows: 24px 22px;
+  gap: 0;
+  padding: 1px 15px 1px 0;
+}
+
+body.skin-quest-hub.playing-mission .quest-progress-stat::before,
+body.skin-quest-hub.mission-summary .quest-progress-stat::before {
+  content: "";
+  grid-row: 1 / 3;
+  width: 40px;
+  height: 40px;
+  align-self: center;
+  background: url("assets/ui/quest-progress-icon.png") center / contain no-repeat;
+  image-rendering: pixelated;
+}
+
+body.skin-quest-hub.playing-mission .quest-progress-stat > span:first-child,
+body.skin-quest-hub.mission-summary .quest-progress-stat > span:first-child,
+body.skin-quest-hub.playing-mission #score-badge::before,
+body.skin-quest-hub.mission-summary #score-badge::before {
+  align-self: end;
+  font-size: clamp(.7rem, 1.3vw, 1rem);
+  letter-spacing: -.055em;
+  text-shadow: 0 3px 0 #02030a;
+}
+
+body.skin-quest-hub.playing-mission .quest-meter,
+body.skin-quest-hub.mission-summary .quest-meter,
+body.skin-quest-hub.playing-mission #score-badge::after,
+body.skin-quest-hub.mission-summary #score-badge::after {
+  align-self: center;
+  height: 20px;
+  padding: 2px;
+  border: 3px solid #d8e4ed;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px #26344c, inset 0 0 0 1px #03050d;
+}
+
+body.skin-quest-hub.playing-mission #score-badge,
+body.skin-quest-hub.mission-summary #score-badge {
+  position: relative;
+  padding-left: 8px;
+}
+
+body.skin-quest-hub.playing-mission #score-badge::before,
+body.skin-quest-hub.mission-summary #score-badge::before {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+body.skin-quest-hub.playing-mission #score-badge::after,
+body.skin-quest-hub.mission-summary #score-badge::after {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+body.skin-quest-hub.playing-mission #score-badge #points,
+body.skin-quest-hub.mission-summary #score-badge #points {
+  display: block;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  width: 40px;
+  height: 40px;
+  align-self: center;
+  color: transparent;
+  font-size: 0;
+  background: url("assets/ui/behavior-xp-icon.png") center / contain no-repeat;
+  image-rendering: pixelated;
+}
+
+/* Compact story and command panels */
+body.skin-quest-hub.playing-mission #story-text {
+  grid-area: story;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  padding: clamp(20px, 2.3vw, 34px);
+  overflow: auto;
+  float: none;
+  color: #1d160f;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(100, 55, 18, .12) 0 2px, transparent 3px),
+    linear-gradient(90deg, rgba(105, 55, 17, .16), transparent 8%, transparent 92%, rgba(105, 55, 17, .16)),
+    linear-gradient(180deg, #f6d99e, #eac17f);
+  border: 4px solid #5d3616;
+  border-radius: 3px;
+  outline: 3px solid #151026;
+  box-shadow: inset 0 0 0 3px rgba(255, 246, 210, .48), inset 0 -12px 22px rgba(82, 42, 13, .17), 0 6px 0 #050711;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(.9rem, 1.15vw, 1.08rem);
+  font-weight: 700;
+  line-height: 1.42;
+  white-space: pre-wrap;
+  scrollbar-color: #9a6429 #ead09a;
+}
+
+body.skin-quest-hub.playing-mission #story-text::before,
+body.skin-quest-hub.playing-mission #story-text::after {
+  display: none;
+}
+
+body.skin-quest-hub.playing-mission #choices {
+  grid-area: choices;
+  display: flex;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body.skin-quest-hub.playing-mission #choices > button {
+  order: 1;
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 58px;
+  max-height: 112px;
+  padding: 10px 16px;
+  color: #fff;
+  background: linear-gradient(180deg, var(--game-panel-hi), var(--game-panel));
+  border: 3px solid var(--game-line);
+  border-radius: 3px;
+  outline: 2px solid #050711;
+  box-shadow: inset 0 0 0 2px #263457, inset 0 -5px 10px rgba(0, 0, 0, .25), 0 4px 0 #03050c;
+  font-family: var(--font-pixel, "Courier New", monospace);
+  font-size: clamp(.63rem, .9vw, .82rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.04em;
+  text-align: center;
+  text-transform: none;
+  text-shadow: 0 2px 0 #02030a;
+}
+
+body.skin-quest-hub.playing-mission #choices > button:hover,
+body.skin-quest-hub.playing-mission #choices > button:focus-visible {
+  color: var(--game-gold-hi);
+  border-color: var(--game-gold);
+  box-shadow: inset 0 0 0 2px var(--game-gold-lo), 0 0 0 2px #050711, 0 0 14px rgba(228, 185, 78, .3);
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+body.skin-quest-hub.playing-mission #choices > button:active {
+  transform: translateY(3px);
+  box-shadow: inset 0 0 0 2px var(--game-gold-lo), 0 1px 0 #03050c;
+}
+
+/* Wizard prompt sits beneath the three equal command options. */
+body.skin-quest-hub.playing-mission .choice-wizard-card {
+  order: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 92px;
+  align-items: end;
+  gap: 10px;
+  min-height: 104px;
+  padding: 0 4px 0 0;
+  color: #17131a;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+body.skin-quest-hub.playing-mission .choice-wizard-icon {
+  order: 2;
+  width: 92px;
+  height: 104px;
+  align-self: end;
+  flex: none;
+}
+
+body.skin-quest-hub.playing-mission .choice-wizard-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, .65));
+}
+
+body.skin-quest-hub.playing-mission .choice-wizard-text {
+  position: relative;
+  order: 1;
+  display: block;
+  align-self: center;
+  padding: 13px 17px;
+  color: #20191b;
+  background: #fff;
+  border: 4px solid #171016;
+  border-radius: 3px;
+  box-shadow: inset 0 -7px #e9e9fa, 0 5px 0 rgba(0, 0, 0, .5);
+  font: 700 clamp(.7rem, .9vw, .84rem)/1.38 "Courier New", monospace;
+}
+
+body.skin-quest-hub.playing-mission .choice-wizard-text::after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 15px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #fff 0 48%, transparent 49%);
+  border-top: 4px solid #171016;
+  transform: rotate(45deg);
+}
+
+body.skin-quest-hub.playing-mission .choice-wizard-text strong {
+  display: none;
+}
+
+body.skin-quest-hub.playing-mission .choice-wizard-text span {
+  display: block;
+}
+
+/* Low-profile bottom controls */
+body.skin-quest-hub.playing-mission #bottom-action-slot,
+body.skin-quest-hub.mission-summary #bottom-action-slot {
+  grid-area: nav;
+  width: calc(100% + 40px);
+  height: 64px;
+  margin: 0 0 0 -20px;
+  padding: 5px 28px 7px;
+  background: linear-gradient(180deg, #11162f, #080c20);
+  border-top: 3px solid #6f8299;
+}
+
+body.skin-quest-hub.playing-mission #bottom-action-slot .utility-actions,
+body.skin-quest-hub.mission-summary #bottom-action-slot .utility-actions {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+body.skin-quest-hub.playing-mission #bottom-action-slot .ghost,
+body.skin-quest-hub.mission-summary #bottom-action-slot .ghost {
+  width: min(250px, 32vw);
+  min-height: 44px;
+  padding: 5px 12px;
+  color: #fff;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--font-pixel, "Courier New", monospace);
+  font-size: .72rem;
+}
+
+body.skin-quest-hub.playing-mission #bottom-action-slot .ghost img,
+body.skin-quest-hub.mission-summary #bottom-action-slot .ghost img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  vertical-align: middle;
+  image-rendering: pixelated;
+}
+
+/* ============================================================
+   BIP BRIEFING + WIZARD FEEDBACK DIALOGUE
+   ============================================================ */
+
+body.skin-quest-hub.modal-open {
+  overflow: hidden;
+}
+
+body.skin-quest-hub .wizard-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(2, 5, 17, .82);
+  backdrop-filter: blur(3px);
+}
+
+body.skin-quest-hub .wizard-modal-card {
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100vh - 38px);
+  padding: clamp(18px, 2.5vw, 28px);
+  overflow: auto;
+  color: var(--game-cream, #fff6d8);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .035), transparent 42%),
+    linear-gradient(180deg, #1a2347, #0a0f29);
+  border: 4px solid var(--game-gold, #e4b94e);
+  border-radius: 4px;
+  outline: 4px solid #171026;
+  box-shadow: inset 0 0 0 3px var(--game-gold-lo, #684315), inset 0 0 28px rgba(0, 0, 0, .35), 0 20px 70px rgba(0, 0, 0, .78);
+  font-family: var(--font-pixel, "Courier New", monospace);
+}
+
+body.skin-quest-hub .wizard-modal-top {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+body.skin-quest-hub .wizard-modal-icon {
+  width: 112px;
+  height: 112px;
+  padding: 6px;
+  background: radial-gradient(circle, #342b70, #090d26 72%);
+  border: 3px solid var(--game-gold, #e4b94e);
+  box-shadow: inset 0 0 0 2px #59401b, 0 5px 0 #03050c;
+  cursor: pointer;
+}
+
+body.skin-quest-hub .wizard-modal-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+body.skin-quest-hub .wizard-modal h2 {
+  width: auto;
+  margin: 0 0 8px;
+  color: #fff;
+  font-family: var(--font-pixel, "Courier New", monospace);
+  font-size: clamp(1rem, 2.2vw, 1.5rem);
+  text-align: left;
+  text-shadow: 0 3px 0 #02030a;
+}
+
+body.skin-quest-hub .wizard-modal-tag {
+  display: inline-block;
+  padding: 6px 9px;
+  color: var(--game-gold-hi, #fff09a);
+  background: rgba(228, 185, 78, .1);
+  border: 2px solid rgba(228, 185, 78, .65);
+  font-size: .68rem;
+  line-height: 1.3;
+}
+
+body.skin-quest-hub .wizard-modal-body {
+  padding: 17px 19px;
+  color: #f4f3ff;
+  background: linear-gradient(180deg, #121a3a, #090f29);
+  border: 3px solid #8197b0;
+  box-shadow: inset 0 0 0 2px #263457;
+  font-family: "Courier New", monospace;
+  font-size: clamp(.82rem, 1.2vw, 1rem);
+  font-weight: 700;
+  line-height: 1.48;
+  cursor: pointer;
+}
+
+body.skin-quest-hub .wizard-continue-btn {
+  display: block;
+  width: min(330px, 100%);
+  min-height: 48px;
+  margin: 18px auto 0;
+  padding: 9px 15px;
+  color: #fff;
+  background: linear-gradient(180deg, #6dea50, #2fae39 55%, #146b2b);
+  border: 3px solid var(--game-gold-hi, #fff09a);
+  border-radius: 2px;
+  outline: 3px solid #151026;
+  box-shadow: inset 0 0 0 2px #176c29, 0 5px 0 #04130a;
+  font-family: var(--font-pixel, "Courier New", monospace);
+  font-size: .75rem;
+  text-shadow: 0 2px 0 #06110a;
+  cursor: pointer;
+}
+
+body.skin-quest-hub .wizard-modal.state-plus .wizard-modal-card,
+body.skin-quest-hub .wizard-modal.state-correct .wizard-modal-card {
+  border-color: #71dff4;
+}
+
+body.skin-quest-hub .wizard-modal.state-meh .wizard-modal-card {
+  border-color: var(--game-gold, #e4b94e);
+}
+
+body.skin-quest-hub .wizard-modal.state-minus .wizard-modal-card {
+  border-color: #e46868;
+}
+
+/* Summary remains readable after the last decision. */
+body.skin-quest-hub.mission-summary #game-container {
+  grid-template-columns: 1fr;
+  grid-template-rows: 84px minmax(0, 1fr) auto 64px;
+  grid-template-areas: "toolbar" "summary" "actions" "nav";
+}
+
+body.skin-quest-hub.mission-summary #story-text {
+  display: none !important;
+}
+
+body.skin-quest-hub.mission-summary #summary-panel {
+  grid-area: summary;
+  min-width: 0;
+  margin: 0;
+  padding: 22px 26px;
+  overflow: auto;
+  color: #f8f2dd;
+  background: linear-gradient(180deg, #172044, #0a102c);
+  border: 4px solid var(--game-gold, #e4b94e);
+  box-shadow: inset 0 0 0 3px var(--game-gold-lo, #684315);
+}
+
+body.skin-quest-hub.mission-summary #choices {
+  grid-area: actions;
+  display: block;
+  width: min(360px, 100%);
+  margin: 0 auto;
+}
+
+body.skin-quest-hub.mission-summary #choices > button {
+  width: 100%;
+  min-height: 48px;
+  color: #fff;
+  background: linear-gradient(180deg, var(--game-panel-hi), var(--game-panel));
+  border: 3px solid var(--game-gold);
+  box-shadow: inset 0 0 0 2px var(--game-gold-lo), 0 4px 0 #03050c;
+  font-family: var(--font-pixel, "Courier New", monospace);
+  font-size: .72rem;
+}
+
+@media (max-width: 900px), (max-height: 679px) {
+  body.skin-quest-hub.playing-mission,
+  body.skin-quest-hub.mission-summary {
+    height: auto;
+    overflow: auto;
+  }
+
+  body.skin-quest-hub.playing-mission #game-container,
+  body.skin-quest-hub.mission-summary #game-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "toolbar" "story" "choices" "nav";
+    min-height: 100vh;
+    height: auto;
+    padding: 8px 12px 0;
+    overflow: visible;
+  }
+
+  body.skin-quest-hub.mission-summary #game-container {
+    grid-template-areas: "toolbar" "summary" "actions" "nav";
+  }
+
+  body.skin-quest-hub.playing-mission #toolbar,
+  body.skin-quest-hub.mission-summary #toolbar {
+    grid-template-columns: 1fr;
+    grid-template-areas: "hearts" "quest" "xp";
+    gap: 6px;
+    padding: 9px 14px;
+  }
+
+  body.skin-quest-hub.playing-mission #hearts-display,
+  body.skin-quest-hub.mission-summary #hearts-display {
+    justify-content: center;
+  }
+
+  body.skin-quest-hub.playing-mission #story-text {
+    max-height: none;
+    overflow: visible;
+  }
+
+  body.skin-quest-hub.playing-mission #choices {
+    overflow: visible;
+  }
+
+  body.skin-quest-hub.playing-mission #choices > button {
+    flex: none;
+    max-height: none;
+    min-height: 72px;
+  }
+
+  body.skin-quest-hub.playing-mission .choice-wizard-card {
+    grid-template-columns: minmax(0, 1fr) 78px;
+  }
+
+  body.skin-quest-hub.playing-mission .choice-wizard-icon {
+    width: 78px;
+    height: 94px;
+  }
+
+  body.skin-quest-hub.playing-mission #bottom-action-slot,
+  body.skin-quest-hub.mission-summary #bottom-action-slot {
+    width: calc(100% + 24px);
+    margin-left: -12px;
+  }
+
+  body.skin-quest-hub .wizard-modal {
+    padding: 12px;
+  }
+
+  body.skin-quest-hub .wizard-modal-top {
+    grid-template-columns: 82px minmax(0, 1fr);
+  }
+
+  body.skin-quest-hub .wizard-modal-icon {
+    width: 82px;
+    height: 82px;
+  }
+}
+
+@media (max-width: 520px) {
+  body.skin-quest-hub .wizard-modal-top {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  body.skin-quest-hub .wizard-modal h2 {
+    text-align: center;
+  }
+
+  body.skin-quest-hub.playing-mission #bottom-action-slot .utility-actions,
+  body.skin-quest-hub.mission-summary #bottom-action-slot .utility-actions {
+    gap: 8px;
+  }
+
+  body.skin-quest-hub.playing-mission #bottom-action-slot .ghost,
+  body.skin-quest-hub.mission-summary #bottom-action-slot .ghost {
+    width: 50%;
+    font-size: .6rem;
+  }
+}
