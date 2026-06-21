@@ -177,7 +177,7 @@ function updateGameplayHud(isComplete = false) {
     ? Math.round((points / maxPossible) * 100)
     : 0;
   const hudVisible = document.body.classList.contains('playing-mission')
-    || document.body.classList.contains('mission-summary');
+    || document.body.classList.contains('summary-screen');
 
   if (questProgressEl) {
     questProgressEl.hidden = !hudVisible;
@@ -227,7 +227,12 @@ function resetGame() {
 
   setPoints(0);
   renderHearts();
-  document.body.classList.remove('mission-summary');
+  document.body.classList.remove(
+    'modal-open',
+    'bip-briefing',
+    'feedback-open',
+    'summary-screen'
+  );
   updateGameplayHud();
   showFeedback('', null, 5);
 
@@ -371,14 +376,15 @@ function showWizardPopup(opt, onContinue) {
     </div>
   `;
 
-  document.body.classList.add('modal-open');
+  document.body.classList.remove('bip-briefing');
+  document.body.classList.add('modal-open', 'feedback-open');
   document.body.appendChild(modal);
 
   const continueBtn = document.getElementById('wizard-continue-btn');
   const continueFromWizard = () => {
     if (!modal.isConnected) return;
     modal.remove();
-    document.body.classList.remove('modal-open');
+    document.body.classList.remove('modal-open', 'feedback-open');
     onContinue();
   };
 
@@ -440,7 +446,8 @@ function showBipBriefingPopup(scn, briefingText, onContinue) {
     </div>
   `;
 
-  document.body.classList.add('modal-open');
+  document.body.classList.remove('feedback-open');
+  document.body.classList.add('modal-open', 'bip-briefing');
   document.body.appendChild(modal);
 
   const continueBtn = document.getElementById('wizard-continue-btn');
@@ -450,7 +457,7 @@ function showBipBriefingPopup(scn, briefingText, onContinue) {
 
     continueBtn.addEventListener('click', () => {
       modal.remove();
-      document.body.classList.remove('modal-open');
+      document.body.classList.remove('modal-open', 'bip-briefing');
       onContinue();
     });
   }
@@ -601,7 +608,7 @@ saveTodayResult(payload);
 }
 function setPlayMode(isPlaying) {
   document.body.classList.toggle("playing-mission", !!isPlaying);
-  if (isPlaying) document.body.classList.remove('mission-summary');
+  if (isPlaying) document.body.classList.remove('summary-screen');
 }
 /* -------- Utilities -------- */
 function shuffledOptions(options) { return (options || []).map(o => ({...o})).sort(() => Math.random() - 0.5); }
@@ -997,7 +1004,7 @@ function showNode(id) {
 
 if (node.feedback) {
   setPlayMode(false);
-  document.body.classList.add('mission-summary');
+  document.body.classList.add('summary-screen');
   completedDecisionNodes = totalDecisionNodes;
   updateGameplayHud(true);
   if (storyText) storyText.style.display = 'none';

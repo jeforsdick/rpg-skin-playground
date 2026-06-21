@@ -1,0 +1,137 @@
+/* ============================================================
+   MISSION: REINFORCEABLE — SHARED UI PRIMITIVES
+   No screen skin belongs here. Landing and gameplay visuals live
+   in quest-hub.css and gameplay-skin.css respectively.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=MedievalSharp&family=Silkscreen:wght@400;700&display=swap");
+
+:root {
+  --font-fantasy: "MedievalSharp", "Copperplate", Georgia, serif;
+  --font-pixel: "Silkscreen", "Courier New", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  background: #050714;
+  color: #fff;
+  font-family: "Courier New", monospace;
+}
+
+body {
+  padding: 0;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* These elements stay available to JavaScript. Screen skins decide when
+   and how they are displayed. */
+#teacher-badge,
+#score-badge,
+.quest-stat {
+  display: none;
+}
+
+#hearts-display {
+  display: flex;
+  align-items: center;
+}
+
+.zelda-heart {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 34px;
+  flex: 0 0 38px;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+.heart-icon,
+.heart-icon-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.heart-icon {
+  display: block;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.heart-icon-empty {
+  opacity: .82;
+  filter: grayscale(1) brightness(.3);
+}
+
+.heart-icon-fill {
+  overflow: hidden;
+  clip-path: inset(0 calc(100% - var(--heart-fill)) 0 0);
+}
+
+#coach-img,
+.choice-wizard-icon img,
+.wizard-modal-icon img {
+  image-rendering: pixelated;
+}
+
+#story-text {
+  white-space: pre-wrap;
+}
+
+#choices,
+#bottom-action-slot {
+  min-width: 0;
+}
+
+/* Functional fallback for dashboard/same-day screens. This deliberately
+   avoids recreating either legacy visual skin. */
+body:not(.start-screen):not(.playing-mission):not(.summary-screen) #game-container {
+  width: min(1100px, calc(100vw - 24px));
+  min-height: calc(100vh - 24px);
+  margin: 12px auto;
+  padding: 20px;
+  overflow: auto;
+  background: #0d132c;
+  border: 3px solid #7189a5;
+}
+
+body:not(.start-screen):not(.playing-mission):not(.summary-screen) #story-text,
+body:not(.start-screen):not(.playing-mission):not(.summary-screen) #choices {
+  width: 100%;
+}
+
+body:not(.start-screen):not(.playing-mission):not(.summary-screen) #choices button {
+  min-height: 44px;
+  padding: 9px 14px;
+  color: #fff;
+  background: #172044;
+  border: 2px solid #8197b0;
+}
