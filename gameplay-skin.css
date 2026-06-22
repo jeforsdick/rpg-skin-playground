@@ -1182,3 +1182,218 @@ body.skin-quest-hub.summary-screen #choices > button {
     font-size: .6rem;
   }
 }
+
+/* ============================================================
+   SHARED PARCHMENT POPUPS — BIP BRIEFING + WIZARD COACHING
+   The transparent scroll asset is the single visual shell for both
+   modal states. Existing content and continue handlers remain intact.
+   ============================================================ */
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal {
+  inset: 84px 0 64px;
+  place-items: center;
+  padding: 10px;
+  overflow-y: auto;
+  background: rgba(2, 5, 17, .78);
+  backdrop-filter: blur(3px) brightness(.65);
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-card {
+  position: relative;
+  display: block;
+  width: auto;
+  max-width: calc(100vw - 24px);
+  height: min(700px, calc(100vh - 164px));
+  max-height: none;
+  aspect-ratio: .74;
+  padding: clamp(64px, 9vh, 88px) clamp(72px, 7vw, 92px) clamp(58px, 8vh, 78px);
+  overflow: visible;
+  color: #21170f;
+  background: url("assets/ui/wizard-popup-scroll.png") center / 142% 100% no-repeat;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  box-shadow: none;
+  filter: drop-shadow(0 18px 18px rgba(0, 0, 0, .68));
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-card::before,
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-card::after {
+  display: none;
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-top {
+  display: grid;
+  grid-template-columns: clamp(68px, 7vw, 88px) minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-top > div:last-child {
+  padding: 0;
+  border: 0;
+  text-align: left;
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-icon {
+  display: block;
+  width: clamp(68px, 7vw, 88px);
+  height: clamp(88px, 9vw, 116px);
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 4px 0 rgba(83, 44, 17, .28));
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal h2 {
+  margin: 0 0 5px;
+  color: #20140d;
+  font-family: var(--font-fantasy, Georgia, serif);
+  font-size: clamp(1.05rem, 1.55vw, 1.38rem);
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: none;
+  white-space: nowrap;
+  text-shadow: 0 1px rgba(255, 245, 194, .7);
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-tag {
+  display: block;
+  padding: 0;
+  color: #70451d;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-family: "Courier New", monospace;
+  font-size: clamp(.58rem, .68vw, .66rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-body {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: #281b12;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-family: "Courier New", monospace;
+  font-size: clamp(.68rem, .82vw, .8rem);
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+body.skin-quest-hub.feedback-open .wizard-modal-body {
+  cursor: pointer;
+}
+
+body.skin-quest-hub.bip-briefing .bip-focus-block {
+  display: block;
+  margin: 0 0 8px;
+  padding: 6px 8px;
+  color: #281b12;
+  background: rgba(119, 72, 28, .08);
+  border: 0;
+  border-left: 3px solid #8b5521;
+  box-shadow: none;
+}
+
+body.skin-quest-hub.bip-briefing .bip-focus-block strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #5d3517;
+  font-family: var(--font-pixel, "Courier New", monospace);
+  font-size: clamp(.61rem, .78vw, .7rem);
+  text-transform: uppercase;
+}
+
+body.skin-quest-hub.bip-briefing .bip-focus-block span,
+body.skin-quest-hub.bip-briefing .bip-briefing-copy {
+  color: #281b12;
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+}
+
+body.skin-quest-hub.bip-briefing .bip-focus-block span {
+  font-size: clamp(.66rem, .78vw, .76rem);
+  line-height: 1.2;
+}
+
+body.skin-quest-hub.bip-briefing .bip-briefing-copy {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font-size: clamp(.66rem, .8vw, .78rem);
+  line-height: 1.22;
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-continue-btn {
+  display: block;
+  width: min(270px, 92%);
+  min-height: 48px;
+  margin: 14px auto 0;
+  padding: 8px 14px;
+  color: #fff;
+  background: linear-gradient(180deg, #61c96a 0%, #2f9256 52%, #17633e 100%);
+  border: 4px solid #e9c963;
+  border-radius: 7px;
+  outline: 3px solid #254c32;
+  box-shadow:
+    inset 0 0 0 3px #94dd83,
+    inset 0 -7px rgba(6, 65, 36, .28),
+    0 6px 0 #442f16,
+    0 0 0 3px #775423;
+  font-family: var(--font-pixel, "Courier New", monospace);
+  font-size: clamp(.66rem, .9vw, .78rem);
+  text-shadow: 0 2px 0 #143c25;
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-continue-btn:hover,
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-continue-btn:focus-visible {
+  filter: brightness(1.12) drop-shadow(0 0 8px rgba(121, 255, 111, .4));
+  transform: translateY(-1px);
+}
+
+body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-continue-btn:active {
+  filter: brightness(.94);
+  transform: translateY(4px);
+  box-shadow:
+    inset 0 0 0 3px #79c96f,
+    inset 0 -4px rgba(6, 65, 36, .28),
+    0 2px 0 #442f16,
+    0 0 0 3px #775423;
+}
+
+@media (max-width: 600px) {
+  body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal {
+    inset: 170px 0 64px;
+    align-items: start;
+  }
+
+  body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-card {
+    width: calc(100vw - 8px);
+    height: auto;
+    aspect-ratio: .74;
+    padding: 54px 18% 48px;
+  }
+
+  body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-body,
+  body.skin-quest-hub.bip-briefing .bip-briefing-copy {
+    font-size: .64rem;
+  }
+}
