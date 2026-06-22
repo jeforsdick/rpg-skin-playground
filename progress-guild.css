@@ -354,19 +354,34 @@ body.skin-quest-hub.dashboard-screen #session-details::-webkit-scrollbar-thumb {
 
 body.skin-quest-hub.dashboard-screen .dashboard-session-card {
   --session-accent: var(--progress-gold);
+  position: relative;
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) 82px;
-  min-height: 88px;
+  grid-template-columns: 56px minmax(0, 1fr) 118px;
+  height: 92px;
   align-items: center;
-  gap: 9px;
-  padding: 7px 10px;
+  gap: 12px;
+  padding: 8px 12px;
   color: #fff;
-  background: linear-gradient(180deg, #142044, #09122f);
-  border: 2px solid var(--session-accent);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .025), transparent 36%),
+    linear-gradient(180deg, #142044, #09122f);
+  border: 2px solid var(--progress-blue);
+  border-left: 4px solid var(--session-accent);
   border-radius: 0;
-  box-shadow: inset 0 0 0 1px #24365d, 0 2px 0 #03050c;
+  box-shadow: inset 0 0 0 1px #24365d, inset 0 -8px 14px rgba(0, 0, 0, .14), 0 3px 0 #03050c;
   font-family: "Courier New", monospace;
   text-align: left;
+}
+
+body.skin-quest-hub.dashboard-screen .dashboard-session-card::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  background: var(--session-accent);
+  box-shadow: -3px 3px 0 #192649;
 }
 
 body.skin-quest-hub.dashboard-screen .dashboard-session-card.accuracy-high {
@@ -393,28 +408,35 @@ body.skin-quest-hub.dashboard-screen .dashboard-session-card:active {
 }
 
 body.skin-quest-hub.dashboard-screen .dashboard-session-icon {
-  width: 46px;
-  height: 46px;
+  width: 54px;
+  height: 54px;
+  padding: 3px;
   object-fit: contain;
+  background: #070c22;
+  border: 2px solid var(--progress-gold);
+  box-shadow: inset 0 0 0 1px #6b4a18, 0 2px 0 #03050c;
   image-rendering: pixelated;
 }
 
 body.skin-quest-hub.dashboard-screen .dashboard-session-main {
   display: grid;
-  gap: 2px;
+  gap: 3px;
   min-width: 0;
+  align-content: center;
 }
 
 body.skin-quest-hub.dashboard-screen .dashboard-session-date {
-  color: #e4e9f2;
-  font-size: .7rem;
+  color: #aeb9cc;
+  font-size: .64rem;
+  line-height: 1;
 }
 
 body.skin-quest-hub.dashboard-screen .dashboard-session-main strong {
   overflow: hidden;
   color: var(--progress-gold-hi);
   font-family: var(--font-pixel, "Courier New", monospace);
-  font-size: clamp(.64rem, .88vw, .78rem);
+  font-size: clamp(.68rem, .9vw, .8rem);
+  line-height: 1.12;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -422,14 +444,15 @@ body.skin-quest-hub.dashboard-screen .dashboard-session-main strong {
 body.skin-quest-hub.dashboard-screen .dashboard-session-main span,
 body.skin-quest-hub.dashboard-screen .dashboard-session-main small {
   color: #f2f3f8;
-  font-size: .68rem;
-  line-height: 1.2;
+  font-size: .66rem;
+  line-height: 1.12;
 }
 
 body.skin-quest-hub.dashboard-screen .dashboard-session-metrics {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 14px;
+  flex-wrap: nowrap;
+  gap: 6px 16px;
+  min-width: 0;
 }
 
 body.skin-quest-hub.dashboard-screen .dashboard-session-metrics > span,
@@ -441,17 +464,23 @@ body.skin-quest-hub.dashboard-screen .dashboard-session-main b {
   color: var(--session-accent);
 }
 
+body.skin-quest-hub.dashboard-screen .dashboard-session-main small {
+  color: #9eabc1;
+  font-size: .6rem;
+}
+
 body.skin-quest-hub.dashboard-screen .dashboard-session-link {
   display: grid;
-  min-height: 34px;
+  width: 118px;
+  min-height: 36px;
   place-items: center;
-  padding: 7px 9px;
+  padding: 7px 10px;
   color: #fff;
   background: linear-gradient(180deg, #59c853, #277d3a);
   border: 2px solid #a5e87b;
   box-shadow: inset 0 0 0 2px #1b5e31, 0 3px 0 #06170c;
   font-family: var(--font-pixel, "Courier New", monospace);
-  font-size: .6rem;
+  font-size: .62rem;
   white-space: nowrap;
 }
 
@@ -646,16 +675,19 @@ body.skin-quest-hub.dashboard-screen #bottom-action-slot #progress-btn {
   }
 
   body.skin-quest-hub.dashboard-screen .dashboard-session-card {
-    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-columns: 56px minmax(0, 1fr);
+    height: auto;
+    min-height: 122px;
   }
 
   body.skin-quest-hub.dashboard-screen .dashboard-session-icon {
-    width: 46px;
-    height: 46px;
+    width: 54px;
+    height: 54px;
   }
 
   body.skin-quest-hub.dashboard-screen .dashboard-session-link {
     grid-column: 1 / -1;
+    width: 118px;
     justify-self: end;
   }
 
