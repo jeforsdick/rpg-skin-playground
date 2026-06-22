@@ -1,7 +1,7 @@
 /* ============================================================
-   MISSION: REINFORCEABLE — UNIFIED SKIN V2
-   Landing composition matched to assets/mockups/landing-page-mockup.png.
-   Every visual rule in this phase is scoped to body.start-screen.
+   MISSION: REINFORCEABLE — LANDING SKIN V2
+   Fixed title / hub / navigation composition.
+   All visual rules are scoped to the landing state.
    ============================================================ */
 
 body.skin-v2 .screen-content-shell {
@@ -10,19 +10,18 @@ body.skin-v2 .screen-content-shell {
 
 body.skin-v2.start-screen {
   --v2-navy: #090d3c;
-  --v2-card: #1a2857;
-  --v2-blue-line: #9db4cf;
-  --v2-gold: #e2ad32;
-  --v2-gold-light: #ffe28a;
-  --v2-shadow: #281708;
+  --v2-card: #1b2a5a;
+  --v2-blue: #9fb7d2;
+  --v2-gold: #e1aa2d;
+  --v2-gold-light: #ffe289;
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  padding: 8px 12px;
+  padding: 6px 0;
   overflow: hidden;
   color: #fff;
   background:
-    linear-gradient(rgba(9, 13, 52, .05), rgba(4, 16, 28, .18)),
+    linear-gradient(rgba(5, 9, 35, .03), rgba(4, 15, 27, .15)),
     url("assets/skin-v2/mission-reinforceable-background.png") center / cover fixed no-repeat;
   font-family: var(--font-pixel, "Courier New", monospace);
 }
@@ -31,9 +30,9 @@ body.skin-v2.start-screen #game-container {
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-rows: 125px minmax(0, 1fr) 112px;
-  width: min(1180px, calc(100vw - 24px));
-  height: min(752px, calc(100vh - 16px));
+  grid-template-rows: 120px minmax(0, 1fr) 96px;
+  width: min(88vw, 1300px);
+  height: min(850px, calc(100vh - 12px));
   margin: 0 auto;
   padding: 0;
   overflow: visible;
@@ -50,18 +49,16 @@ body.skin-v2.start-screen #scenario-title {
   display: none !important;
 }
 
-/* ============================================================
-   LARGE FLOATING TITLE
-   ============================================================ */
+/* ---------- Title above the frame ---------- */
 
 body.skin-v2.start-screen h1 {
   grid-row: 1;
-  align-self: end;
+  align-self: center;
   justify-self: center;
-  z-index: 4;
-  width: min(900px, 84vw);
-  height: 118px;
-  margin: 0 0 -5px;
+  z-index: 5;
+  width: min(920px, 78vw);
+  height: 90px;
+  margin: 0;
   padding: 0;
   overflow: hidden;
   color: transparent;
@@ -77,45 +74,33 @@ body.skin-v2.start-screen h1::after {
   display: none;
 }
 
-/* ============================================================
-   MAIN GOLD-FRAMED PANEL
-   ============================================================ */
+/* ---------- Main frame: header row + two-column content ---------- */
 
 body.skin-v2.start-screen .screen-content-shell {
   position: relative;
   grid-row: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1.58fr) minmax(345px, .92fr);
-  grid-template-rows: 90px minmax(0, 1fr);
-  gap: 12px 26px;
+  grid-template-columns: minmax(0, 63fr) minmax(350px, 37fr);
+  grid-template-rows: 92px minmax(0, 1fr);
+  column-gap: 34px;
+  row-gap: 12px;
+  min-width: 0;
   min-height: 0;
-  padding: 42px 34px 27px;
+  padding: 43px 31px 28px;
+  overflow: visible;
   background:
     url("assets/skin-v2/large-frame.png") center / 100% 100% no-repeat,
-    radial-gradient(circle at 50% 35%, rgba(37, 48, 111, .92), rgba(7, 11, 55, .98) 72%);
+    radial-gradient(circle at 50% 35%, #29346d 0, #11174e 45%, #080d38 100%);
   border: 0;
-  box-shadow: 0 10px 24px rgba(1, 5, 18, .48);
+  box-shadow: 0 9px 24px rgba(1, 4, 17, .45);
 }
 
-body.skin-v2.start-screen .screen-content-shell::before,
-body.skin-v2.start-screen .screen-content-shell::after {
-  content: "✦";
-  position: absolute;
-  top: 76px;
-  z-index: 1;
-  color: rgba(226, 173, 50, .62);
-  font-size: 21px;
-  text-shadow: 34px 14px rgba(226, 173, 50, .22), 69px -17px rgba(226, 173, 50, .34);
-}
-
-body.skin-v2.start-screen .screen-content-shell::before { left: 38px; }
-body.skin-v2.start-screen .screen-content-shell::after {
-  right: 38px;
-  transform: scaleX(-1);
+body.skin-v2.start-screen #story-text,
+body.skin-v2.start-screen .quest-hero {
+  display: contents;
 }
 
 body.skin-v2.start-screen #story-text {
-  display: contents;
   margin: 0;
   padding: 0;
   background: transparent;
@@ -129,67 +114,59 @@ body.skin-v2.start-screen #story-text::after {
   display: none;
 }
 
-body.skin-v2.start-screen .quest-hero {
-  display: contents;
+body.skin-v2.start-screen .quest-classroom-plaque {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 8;
+  display: grid;
+  width: min(360px, 42%);
+  height: 58px;
+  place-items: center;
+  padding: 8px 32px;
+  transform: translate(-50%, -25%);
+  color: #fff;
+  background: url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat;
+  font-family: Georgia, serif;
+  font-size: clamp(1rem, 1.65vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 2px 0 #281432;
 }
 
 body.skin-v2.start-screen .quest-hero-heading {
   grid-column: 1 / -1;
   grid-row: 1;
   align-self: center;
-  z-index: 2;
   min-width: 0;
-  padding: 3px 20px 0;
+  padding: 7px 18px 0;
   text-align: center;
-}
-
-body.skin-v2.start-screen .quest-classroom-plaque {
-  position: absolute;
-  top: -24px;
-  left: 50%;
-  z-index: 6;
-  display: grid;
-  width: min(350px, 44%);
-  min-height: 58px;
-  place-items: center;
-  padding: 8px 30px;
-  transform: translateX(-50%);
-  color: #fff;
-  background:
-    url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat,
-    #4d2d62;
-  font-family: Georgia, serif;
-  font-size: clamp(1rem, 1.6vw, 1.42rem);
-  font-weight: 700;
-  line-height: 1;
-  text-shadow: 0 2px 0 #2b1833;
 }
 
 body.skin-v2.start-screen .quest-hero-heading h2 {
   margin: 0;
-  color: #f6c95d;
+  color: #f6c759;
   font-family: var(--font-pixel, "Courier New", monospace);
-  font-size: clamp(.9rem, 1.58vw, 1.35rem);
+  font-size: clamp(.9rem, 1.55vw, 1.38rem);
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -.055em;
   text-transform: uppercase;
-  text-shadow: 0 3px 0 #130b0b;
+  text-shadow: 0 3px 0 #140b0a;
 }
 
 body.skin-v2.start-screen .quest-hero-heading p {
-  margin: 5px 0 0;
-  color: #fff;
+  margin: 6px 0 0;
+  color: #fff9e9;
   font-family: Georgia, serif;
-  font-size: clamp(.9rem, 1.25vw, 1.12rem);
+  font-size: clamp(.88rem, 1.2vw, 1.1rem);
   font-weight: 700;
-  line-height: 1.05;
-  text-shadow: 0 2px 0 #10122f;
+  line-height: 1.1;
+  text-shadow: 0 2px 0 #111331;
 }
 
-/* ============================================================
-   CLASSROOM PANEL
-   ============================================================ */
+/* ---------- Left column: full classroom ---------- */
 
 body.skin-v2.start-screen .quest-hero-art {
   position: relative;
@@ -198,21 +175,20 @@ body.skin-v2.start-screen .quest-hero-art {
   align-self: stretch;
   min-width: 0;
   min-height: 0;
-  margin: 0 0 5px;
+  margin: 0 0 18px;
   overflow: visible;
-  background: #111940;
-  border: 3px solid var(--v2-blue-line);
-  box-shadow: 0 0 0 3px #161022, 0 0 0 5px var(--v2-gold), inset 0 0 16px rgba(0, 0, 0, .36);
+  background: #11183d;
+  border: 3px solid var(--v2-blue);
+  box-shadow: 0 0 0 3px #0a0b22, 0 0 0 5px var(--v2-gold), inset 0 0 14px rgba(0, 0, 0, .35);
 }
 
 body.skin-v2.start-screen .quest-classroom-background {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center;
-  background: #111940;
+  background: #11183d;
   image-rendering: pixelated;
 }
 
@@ -222,92 +198,86 @@ body.skin-v2.start-screen .quest-hero-art::after {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  box-shadow: inset 0 0 20px rgba(2, 5, 17, .34);
+  box-shadow: inset 0 0 18px rgba(3, 5, 18, .32);
 }
 
 body.skin-v2.start-screen .quest-wizard-coach {
   position: absolute;
-  inset: 0;
-  z-index: 3;
-  width: 100%;
-  height: 100%;
+  top: 10px;
+  left: 12px;
+  z-index: 4;
+  width: min(290px, 48%);
+  aspect-ratio: 2 / 1;
   pointer-events: none;
+}
+
+body.skin-v2.start-screen .quest-wizard-bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 85%;
+  height: 78%;
+  object-fit: fill;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 3px 0 rgba(2, 4, 15, .5));
+}
+
+body.skin-v2.start-screen .quest-wizard-coach span {
+  position: absolute;
+  top: 18%;
+  left: 7%;
+  z-index: 2;
+  width: 64%;
+  color: #160d09;
+  font-family: "Courier New", monospace;
+  font-size: clamp(.58rem, .82vw, .78rem);
+  font-weight: 800;
+  line-height: 1.28;
+  text-align: center;
 }
 
 body.skin-v2.start-screen .quest-map-wizard-guide {
   position: absolute;
-  top: 20%;
-  left: 30%;
-  width: clamp(48px, 6vw, 72px);
+  right: 0;
+  bottom: 0;
+  width: 20%;
   height: auto;
   object-fit: contain;
   image-rendering: pixelated;
   filter: drop-shadow(0 3px 0 rgba(2, 4, 15, .62));
 }
 
-body.skin-v2.start-screen .quest-wizard-bubble {
-  position: absolute;
-  top: -12%;
-  left: 1.5%;
-  width: min(280px, 43%);
-  height: 43%;
-  object-fit: fill;
-  image-rendering: pixelated;
-  filter: drop-shadow(0 4px 0 rgba(2, 4, 15, .56));
-}
-
-body.skin-v2.start-screen .quest-wizard-coach span {
-  position: absolute;
-  top: -2.5%;
-  left: 5%;
-  z-index: 2;
-  width: min(205px, 32%);
-  color: #170d09;
-  font-family: "Courier New", monospace;
-  font-size: clamp(.64rem, .88vw, .82rem);
-  font-weight: 800;
-  line-height: 1.32;
-  text-align: center;
-}
-
 body.skin-v2.start-screen .quest-hero-cta {
   position: absolute;
   left: 50%;
-  bottom: -18px;
-  z-index: 5;
-  width: min(310px, 56%);
-  min-height: 58px;
+  bottom: -17px;
+  z-index: 7;
+  width: min(315px, 58%);
+  height: 58px;
   padding: 8px 24px;
   transform: translateX(-50%);
   color: #fff;
-  background:
-    url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat,
-    #7b382a;
+  background: url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat;
   border: 0;
   font-family: Georgia, serif;
-  font-size: clamp(.75rem, 1vw, .96rem);
+  font-size: clamp(.72rem, 1vw, .94rem);
   font-weight: 800;
+  line-height: 1;
   text-transform: uppercase;
   text-shadow: 0 2px 0 #3a160e;
   cursor: pointer;
 }
 
-body.skin-v2.start-screen .quest-hero-cta:hover,
-body.skin-v2.start-screen .quest-card button:hover {
-  filter: brightness(1.12) saturate(1.06);
-}
-
 body.skin-v2.start-screen .quest-hero-cta:hover {
   transform: translateX(-50%) translateY(-1px);
+  filter: brightness(1.1);
 }
 
 body.skin-v2.start-screen .quest-hero-cta:active {
   transform: translateX(-50%) translateY(3px);
 }
 
-/* ============================================================
-   STACKED MISSION OPTIONS
-   ============================================================ */
+/* ---------- Right column: mission options ---------- */
 
 body.skin-v2.start-screen #choices {
   position: relative;
@@ -316,7 +286,7 @@ body.skin-v2.start-screen #choices {
   min-width: 0;
   min-height: 0;
   margin: 0;
-  padding: 15px 0 0;
+  padding: 20px 0 0;
   overflow: visible;
   background: transparent;
   border: 0;
@@ -328,18 +298,16 @@ body.skin-v2.start-screen #choices::before {
   position: absolute;
   top: -15px;
   left: 50%;
-  z-index: 7;
+  z-index: 8;
   display: grid;
-  width: min(250px, 78%);
-  height: 49px;
+  width: min(255px, 78%);
+  height: 48px;
   place-items: center;
   transform: translateX(-50%);
   color: #fff;
-  background:
-    url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat,
-    #4d2d62;
+  background: url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat;
   font-family: Georgia, serif;
-  font-size: clamp(.9rem, 1.35vw, 1.18rem);
+  font-size: clamp(.88rem, 1.3vw, 1.17rem);
   font-weight: 800;
   text-shadow: 0 2px 0 #2b1833;
 }
@@ -356,31 +324,30 @@ body.skin-v2.start-screen .quest-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 9px;
 }
 
 body.skin-v2.start-screen .quest-card {
   position: relative;
   display: grid;
-  grid-template-columns: 78px minmax(0, 1fr);
+  grid-template-columns: 68px minmax(0, 1fr);
   gap: 10px;
   min-width: 0;
   min-height: 0;
   align-items: center;
-  padding: 11px 14px 24px 12px;
-  overflow: visible;
+  padding: 10px 124px 10px 12px;
+  overflow: hidden;
   background:
     url("assets/skin-v2/small-frame.png") center / 100% 100% no-repeat,
     var(--v2-card);
   border: 0;
-  border-radius: 0;
-  box-shadow: 0 3px 0 rgba(1, 3, 13, .48);
+  box-shadow: 0 3px 0 rgba(1, 3, 13, .45);
 }
 
 body.skin-v2.start-screen .quest-card-icon {
   display: grid;
-  width: 72px;
-  height: 72px;
+  width: 64px;
+  height: 64px;
   place-items: center;
   padding: 2px;
   overflow: hidden;
@@ -398,7 +365,6 @@ body.skin-v2.start-screen .quest-card-icon img {
 
 body.skin-v2.start-screen .quest-card-copy {
   min-width: 0;
-  align-self: center;
 }
 
 body.skin-v2.start-screen .quest-card-kicker {
@@ -409,9 +375,9 @@ body.skin-v2.start-screen .quest-card h3 {
   margin: 0 0 4px;
   color: #fff;
   font-family: Georgia, serif;
-  font-size: clamp(.82rem, 1.15vw, 1.03rem);
+  font-size: clamp(.75rem, 1vw, .94rem);
   font-weight: 800;
-  line-height: 1.04;
+  line-height: 1.05;
   text-transform: uppercase;
   text-shadow: 0 2px 0 #090b20;
 }
@@ -420,30 +386,28 @@ body.skin-v2.start-screen .quest-card p {
   margin: 0;
   color: #fff;
   font-family: Georgia, serif;
-  font-size: clamp(.72rem, .88vw, .86rem);
+  font-size: clamp(.64rem, .78vw, .78rem);
   font-weight: 700;
   line-height: 1.13;
 }
 
 body.skin-v2.start-screen .quest-card .action {
   position: absolute;
-  right: 14px;
-  bottom: -7px;
+  right: 12px;
+  bottom: 12px;
   z-index: 4;
 }
 
 body.skin-v2.start-screen .quest-card button {
-  width: 145px;
-  height: 43px;
-  padding: 5px 10px;
+  width: 105px;
+  height: 39px;
+  padding: 4px 7px;
   opacity: 1;
   color: #fff;
-  background:
-    url("assets/skin-v2/green-button.png") center / 100% 100% no-repeat,
-    #237448;
+  background: url("assets/skin-v2/green-button.png") center / 100% 100% no-repeat;
   border: 0;
   font-family: Georgia, serif;
-  font-size: .72rem;
+  font-size: .62rem;
   font-weight: 800;
   line-height: 1;
   text-transform: uppercase;
@@ -451,38 +415,42 @@ body.skin-v2.start-screen .quest-card button {
   cursor: pointer;
 }
 
+body.skin-v2.start-screen .quest-card:hover,
+body.skin-v2.start-screen .quest-card:focus-within {
+  filter: brightness(1.07);
+}
+
+body.skin-v2.start-screen .quest-card button:hover {
+  filter: brightness(1.12);
+}
+
 body.skin-v2.start-screen .quest-card button:active {
-  transform: translateY(3px);
-  filter: brightness(.95);
+  transform: translateY(2px);
 }
 
-body.skin-v2.start-screen .quest-card:focus-within,
-body.skin-v2.start-screen .quest-card:hover {
-  filter: brightness(1.06);
-}
-
-/* ============================================================
-   SEPARATE BOTTOM NAV WITH INDIVIDUAL SCROLL BUTTONS
-   ============================================================ */
+/* ---------- Separate navigation bar ---------- */
 
 body.skin-v2.start-screen #bottom-action-slot {
   grid-row: 3;
+  align-self: stretch;
   min-height: 0;
   margin: 8px 0 0;
-  padding: 12px 90px;
+  padding: 10px 76px;
+  overflow: hidden;
   background:
     url("assets/skin-v2/large-frame.png") center / 100% 100% no-repeat,
     rgba(7, 12, 52, .97);
   border: 0;
-  box-shadow: 0 8px 18px rgba(1, 4, 17, .38);
+  box-shadow: 0 7px 17px rgba(1, 4, 17, .35);
 }
 
 body.skin-v2.start-screen #bottom-action-slot .quest-bottom-nav {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  gap: 26px;
   width: 100%;
-  height: 80px;
+  height: 100%;
+  margin: 0;
   padding: 0;
   background: transparent;
 }
@@ -500,20 +468,18 @@ body.skin-v2.start-screen #progress-btn,
 body.skin-v2.start-screen #home-btn {
   display: flex;
   min-width: 0;
-  min-height: 72px;
+  min-height: 68px;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 9px;
   margin: 0;
-  padding: 8px 28px;
+  padding: 7px 24px;
   color: #2c190c;
-  background:
-    url("assets/skin-v2/bottom-menu-scroll.png") center / 100% 100% no-repeat,
-    transparent;
+  background: url("assets/skin-v2/bottom-menu-scroll.png") center / 100% 100% no-repeat;
   border: 0;
   box-shadow: none;
   font-family: Georgia, serif;
-  font-size: clamp(.82rem, 1.15vw, 1.04rem);
+  font-size: clamp(.78rem, 1.05vw, .98rem);
   font-weight: 800;
   line-height: 1;
   text-decoration: none;
@@ -524,9 +490,9 @@ body.skin-v2.start-screen #home-btn {
 body.skin-v2.start-screen .quest-nav-link img,
 body.skin-v2.start-screen #progress-btn img,
 body.skin-v2.start-screen #home-btn img {
-  width: 38px;
-  height: 38px;
-  flex: 0 0 38px;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
   object-fit: contain;
   image-rendering: pixelated;
 }
@@ -546,38 +512,66 @@ body.skin-v2.start-screen #home-btn:active {
 }
 
 body.skin-v2.start-screen .quest-resources-link {
-  opacity: .72;
+  opacity: 1;
   pointer-events: none;
 }
 
-/* ============================================================
-   RESPONSIVE FALLBACK
-   ============================================================ */
+/* ---------- Responsive fallback ---------- */
 
-@media (max-width: 940px) {
+@media (max-width: 1050px), (max-height: 735px) {
+  body.skin-v2.start-screen #game-container {
+    grid-template-rows: 82px minmax(0, 1fr) 88px;
+  }
+
+  body.skin-v2.start-screen h1 {
+    height: 84px;
+  }
+
+  body.skin-v2.start-screen .screen-content-shell {
+    grid-template-columns: minmax(0, 61fr) minmax(330px, 39fr);
+    grid-template-rows: 78px minmax(0, 1fr);
+    column-gap: 25px;
+    padding: 39px 26px 24px;
+  }
+
+  body.skin-v2.start-screen .quest-card {
+    padding-right: 108px;
+  }
+
+  body.skin-v2.start-screen .quest-card button {
+    width: 92px;
+  }
+
+  body.skin-v2.start-screen #bottom-action-slot {
+    padding-inline: 55px;
+  }
+}
+
+@media (max-width: 860px) {
   body.skin-v2.start-screen {
     height: auto;
+    padding: 6px;
     overflow: auto;
     background-attachment: scroll;
   }
 
   body.skin-v2.start-screen #game-container {
-    grid-template-rows: 105px auto auto;
+    grid-template-rows: 95px auto auto;
     width: 100%;
     height: auto;
     min-height: 100vh;
   }
 
   body.skin-v2.start-screen h1 {
-    width: min(760px, 94vw);
-    height: 98px;
+    width: 94vw;
+    height: 90px;
   }
 
   body.skin-v2.start-screen .screen-content-shell {
     grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(400px, 56vw) auto;
+    grid-template-rows: auto minmax(390px, 56vw) auto;
     gap: 22px;
-    padding: 55px 24px 32px;
+    padding: 55px 22px 32px;
   }
 
   body.skin-v2.start-screen .quest-hero-heading {
@@ -597,35 +591,24 @@ body.skin-v2.start-screen .quest-resources-link {
   }
 
   body.skin-v2.start-screen #bottom-action-slot {
-    min-height: 190px;
-    padding: 16px 24px;
+    min-height: 235px;
+    padding: 14px 20px;
   }
 
   body.skin-v2.start-screen #bottom-action-slot .quest-bottom-nav {
     grid-template-columns: 1fr;
-    gap: 8px;
-    height: auto;
-  }
-
-  body.skin-v2.start-screen .quest-nav-link,
-  body.skin-v2.start-screen #progress-btn,
-  body.skin-v2.start-screen #home-btn {
-    min-height: 68px;
+    gap: 7px;
   }
 }
 
-@media (max-width: 560px) {
-  body.skin-v2.start-screen {
-    padding-inline: 5px;
-  }
-
+@media (max-width: 520px) {
   body.skin-v2.start-screen .quest-classroom-plaque {
-    width: 76%;
+    width: 78%;
     font-size: 1rem;
   }
 
   body.skin-v2.start-screen .screen-content-shell {
-    padding-inline: 14px;
+    padding-inline: 13px;
   }
 
   body.skin-v2.start-screen .quest-hero-heading {
@@ -633,35 +616,24 @@ body.skin-v2.start-screen .quest-resources-link {
   }
 
   body.skin-v2.start-screen .quest-hero-heading h2 {
-    font-size: .84rem;
+    font-size: .82rem;
   }
 
-  body.skin-v2.start-screen .quest-wizard-bubble {
-    width: 58%;
-    height: 40%;
+  body.skin-v2.start-screen .quest-wizard-coach {
+    width: 55%;
   }
 
   body.skin-v2.start-screen .quest-wizard-coach span {
-    left: 7%;
-    width: 42%;
-    font-size: .58rem;
-  }
-
-  body.skin-v2.start-screen .quest-map-wizard-guide {
-    left: 39%;
+    font-size: .52rem;
   }
 
   body.skin-v2.start-screen .quest-card {
-    grid-template-columns: 62px minmax(0, 1fr);
-    min-height: 125px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    padding-right: 105px;
   }
 
   body.skin-v2.start-screen .quest-card-icon {
-    width: 58px;
-    height: 58px;
-  }
-
-  body.skin-v2.start-screen .quest-card button {
-    width: 130px;
+    width: 54px;
+    height: 54px;
   }
 }

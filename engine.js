@@ -693,7 +693,7 @@ function renderIntroCards() {
         <div class="quest-hero-heading">
           <span class="quest-classroom-plaque">Mrs. Olson&rsquo;s Classroom</span>
           <h2 id="quest-hero-title">Master Classroom Missions, One Choice at a Time.</h2>
-          <p>Embark on a journey to level up behavior support,</p>
+          <p>Embark on a journey to level up behavior support, one decision at a time.</p>
         </div>
         <div class="quest-hero-art">
           <img class="quest-classroom-background" src="../assets/skin-v2/classroom-image.png" alt="A magical pixel-art classroom">
