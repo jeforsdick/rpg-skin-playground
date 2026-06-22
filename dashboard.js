@@ -164,6 +164,69 @@ function dashboardFormatTime(dateString) {
   });
 }
 
+function dashboardDateKey(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function dashboardCurrentWeek(sessions) {
+  const completedDates = new Set(dashboardUniqueDates(sessions));
+  const today = new Date();
+  const start = new Date(today);
+  start.setHours(12, 0, 0, 0);
+  start.setDate(today.getDate() - today.getDay());
+  const todayKey = dashboardDateKey(today);
+
+  return Array.from({ length: 7 }, (_, index) => {
+    const date = new Date(start);
+    date.setDate(start.getDate() + index);
+    const key = dashboardDateKey(date);
+
+    return {
+      key,
+      label: date.toLocaleDateString([], { weekday: "short" }),
+      completed: completedDates.has(key),
+      today: key === todayKey
+    };
+  });
+}
+
+function dashboardMissionPresentation(mode) {
+  const value = String(mode || "Mission");
+  const normalized = value.toLowerCase();
+
+  if (normalized.includes("crisis") || normalized.includes("emergency")) {
+    return {
+      label: "Crisis Mission",
+      icon: "../assets/ui/crisis-mission-icon.png",
+      type: "crisis"
+    };
+  }
+
+  if (normalized.includes("wild") || normalized.includes("shuffle") || normalized.includes("mystery")) {
+    return {
+      label: "Mystery Mission",
+      icon: "../assets/ui/mystery-mission-icon.png",
+      type: "mystery"
+    };
+  }
+
+  return {
+    label: normalized.includes("daily") ? "Daily Mission" : value,
+    icon: "../assets/ui/daily-mission-icon.png",
+    type: "daily"
+  };
+}
+
+function dashboardAccuracyClass(percent) {
+  const value = Number(percent) || 0;
+  if (value >= 80) return "accuracy-high";
+  if (value >= 50) return "accuracy-mid";
+  return "accuracy-growing";
+}
+
 function dashboardEscape(str) {
   return String(str || "")
     .replaceAll("&", "&amp;")
@@ -282,21 +345,38 @@ function renderProgressDashboardFromHistory(history) {
   const best = dashboardBestPercent(sessions);
   const streak = dashboardCurrentStreak(sessions);
   const total = sessions.length;
-  const coachSummary = dashboardMakeCoachSummary(sessions, decisions);
-  const wizard = dashboardStateFromAccuracy(avg);
+  const week = dashboardCurrentWeek(sessions);
+
+  const weeklyNodes = week.map(day => {
+    const stateClass = day.today
+      ? "is-today"
+      : day.completed
+        ? "is-complete"
+        : "is-empty";
+
+    return `
+      <div class="weekly-path-day ${stateClass}">
+        <span class="weekly-path-label">${dashboardEscape(day.label)}</span>
+        <span class="weekly-path-node" aria-label="${day.today ? "Today" : day.completed ? "Mission completed" : "No session"}"></span>
+      </div>
+    `;
+  }).join("");
 
   const recentSessionCards = sessions.length
     ? sessions.slice(0, 12).map(session => {
         const sessionDecisions = decisionsBySession[session.session_id] || [];
         const scoreText = `${session.points}/${session.max_possible}`;
         const pctText = `${Math.round(session.percent)}%`;
+        const mission = dashboardMissionPresentation(session.mode);
+        const accuracyClass = dashboardAccuracyClass(session.percent);
 
         return `
-          <button class="dashboard-session-card" data-session-id="${dashboardEscape(session.session_id)}">
-            <div class="dashboard-session-date">${dashboardEscape(dashboardFormatDate(session.timestamp || session.date))}</div>
+          <button class="dashboard-session-card ${dashboardEscape(accuracyClass)} mission-${dashboardEscape(mission.type)}" data-session-id="${dashboardEscape(session.session_id)}">
+            <img class="dashboard-session-icon" src="${dashboardEscape(mission.icon)}" alt="">
             <div class="dashboard-session-main">
-              <strong>${dashboardEscape(session.mode || "Mission")}</strong>
-              <span>Score: ${dashboardEscape(scoreText)} (${dashboardEscape(pctText)})</span>
+              <span class="dashboard-session-date">${dashboardEscape(dashboardFormatDate(session.timestamp || session.date))}</span>
+              <strong>${dashboardEscape(mission.label)}</strong>
+              <span>Score: ${dashboardEscape(scoreText)} <b>Accuracy: ${dashboardEscape(pctText)}</b></span>
               <small>${dashboardEscape(sessionDecisions.length)} choices reviewed</small>
             </div>
             <div class="dashboard-session-link">Details ▶</div>
@@ -307,45 +387,58 @@ function renderProgressDashboardFromHistory(history) {
 
   choicesDiv.innerHTML = `
     <div id="progress-dashboard">
-      <div class="wizard-summary-bubble wizard-summary-${dashboardEscape(wizard.state)}">
-        <div class="wizard-summary-icon">
-          <img src="${dashboardEscape(wizard.img)}" alt="MR Wizard">
+      <header class="progress-guild-header">
+        <img class="progress-guild-wizard" src="../assets/characters/wizard-guide.png" alt="MR Wizard">
+        <div class="progress-guild-heading">
+          <h2>Mission Progress</h2>
+          <p>Review your mission history, accuracy, and mission streak.</p>
         </div>
-        <div class="wizard-summary-text">
-          <h3>${dashboardEscape(wizard.title)}</h3>
-          <p>${dashboardEscape(coachSummary)}</p>
+        <div class="progress-guild-mark" aria-hidden="true">
+          <img src="../assets/ui/bottom-bar-my-progress-icon.png" alt="">
         </div>
-      </div>
+      </header>
 
       <div class="dashboard-grid">
         <div class="dashboard-card">
-          <div class="dashboard-number">${dashboardEscape(avg)}%</div>
-          <div class="dashboard-label">Overall Accuracy</div>
+          <img src="../assets/ui/crisis-mission-icon.png" alt="">
+          <div><div class="dashboard-label">Current Streak</div><div class="dashboard-number">${dashboardEscape(streak)} <small>days</small></div></div>
         </div>
 
         <div class="dashboard-card">
-          <div class="dashboard-number">${dashboardEscape(streak)}</div>
-          <div class="dashboard-label">School-Day Streak</div>
+          <img src="../assets/ui/behavior-xp-icon.png" alt="">
+          <div><div class="dashboard-label">Average Accuracy</div><div class="dashboard-number">${dashboardEscape(avg)}%</div></div>
         </div>
 
         <div class="dashboard-card">
-          <div class="dashboard-number">${dashboardEscape(total)}</div>
-          <div class="dashboard-label">Missions Completed</div>
+          <img src="../assets/ui/daily-mission-icon.png" alt="">
+          <div><div class="dashboard-label">Missions Completed</div><div class="dashboard-number">${dashboardEscape(total)}</div></div>
         </div>
 
         <div class="dashboard-card">
-          <div class="dashboard-number">${dashboardEscape(best)}%</div>
-          <div class="dashboard-label">Best Score</div>
+          <img src="../assets/ui/quest-progress-icon.png" alt="">
+          <div><div class="dashboard-label">Best Score</div><div class="dashboard-number">${dashboardEscape(best)}%</div></div>
         </div>
       </div>
 
-      <div class="dashboard-section">
-        <h3>Past Missions</h3>
-        <p class="dashboard-hint">Tap a session to review your score, choices, and overall feedback.</p>
+      <section class="dashboard-section weekly-mission-path">
+        <h3>Weekly Mission Path</h3>
+        <div class="weekly-path-track">${weeklyNodes}</div>
+        <div class="weekly-path-legend">
+          <span><i class="legend-complete"></i>Completed</span>
+          <span><i class="legend-empty"></i>No Session</span>
+          <span><i class="legend-today"></i>Today</span>
+        </div>
+      </section>
+
+      <section class="dashboard-section recent-mission-log">
+        <div class="dashboard-section-heading">
+          <h3>Recent Mission Log</h3>
+          <p class="dashboard-hint">Select Details to review choices and coaching.</p>
+        </div>
         <div class="dashboard-session-list">
           ${recentSessionCards}
         </div>
-      </div>
+      </section>
 
       <button id="dashboard-back-btn" class="scenario-btn primary big option-btn">
         Back to Missions
