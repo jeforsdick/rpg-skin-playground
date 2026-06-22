@@ -1205,11 +1205,11 @@ body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-card {
   max-width: calc(100vw - 24px);
   height: min(700px, calc(100vh - 164px));
   max-height: none;
-  aspect-ratio: .74;
-  padding: clamp(64px, 9vh, 88px) clamp(72px, 7vw, 92px) clamp(58px, 8vh, 78px);
+  aspect-ratio: 1.28;
+  padding: clamp(82px, 11vh, 108px) clamp(78px, 8vw, 108px) clamp(58px, 8vh, 78px);
   overflow: visible;
   color: #21170f;
-  background: url("assets/ui/wizard-popup-scroll.png") center / 142% 100% no-repeat;
+  background: url("assets/ui/wizard-pop-up-scroll.png") top center / 100% auto no-repeat;
   border: 0;
   border-radius: 0;
   outline: 0;
@@ -1224,22 +1224,23 @@ body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-card::after 
 
 body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-top {
   display: grid;
-  grid-template-columns: clamp(68px, 7vw, 88px) minmax(0, 1fr);
+  grid-template-columns: clamp(64px, 6vw, 78px) minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
-  margin: 0 0 8px;
+  gap: 9px;
+  margin: 0 0 6px;
 }
 
 body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-top > div:last-child {
   padding: 0;
   border: 0;
   text-align: left;
+  transform: translateY(20px);
 }
 
 body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-icon {
   display: block;
-  width: clamp(68px, 7vw, 88px);
-  height: clamp(88px, 9vw, 116px);
+  width: clamp(64px, 6vw, 78px);
+  height: clamp(78px, 7.5vw, 96px);
   margin: 0;
   padding: 0;
   overflow: visible;
@@ -1262,7 +1263,7 @@ body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal h2 {
   margin: 0 0 5px;
   color: #20140d;
   font-family: var(--font-fantasy, Georgia, serif);
-  font-size: clamp(1.05rem, 1.55vw, 1.38rem);
+  font-size: clamp(1.08rem, 1.6vw, 1.42rem);
   line-height: 1;
   letter-spacing: 0;
   text-align: left;
@@ -1279,7 +1280,7 @@ body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-tag {
   border: 0;
   box-shadow: none;
   font-family: "Courier New", monospace;
-  font-size: clamp(.58rem, .68vw, .66rem);
+  font-size: clamp(.62rem, .76vw, .72rem);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -1293,7 +1294,7 @@ body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-body {
   border: 0;
   box-shadow: none;
   font-family: "Courier New", monospace;
-  font-size: clamp(.68rem, .82vw, .8rem);
+  font-size: clamp(.74rem, .92vw, .88rem);
   font-weight: 700;
   line-height: 1.28;
 }
@@ -1330,7 +1331,7 @@ body.skin-quest-hub.bip-briefing .bip-briefing-copy {
 }
 
 body.skin-quest-hub.bip-briefing .bip-focus-block span {
-  font-size: clamp(.66rem, .78vw, .76rem);
+  font-size: clamp(.72rem, .86vw, .82rem);
   line-height: 1.2;
 }
 
@@ -1338,16 +1339,16 @@ body.skin-quest-hub.bip-briefing .bip-briefing-copy {
   padding: 0;
   background: transparent;
   border: 0;
-  font-size: clamp(.66rem, .8vw, .78rem);
-  line-height: 1.22;
+  font-size: clamp(.72rem, .88vw, .84rem);
+  line-height: 1.25;
 }
 
 body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-continue-btn {
   display: block;
-  width: min(270px, 92%);
-  min-height: 48px;
-  margin: 14px auto 0;
-  padding: 8px 14px;
+  width: min(250px, 88%);
+  min-height: 44px;
+  margin: 9px auto 0;
+  padding: 7px 13px;
   color: #fff;
   background: linear-gradient(180deg, #61c96a 0%, #2f9256 52%, #17633e 100%);
   border: 4px solid #e9c963;
@@ -1359,7 +1360,7 @@ body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-continue-btn {
     0 6px 0 #442f16,
     0 0 0 3px #775423;
   font-family: var(--font-pixel, "Courier New", monospace);
-  font-size: clamp(.66rem, .9vw, .78rem);
+  font-size: clamp(.64rem, .82vw, .74rem);
   text-shadow: 0 2px 0 #143c25;
 }
 
@@ -1388,12 +1389,16 @@ body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-continue-btn:activ
   body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-card {
     width: calc(100vw - 8px);
     height: auto;
-    aspect-ratio: .74;
-    padding: 54px 18% 48px;
+    aspect-ratio: 1.28;
+    padding: 54px 12% 42px;
   }
 
   body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-body,
   body.skin-quest-hub.bip-briefing .bip-briefing-copy {
     font-size: .64rem;
+  }
+
+  body.skin-quest-hub:is(.bip-briefing, .feedback-open) .wizard-modal-top > div:last-child {
+    transform: translateY(12px);
   }
 }
