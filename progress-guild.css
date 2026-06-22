@@ -17,6 +17,7 @@ body.skin-quest-hub.dashboard-screen {
 }
 
 body.skin-quest-hub.dashboard-screen #game-container {
+  position: relative;
   grid-template-rows: minmax(0, 1fr) 64px;
   grid-template-areas: "content" "nav";
   gap: 7px;
@@ -26,10 +27,22 @@ body.skin-quest-hub.dashboard-screen #game-container {
     url("assets/ui/gameplay-stone-background.png") center / cover no-repeat;
 }
 
-/* The active-mission HUD is omitted on history screens so no stale mission
-   values appear and the mission log receives the full available height. */
+/* Dashboard-only hearts strip. Active-mission meters remain hidden here. */
 body.skin-quest-hub.dashboard-screen #toolbar {
-  display: none !important;
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  z-index: 5;
+  display: flex !important;
+  width: 224px;
+  height: 50px;
+  min-height: 0;
+  align-items: center;
+  margin: 0;
+  padding: 5px 10px;
+  background: linear-gradient(180deg, #121a38, #080e25);
+  border: 2px solid var(--progress-blue);
+  box-shadow: inset 0 0 0 1px #26385e, 0 3px 0 #03050c;
 }
 
 body.skin-quest-hub.dashboard-screen #toolbar .quest-progress-stat,
@@ -39,18 +52,18 @@ body.skin-quest-hub.dashboard-screen #toolbar #score-badge {
 
 body.skin-quest-hub.dashboard-screen #hearts-display {
   justify-content: flex-start;
-  gap: 6px;
+  gap: 5px;
   padding: 0;
 }
 
 body.skin-quest-hub.dashboard-screen #hearts-display .zelda-heart {
-  width: 38px;
-  height: 34px;
-  flex-basis: 38px;
+  width: 36px;
+  height: 32px;
+  flex-basis: 36px;
 }
 
 body.skin-quest-hub.dashboard-screen #choices {
-  padding: 0;
+  padding: 54px 0 0;
   overflow: hidden;
   scrollbar-color: #8ca6c2 #070c22;
 }
@@ -610,6 +623,7 @@ body.skin-quest-hub.dashboard-screen #bottom-action-slot #progress-btn {
   }
 
   body.skin-quest-hub.dashboard-screen #choices {
+    padding-top: 54px;
     overflow: visible;
   }
 
@@ -635,6 +649,10 @@ body.skin-quest-hub.dashboard-screen #bottom-action-slot #progress-btn {
 }
 
 @media (max-width: 620px) {
+  body.skin-quest-hub.dashboard-screen #toolbar {
+    left: 12px;
+  }
+
   body.skin-quest-hub.dashboard-screen .progress-guild-header {
     grid-template-columns: 58px minmax(0, 1fr);
     padding: 8px 12px;
