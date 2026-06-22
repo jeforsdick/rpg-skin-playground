@@ -14,16 +14,38 @@ body.skin-quest-hub.dashboard-screen {
   --progress-green: #70d65e;
   --progress-purple: #a96ad9;
   --progress-amber: #d89b45;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 body.skin-quest-hub.dashboard-screen #game-container {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
   grid-template-rows: 50px minmax(0, 1fr) 64px;
   grid-template-areas: "toolbar" "content" "nav";
   gap: 7px;
-  padding-top: 7px;
+  width: 100vw !important;
+  max-width: none !important;
+  height: 100vh !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 7px 20px 0 !important;
+  overflow: hidden !important;
   background:
     linear-gradient(rgba(3, 7, 24, .76), rgba(3, 7, 24, .9)),
     url("assets/ui/gameplay-stone-background.png") center / cover no-repeat;
+}
+
+body.skin-quest-hub.dashboard-screen #game-container > h1,
+body.skin-quest-hub.dashboard-screen #scenario-title,
+body.skin-quest-hub.dashboard-screen #teacher-badge,
+body.skin-quest-hub.dashboard-screen #feedback,
+body.skin-quest-hub.dashboard-screen .scenario-progress-stat,
+body.skin-quest-hub.dashboard-screen #story-text {
+  display: none !important;
 }
 
 /* Dashboard-only hearts strip. Active-mission meters remain hidden here. */
@@ -61,6 +83,13 @@ body.skin-quest-hub.dashboard-screen #hearts-display .zelda-heart {
 }
 
 body.skin-quest-hub.dashboard-screen #choices {
+  grid-area: content !important;
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
   padding: 0;
   overflow: hidden;
   scrollbar-color: #8ca6c2 #070c22;
@@ -70,12 +99,48 @@ body.skin-quest-hub.dashboard-screen #progress-dashboard {
   display: grid;
   grid-template-rows: auto auto auto minmax(280px, 1fr);
   gap: 10px;
-  width: min(1420px, 100%);
+  width: 100%;
+  max-width: none;
   height: 100%;
   margin: 0 auto;
   padding: 3px 14px 8px;
   color: #f7f5ea;
   font-family: var(--font-pixel, "Courier New", monospace);
+}
+
+body.skin-quest-hub.dashboard-screen #bottom-action-slot {
+  position: static !important;
+  grid-area: nav !important;
+  display: block !important;
+  width: calc(100% + 40px) !important;
+  height: 64px !important;
+  margin: 0 0 0 -20px !important;
+  padding: 5px 28px 7px !important;
+  overflow: hidden;
+  background: linear-gradient(180deg, #11162f, #080c20) !important;
+  border: 0 !important;
+  border-top: 3px solid #6f8299 !important;
+  box-shadow: none !important;
+}
+
+body.skin-quest-hub.dashboard-screen #bottom-action-slot .utility-actions {
+  display: flex !important;
+  width: 100% !important;
+  height: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 48px !important;
+  margin: 0 !important;
+}
+
+body.skin-quest-hub.dashboard-screen #bottom-action-slot :is(.quest-nav-link, .ghost) {
+  position: static !important;
+  display: flex !important;
+  width: min(250px, 24vw) !important;
+  min-height: 44px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
 }
 
 body.skin-quest-hub.dashboard-screen .progress-guild-header {
@@ -608,10 +673,13 @@ body.skin-quest-hub.dashboard-screen #bottom-action-slot #progress-btn {
 
 @media (max-width: 900px) {
   body.skin-quest-hub.dashboard-screen #game-container {
+    grid-template-columns: minmax(0, 1fr) !important;
     grid-template-rows: 50px auto auto;
     grid-template-areas: "toolbar" "content" "nav";
-    height: auto;
-    min-height: 100vh;
+    height: auto !important;
+    min-height: 100vh !important;
+    padding-right: 12px !important;
+    padding-left: 12px !important;
   }
 
   body.skin-quest-hub.dashboard-screen #progress-dashboard {
@@ -623,6 +691,11 @@ body.skin-quest-hub.dashboard-screen #bottom-action-slot #progress-btn {
   body.skin-quest-hub.dashboard-screen #choices {
     padding-top: 0;
     overflow: visible;
+  }
+
+  body.skin-quest-hub.dashboard-screen #bottom-action-slot {
+    width: calc(100% + 24px) !important;
+    margin-left: -12px !important;
   }
 
   body.skin-quest-hub.dashboard-screen .dashboard-grid {
