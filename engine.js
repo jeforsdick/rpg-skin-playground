@@ -690,13 +690,19 @@ function renderIntroCards() {
     storyText.innerHTML = useQuestHub
       ? `
       <section class="quest-hero" aria-labelledby="quest-hero-title">
+        <div class="quest-hero-heading">
+          <span class="quest-classroom-plaque">Mrs. Olson's Classroom</span>
+          <h2 id="quest-hero-title">Master Classroom Missions, One Choice at a Time.</h2>
+          <p>Embark on a journey to level up behavior support, one decision at a time.</p>
+        </div>
         <div class="quest-hero-art">
-          <img class="quest-map-background" src="../assets/ui/map-quest-background.png" alt="Magical classroom kingdom quest map">
-          <img class="quest-map-wizard-guide" src="../assets/ui/wizard-start.png" alt="The Wizard will chime in after every move.">
-          <div class="quest-map-caption">
-            <h3 id="quest-hero-title">Your Classroom Kingdom</h3>
-            <button type="button" class="quest-hero-cta">Start Daily Quest</button>
+          <img class="quest-classroom-background" src="../assets/skin-v2/classroom-image.png" alt="A magical pixel-art classroom">
+          <div class="quest-wizard-coach" aria-label="Wizard guide">
+            <img class="quest-wizard-bubble" src="../assets/skin-v2/speech-bubble-left.png" alt="">
+            <span>Choose a mission and practice your next best move.</span>
+            <img class="quest-map-wizard-guide" src="../assets/skin-v2/wizard-guide.png" alt="Wizard guide">
           </div>
+          <button type="button" class="quest-hero-cta">Start Your Daily Mission</button>
         </div>
       </section>`
       : `
@@ -718,31 +724,28 @@ function renderIntroCards() {
   menu.innerHTML = useQuestHub
     ? `
     <article class="quest-card quest-card-daily">
-      <div class="quest-card-icon"><img src="../assets/ui/daily-mission-icon.png" alt=""></div>
+      <div class="quest-card-icon"><img src="../assets/skin-v2/daily-mission-icon.png" alt=""></div>
       <div class="quest-card-copy">
-        <span class="quest-card-kicker">Plan Your Day</span>
-        <h3>Daily Quest</h3>
+        <h3>Daily Mission</h3>
         <p>Practice plan-aligned support decisions.</p>
       </div>
-      <div class="action"><button id="btn-drill">View Quest</button></div>
-    </article>
-    <article class="quest-card quest-card-crisis">
-      <div class="quest-card-icon"><img src="../assets/ui/crisis-mission-icon.png" alt=""></div>
-      <div class="quest-card-copy">
-        <span class="quest-card-kicker">Steady the Moment</span>
-        <h3>Crisis Mission</h3>
-        <p>Practice calm responses during higher-intensity classroom moments.</p>
-      </div>
-      <div class="action"><button id="btn-crisis">View Quest</button></div>
+      <div class="action"><button id="btn-drill">Start Daily</button></div>
     </article>
     <article class="quest-card quest-card-mystery">
-      <div class="quest-card-icon"><img src="../assets/ui/mystery-mission-icon.png" alt=""></div>
+      <div class="quest-card-icon"><img src="../assets/skin-v2/mystery-mission-icon.png" alt=""></div>
       <div class="quest-card-copy">
-        <span class="quest-card-kicker">Wildcard Challenge</span>
-        <h3>Mystery Quest</h3>
-        <p>Try randomized classroom scenarios.</p>
+        <h3>Mystery Mission</h3>
+        <p>Try a random classroom scenario.</p>
       </div>
-      <div class="action"><button id="btn-random">View Quest</button></div>
+      <div class="action"><button id="btn-random">Start Mystery</button></div>
+    </article>
+    <article class="quest-card quest-card-crisis">
+      <div class="quest-card-icon"><img src="../assets/skin-v2/crisis-mission-icon.png" alt=""></div>
+      <div class="quest-card-copy">
+        <h3>Crisis Mission</h3>
+        <p>Practice calm responses during high-intensity moments.</p>
+      </div>
+      <div class="action"><button id="btn-crisis">Start Crisis</button></div>
     </article>`
     : `
     <div class="mission-card">
