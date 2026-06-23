@@ -1527,3 +1527,72 @@ body.skin-v2.start-screen .quest-card button {
     font-size: .56rem !important;
   }
 }
+
+/* ============================================================
+   SKIN V2 LANDING - BUTTON + CARD FIT FIX
+   Fixes oversized green buttons and card text clipping.
+   ============================================================ */
+
+/* Give the mission column a tiny bit more room */
+body.skin-v2.start-screen .screen-content-shell {
+  grid-template-columns: minmax(0, 58fr) minmax(430px, 42fr) !important;
+  column-gap: 30px !important;
+}
+
+/* Keep mission cards from clipping the large green buttons */
+body.skin-v2.start-screen .quest-card {
+  overflow: visible !important;
+  padding: 12px 132px 12px 14px !important;
+}
+
+/* Keep the card copy from running under the button */
+body.skin-v2.start-screen .quest-card-copy {
+  max-width: calc(100% - 6px) !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.start-screen .quest-card p {
+  max-width: 100% !important;
+  font-size: clamp(.60rem, .70vw, .72rem) !important;
+  line-height: 1.1 !important;
+}
+
+/* Make the green buttons smaller so they fit inside the card */
+body.skin-v2.start-screen .quest-card .action {
+  right: 14px !important;
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+  width: 112px !important;
+  height: 42px !important;
+}
+
+body.skin-v2.start-screen .quest-card button {
+  width: 112px !important;
+  height: 42px !important;
+  font-size: .58rem !important;
+  padding: 4px 10px !important;
+}
+
+/* Slightly reduce icon size so card contents breathe */
+body.skin-v2.start-screen .quest-card-icon {
+  width: 62px !important;
+  height: 62px !important;
+}
+
+/* Bring the bottom nav fully back into view */
+body.skin-v2.start-screen #game-container {
+  grid-template-rows: 142px minmax(0, 1fr) 96px !important;
+}
+
+body.skin-v2.start-screen #bottom-action-slot {
+  margin-top: 6px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+body.skin-v2.start-screen .quest-nav-link,
+body.skin-v2.start-screen #progress-btn,
+body.skin-v2.start-screen #home-btn {
+  min-height: 58px !important;
+}
