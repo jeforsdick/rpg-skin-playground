@@ -1339,3 +1339,109 @@ body.skin-v2.start-screen #home-btn img {
   height: 30px !important;
   flex-basis: 30px !important;
 }
+
+/* ============================================================
+   SKIN V2 LANDING POLISH PASS 2
+   Uses dedicated main-menu background and tightens mockup spacing.
+   ============================================================ */
+
+/* Use the new dedicated home/menu background */
+body.skin-v2.start-screen {
+  background:
+    linear-gradient(rgba(5, 9, 35, .05), rgba(4, 15, 27, .08)),
+    url("assets/backgrounds/landing-page-main-menu-background.png") center / cover fixed no-repeat !important;
+}
+
+/* Main title: still small, but keep it from eating layout space */
+body.skin-v2.start-screen h1 {
+  height: 92px !important;
+  width: min(1050px, 84vw) !important;
+}
+
+/* Give the main frame a tiny bit more breathing room from the title */
+body.skin-v2.start-screen #game-container {
+  grid-template-rows: 94px minmax(0, 1fr) 86px !important;
+}
+
+/* Make the main frame feel closer to the mockup proportions */
+body.skin-v2.start-screen .screen-content-shell {
+  grid-template-columns: minmax(0, 61fr) minmax(390px, 39fr) !important;
+  grid-template-rows: 100px minmax(0, 1fr) !important;
+  column-gap: 36px !important;
+  padding: 50px 34px 26px !important;
+}
+
+/* Slightly reduce the big empty navy space around classroom image */
+body.skin-v2.start-screen .quest-hero-art {
+  align-self: stretch !important;
+  margin-bottom: 18px !important;
+}
+
+/* Classroom should feel a little larger and more centered */
+body.skin-v2.start-screen .quest-classroom-background {
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
+/* Wizard/bubble: move closer to the mockup, less centered over the classroom */
+body.skin-v2.start-screen .quest-wizard-coach {
+  top: 18px !important;
+  left: 22px !important;
+  width: min(245px, 38%) !important;
+  height: 125px !important;
+}
+
+body.skin-v2.start-screen .quest-map-wizard-guide {
+  max-width: 78px !important;
+}
+
+/* Main daily button: a touch smaller and closer to bottom edge */
+body.skin-v2.start-screen .quest-hero-cta {
+  bottom: -16px !important;
+  width: min(315px, 54%) !important;
+  height: 54px !important;
+  font-size: clamp(.7rem, .9vw, .88rem) !important;
+}
+
+/* Mission options column: tighten cards and center them vertically better */
+body.skin-v2.start-screen #choices {
+  padding-top: 30px !important;
+}
+
+body.skin-v2.start-screen #choices::before {
+  top: -16px !important;
+  width: min(250px, 76%) !important;
+  height: 48px !important;
+}
+
+body.skin-v2.start-screen .quest-grid {
+  gap: 11px !important;
+}
+
+body.skin-v2.start-screen .quest-card {
+  padding: 12px 118px 12px 14px !important;
+}
+
+body.skin-v2.start-screen .quest-card button {
+  width: 92px !important;
+  height: 35px !important;
+  font-size: .55rem !important;
+}
+
+/* Bottom nav: make scroll buttons a little closer to mockup */
+body.skin-v2.start-screen #bottom-action-slot {
+  margin-top: 7px !important;
+  padding: 8px 86px !important;
+}
+
+body.skin-v2.start-screen #bottom-action-slot .quest-bottom-nav {
+  gap: 32px !important;
+}
+
+body.skin-v2.start-screen .quest-nav-link,
+body.skin-v2.start-screen #progress-btn,
+body.skin-v2.start-screen #home-btn {
+  min-height: 56px !important;
+  padding: 5px 24px !important;
+  font-size: clamp(.82rem, 1.05vw, 1rem) !important;
+}
