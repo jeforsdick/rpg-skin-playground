@@ -1234,3 +1234,108 @@ body.skin-v2.start-screen .quest-resources-link {
     gap: 7px !important;
   }
 }
+
+/* ============================================================
+   SKIN V2 LANDING POLISH PASS 1
+   Goal: keep bottom nav visible and mission cards inside frame.
+   ============================================================ */
+
+body.skin-v2.start-screen {
+  padding: 4px 0 6px !important;
+}
+
+/* Slightly compress the full composition so nav does not get cut off */
+body.skin-v2.start-screen #game-container {
+  grid-template-rows: 90px minmax(0, 1fr) 86px !important;
+  height: calc(100vh - 10px) !important;
+  width: min(92vw, 1380px) !important;
+}
+
+/* Keep title visible but give more room to the frame/nav */
+body.skin-v2.start-screen h1 {
+  height: 86px !important;
+  width: min(980px, 82vw) !important;
+}
+
+/* Slightly reduce main frame vertical pressure */
+body.skin-v2.start-screen .screen-content-shell {
+  grid-template-rows: 104px minmax(0, 1fr) !important;
+  padding: 48px 34px 28px !important;
+  column-gap: 34px !important;
+}
+
+/* Mission column must stay contained inside the main frame */
+body.skin-v2.start-screen #choices {
+  height: 100% !important;
+  max-height: 100% !important;
+  padding-top: 28px !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.start-screen .mission-intro,
+body.skin-v2.start-screen .quest-grid {
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Cards should distribute within available height instead of forcing overflow */
+body.skin-v2.start-screen .quest-grid {
+  grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+body.skin-v2.start-screen .quest-card {
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 12px 124px 12px 14px !important;
+}
+
+/* Slightly smaller card contents so nothing overlaps */
+body.skin-v2.start-screen .quest-card-icon {
+  width: 58px !important;
+  height: 58px !important;
+}
+
+body.skin-v2.start-screen .quest-card h3 {
+  font-size: clamp(.76rem, .95vw, .9rem) !important;
+  margin-bottom: 4px !important;
+}
+
+body.skin-v2.start-screen .quest-card p {
+  font-size: clamp(.62rem, .72vw, .74rem) !important;
+  line-height: 1.12 !important;
+}
+
+body.skin-v2.start-screen .quest-card button {
+  width: 96px !important;
+  height: 36px !important;
+  font-size: .57rem !important;
+}
+
+body.skin-v2.start-screen .quest-card .action {
+  right: 12px !important;
+  bottom: 12px !important;
+}
+
+/* Bottom nav should sit fully in view */
+body.skin-v2.start-screen #bottom-action-slot {
+  margin-top: 6px !important;
+  padding: 8px 76px !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.start-screen .quest-nav-link,
+body.skin-v2.start-screen #progress-btn,
+body.skin-v2.start-screen #home-btn {
+  min-height: 58px !important;
+  padding: 5px 22px !important;
+}
+
+body.skin-v2.start-screen .quest-nav-link img,
+body.skin-v2.start-screen #progress-btn img,
+body.skin-v2.start-screen #home-btn img {
+  width: 30px !important;
+  height: 30px !important;
+  flex-basis: 30px !important;
+}
