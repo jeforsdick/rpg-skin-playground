@@ -1294,3 +1294,103 @@ body.skin-v2.start-screen .intro-card-icon {
     font-size: 0.72rem !important;
   }
 }
+
+/* ============================================================
+   SKIN V2 LANDING - DREAM MATCH TWEAKS
+   Remove classroom gold border + reduce overall scale
+   ============================================================ */
+
+/* Pull the whole main panel in a little so it breathes more */
+body.skin-v2.start-screen #game-container {
+  width: min(1380px, calc(100vw - 88px)) !important;
+  margin: 28px auto 0 !important;
+  grid-template-rows: 142px minmax(0, 1fr) 102px !important;
+}
+
+/* Slightly reduce the size of the main content area */
+body.skin-v2.start-screen .quest-shell,
+body.skin-v2.start-screen .quest-main,
+body.skin-v2.start-screen .quest-layout {
+  max-width: 1280px !important;
+  margin-inline: auto !important;
+}
+
+/* Make the left/right content area a little less oversized */
+body.skin-v2.start-screen .quest-layout {
+  gap: 28px !important;
+  padding: 22px 26px 18px !important;
+}
+
+/* Remove the gold framed look around the classroom area */
+body.skin-v2.start-screen .quest-hero-stage,
+body.skin-v2.start-screen .quest-hero-media,
+body.skin-v2.start-screen .quest-stage-frame,
+body.skin-v2.start-screen .quest-classroom-wrap {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Give the classroom only a subtle light outline like the mockup */
+body.skin-v2.start-screen .quest-hero-stage img,
+body.skin-v2.start-screen .quest-hero-media img,
+body.skin-v2.start-screen .quest-stage-frame img,
+body.skin-v2.start-screen .quest-classroom-wrap img,
+body.skin-v2.start-screen .quest-hero-image {
+  border: 3px solid #b9c7f0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  display: block !important;
+}
+
+/* Make the classroom region a touch narrower so the screen feels lighter */
+body.skin-v2.start-screen .quest-hero-stage,
+body.skin-v2.start-screen .quest-hero-media,
+body.skin-v2.start-screen .quest-stage-frame,
+body.skin-v2.start-screen .quest-classroom-wrap {
+  width: 100% !important;
+  max-width: 960px !important;
+}
+
+/* Mission column also slightly tighter */
+body.skin-v2.start-screen #choices {
+  max-width: 520px !important;
+  padding-top: 30px !important;
+}
+
+/* Keep the headline block a little more compact */
+body.skin-v2.start-screen .quest-hero-heading {
+  max-width: 980px !important;
+  margin-inline: auto !important;
+  padding-top: 8px !important;
+}
+
+/* Slightly smaller classroom CTA so it feels more like the mockup */
+body.skin-v2.start-screen .quest-hero-cta {
+  width: min(278px, 46%) !important;
+  height: 46px !important;
+  bottom: -12px !important;
+  font-size: clamp(.64rem, .78vw, .76rem) !important;
+}
+
+/* Slightly smaller mission cards */
+body.skin-v2.start-screen .quest-card {
+  padding: 12px 14px !important;
+}
+
+/* Responsive safeguard */
+@media (max-width: 1200px) {
+  body.skin-v2.start-screen #game-container {
+    width: min(96vw, 1320px) !important;
+  }
+
+  body.skin-v2.start-screen .quest-layout {
+    gap: 22px !important;
+    padding: 18px 20px 16px !important;
+  }
+
+  body.skin-v2.start-screen #choices {
+    max-width: 480px !important;
+  }
+}
