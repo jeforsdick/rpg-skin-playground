@@ -5019,6 +5019,23 @@ body.skin-v2.playing-mission #score-badge::before {
   font-size: clamp(.58rem, .68vw, .76rem) !important;
 }
 
+body.skin-v2.playing-mission .quest-progress-stat > span:first-child {
+  font-size: 0 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+body.skin-v2.playing-mission .quest-progress-stat > span:first-child::before {
+  content: "Mission Progress" !important;
+  display: block !important;
+  font-size: clamp(.58rem, .68vw, .76rem) !important;
+  line-height: 1 !important;
+}
+
+body.skin-v2.playing-mission .quest-progress-stat strong {
+  display: none !important;
+}
+
 body.skin-v2.playing-mission .quest-progress-stat .quest-meter,
 body.skin-v2.playing-mission #score-badge::after {
   height: clamp(14px, 1.05vw, 19px) !important;
