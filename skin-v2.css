@@ -3901,18 +3901,19 @@ body.skin-v2.wizard-popup-open .wizard-popup {
 
 body.skin-v2.wizard-popup-open .wizard-popup-copy {
   position: absolute !important;
-  left: 15% !important;
-  top: 18% !important;
-  width: 50% !important;
-  height: 48% !important;
-  max-height: 48% !important;
+  left: 24% !important;
+  top: 17% !important;
+  width: 43% !important;
+  height: 42% !important;
+  max-height: 42% !important;
   overflow-y: auto !important;
-  padding: 0 .5rem 0 0 !important;
+  overflow-x: hidden !important;
+  padding: 0 .6rem 0 0 !important;
   box-sizing: border-box !important;
   color: #1d120d !important;
   background: transparent !important;
   font-family: var(--font-pixel-body, "Courier New", monospace) !important;
-  font-size: clamp(14px, 1.05vw, 20px) !important;
+  font-size: clamp(13px, .95vw, 18px) !important;
   font-weight: 800 !important;
   line-height: 1.35 !important;
   text-align: left !important;
@@ -3920,10 +3921,10 @@ body.skin-v2.wizard-popup-open .wizard-popup-copy {
 }
 
 body.skin-v2.wizard-popup-open .wizard-popup-copy h2 {
-  margin: 0 0 .75rem !important;
+  margin: 0 0 .6rem !important;
   color: #1d120d !important;
   font-family: var(--font-pixel-heading, var(--v2-pixel, "Courier New", monospace)) !important;
-  font-size: clamp(22px, 2vw, 38px) !important;
+  font-size: clamp(20px, 1.75vw, 32px) !important;
   font-weight: 900 !important;
   letter-spacing: .08em !important;
   line-height: 1.05 !important;
@@ -3934,13 +3935,13 @@ body.skin-v2.wizard-popup-open .wizard-popup-copy h2 {
 body.skin-v2.wizard-popup-open .wizard-popup-copy p,
 body.skin-v2.wizard-popup-open .wizard-popup-tag,
 body.skin-v2.wizard-popup-open .wizard-popup-body {
-  margin: 0 0 .85rem !important;
+  margin: 0 0 .65rem !important;
 }
 
 body.skin-v2.wizard-popup-open .bip-focus-block {
   display: grid !important;
   gap: 4px !important;
-  margin: 0 0 .85rem !important;
+  margin: 0 0 .65rem !important;
   padding: 0 !important;
   background: transparent !important;
   border: 0 !important;
@@ -3949,7 +3950,7 @@ body.skin-v2.wizard-popup-open .bip-focus-block {
 
 body.skin-v2.wizard-popup-open .wizard-popup-button {
   position: absolute !important;
-  left: 12% !important;
+  left: 24% !important;
   bottom: 9% !important;
   z-index: 3 !important;
   min-width: 250px !important;
