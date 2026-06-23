@@ -81,6 +81,14 @@ body.skin-v2 #bottom-action-slot {
   box-shadow: inset 0 0 0 2px #071b5d, 0 6px 0 rgba(0, 0, 0, .35);
 }
 
+body.skin-v2.start-screen #bottom-action-slot,
+body.skin-v2.same-day-screen #bottom-action-slot {
+  grid-row: 3;
+  width: 100%;
+  margin: 8px auto 0;
+  padding-block: 6px;
+}
+
 body.skin-v2 #bottom-action-slot .quest-bottom-nav {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -123,6 +131,16 @@ body.skin-v2 .quest-resources-link {
   text-shadow: 0 1px rgba(255, 255, 255, .5);
 }
 
+body.skin-v2.start-screen #progress-btn,
+body.skin-v2.start-screen #home-btn,
+body.skin-v2.start-screen .quest-resources-link,
+body.skin-v2.same-day-screen #progress-btn,
+body.skin-v2.same-day-screen #home-btn,
+body.skin-v2.same-day-screen .quest-resources-link {
+  min-height: 72px;
+  padding-block: 12px;
+}
+
 body.skin-v2 #progress-btn img,
 body.skin-v2 #home-btn img,
 body.skin-v2 .quest-resources-link img {
@@ -143,7 +161,9 @@ body.skin-v2.same-day-screen {
 
 body.skin-v2.start-screen #game-container,
 body.skin-v2.same-day-screen #game-container {
-  grid-template-rows: 152px minmax(0, 1fr) 104px;
+  grid-template-rows: 172px minmax(0, 1fr) 112px;
+  width: min(86vw, 1360px);
+  height: calc(100vh - 12px);
 }
 
 body.skin-v2.start-screen h1,
@@ -151,10 +171,26 @@ body.skin-v2.same-day-screen h1 {
   grid-row: 1;
   align-self: end;
   justify-self: center;
-  width: min(82vw, 1240px);
-  height: 128px;
-  color: transparent;
-  background: var(--v2-title) center / contain no-repeat;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 118px;
+  color: var(--v2-gold);
+  background: none;
+  font-family: var(--v2-font-pixel);
+  font-size: clamp(2.4rem, 4.2vw, 5.1rem);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow:
+    5px 0 #000,
+    -5px 0 #000,
+    0 5px #000,
+    0 -5px #000,
+    5px 5px #000,
+    -5px 5px #000,
+    5px -5px #000,
+    -5px -5px #000;
 }
 
 body.skin-v2.start-screen #scenario-title,
@@ -169,11 +205,12 @@ body.skin-v2.same-day-screen .screen-content-shell {
   grid-row: 2;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 54fr) minmax(22px, 3fr) minmax(380px, 40fr);
+  grid-template-columns: minmax(0, 60fr) minmax(28px, 4fr) minmax(400px, 36fr);
   grid-template-rows: 88px minmax(0, 1fr);
   align-items: start;
   min-height: 0;
-  padding: 42px clamp(28px, 3vw, 46px) 34px;
+  padding: 52px clamp(32px, 3.4vw, 54px) 42px;
+  overflow: visible;
   background: var(--v2-frame-large) center / 100% 100% no-repeat;
 }
 
@@ -199,7 +236,7 @@ body.skin-v2 .quest-hero-heading {
 
 body.skin-v2 .quest-classroom-plaque {
   position: absolute;
-  top: -38px;
+  top: -36px;
   left: 50%;
   transform: translateX(-50%);
   display: grid;
@@ -218,14 +255,14 @@ body.skin-v2 .quest-classroom-plaque {
 body.skin-v2 .quest-hero-heading h2 {
   margin: 0;
   color: var(--v2-gold);
-  font-size: clamp(.95rem, 1.35vw, 1.28rem);
+  font-size: clamp(1rem, 1.5vw, 1.45rem);
   line-height: 1.12;
   text-transform: uppercase;
   text-shadow: 0 3px #1b2259;
 }
 
 body.skin-v2 .quest-hero-heading p {
-  margin: 6px 0 0;
+  margin: 4px 0 0;
   font-family: var(--v2-font-fantasy);
   font-size: clamp(.95rem, 1.25vw, 1.2rem);
   font-weight: 900;
@@ -240,7 +277,8 @@ body.skin-v2 .quest-hero-art {
   align-self: start;
   justify-self: center;
   width: 100%;
-  max-width: 760px;
+  max-width: 790px;
+  max-height: min(430px, calc(100vh - 360px));
   aspect-ratio: 16 / 9;
   overflow: visible;
 }
@@ -254,7 +292,23 @@ body.skin-v2 .quest-classroom-background {
 }
 
 body.skin-v2 .quest-hero-cta {
-  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  min-width: min(320px, 58%);
+  min-height: 60px;
+  padding: 12px 22px;
+  color: #fff;
+  background: url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat;
+  border: 0;
+  font-family: var(--v2-font-fantasy);
+  font-size: clamp(.9rem, 1.25vw, 1.15rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 0 2px #3a1b14;
 }
 
 body.skin-v2.start-screen #choices,
@@ -265,14 +319,16 @@ body.skin-v2.same-day-screen #choices {
   justify-self: stretch;
   min-width: 0;
   margin: 0;
-  padding: 24px 0 0;
+  padding: 32px 0 0;
+  min-height: 0;
 }
 
 body.skin-v2 .quest-grid {
   display: grid;
-  grid-template-rows: repeat(3, minmax(112px, 1fr));
-  gap: clamp(14px, 1.5vw, 20px);
+  grid-template-rows: repeat(3, minmax(104px, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
   width: 100%;
+  max-height: min(430px, calc(100vh - 360px));
 }
 
 body.skin-v2 .quest-grid::before {
@@ -280,8 +336,8 @@ body.skin-v2 .quest-grid::before {
   display: grid;
   place-items: center;
   width: min(420px, 72%);
-  min-height: 60px;
-  margin: -56px auto 2px;
+  min-height: 56px;
+  margin: -58px auto 0;
   color: #fff;
   background: url("assets/skin-v2/box-title-frame.png") center / 100% 100% no-repeat;
   font-family: var(--v2-font-fantasy);
@@ -292,11 +348,11 @@ body.skin-v2 .quest-grid::before {
 
 body.skin-v2 .quest-card {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr) auto;
+  grid-template-columns: 86px minmax(0, 1fr) minmax(138px, auto);
   align-items: center;
-  gap: 16px;
-  min-height: 112px;
-  padding: 14px 22px;
+  gap: 14px;
+  min-height: 104px;
+  padding: 12px 22px;
   color: #fff;
   background:
     var(--v2-frame-small) center / 100% 100% no-repeat,
@@ -306,16 +362,16 @@ body.skin-v2 .quest-card {
 body.skin-v2 .quest-card-icon {
   display: grid;
   place-items: center;
-  width: 78px;
-  height: 78px;
+  width: 72px;
+  height: 72px;
   background: #050817;
   border: 4px solid #f3c23d;
   box-shadow: inset 0 0 0 2px #75551c;
 }
 
 body.skin-v2 .quest-card-icon img {
-  width: 58px;
-  height: 58px;
+  width: 54px;
+  height: 54px;
   object-fit: contain;
   image-rendering: pixelated;
 }
@@ -325,7 +381,7 @@ body.skin-v2 .quest-card-copy {
 }
 
 body.skin-v2 .quest-card-copy h3 {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   font-family: var(--v2-font-fantasy);
   font-size: clamp(1.05rem, 1.35vw, 1.35rem);
   line-height: 1.05;
@@ -341,8 +397,8 @@ body.skin-v2 .quest-card-copy p {
 }
 
 body.skin-v2 .quest-card button {
-  min-width: 150px;
-  min-height: 54px;
+  min-width: 138px;
+  min-height: 50px;
   padding: 10px 18px;
   color: #fff;
   background: var(--v2-green-button) center / 100% 100% no-repeat;
