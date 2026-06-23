@@ -3873,3 +3873,85 @@ body.skin-v2.start-screen.same-day-screen .same-day-bubble-three span {
     padding-top: 26px !important;
   }
 }
+
+
+/* True final popup text placement: constrain live copy to the white speech bubble. */
+body.skin-v2.wizard-popup-open #wizard-modal.wizard-popup-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 24px !important;
+  background: rgba(0, 0, 0, .58) !important;
+}
+
+body.skin-v2.wizard-popup-open .wizard-popup {
+  position: relative !important;
+  width: min(82vw, 980px) !important;
+  aspect-ratio: 1536 / 864 !important;
+  max-height: 82vh !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.wizard-popup-open .wizard-popup-copy {
+  position: absolute !important;
+  left: 15% !important;
+  top: 18% !important;
+  width: 50% !important;
+  height: 48% !important;
+  max-height: 48% !important;
+  overflow-y: auto !important;
+  padding: 0 .5rem 0 0 !important;
+  box-sizing: border-box !important;
+  color: #1d120d !important;
+  background: transparent !important;
+  font-family: var(--font-pixel-body, "Courier New", monospace) !important;
+  font-size: clamp(14px, 1.05vw, 20px) !important;
+  font-weight: 800 !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+  z-index: 2 !important;
+}
+
+body.skin-v2.wizard-popup-open .wizard-popup-copy h2 {
+  margin: 0 0 .75rem !important;
+  color: #1d120d !important;
+  font-family: var(--font-pixel-heading, var(--v2-pixel, "Courier New", monospace)) !important;
+  font-size: clamp(22px, 2vw, 38px) !important;
+  font-weight: 900 !important;
+  letter-spacing: .08em !important;
+  line-height: 1.05 !important;
+  text-transform: uppercase !important;
+  text-shadow: none !important;
+}
+
+body.skin-v2.wizard-popup-open .wizard-popup-copy p,
+body.skin-v2.wizard-popup-open .wizard-popup-tag,
+body.skin-v2.wizard-popup-open .wizard-popup-body {
+  margin: 0 0 .85rem !important;
+}
+
+body.skin-v2.wizard-popup-open .bip-focus-block {
+  display: grid !important;
+  gap: 4px !important;
+  margin: 0 0 .85rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.skin-v2.wizard-popup-open .wizard-popup-button {
+  position: absolute !important;
+  left: 12% !important;
+  bottom: 9% !important;
+  z-index: 3 !important;
+  min-width: 250px !important;
+  min-height: 58px !important;
+}
