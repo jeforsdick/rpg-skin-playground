@@ -56,9 +56,9 @@ const coachImgEl     = document.getElementById('coach-img');
 
 /* -------- Wizard sprites -------- */
 const WIZ = {
-  plus:  '../mr-wizard-plus10.png',
-  meh:   '../mr-wizard-0.png',
-  minus: '../mr-wizard-minus10.png'
+  plus:  '../assets/skin-v2/wizard-success.png',
+  meh:   '../assets/skin-v2/wizard-meh.png',
+  minus: '../assets/skin-v2/wizard-dead.png'
 };
 function setWizardSprite(state) {
   const src = state === 'plus' ? WIZ.plus : state === 'minus' ? WIZ.minus : WIZ.meh;
@@ -93,9 +93,9 @@ function renderHearts() {
 
     html += `
       <span class="zelda-heart ${fill >= 1 ? 'is-full' : fill > 0 ? 'is-partial' : 'is-empty'}" aria-hidden="true" data-fill="${fill}" style="--heart-fill: ${fillPercent}%">
-        <img class="heart-icon heart-icon-empty" src="../assets/ui/heart-icon.png" alt="">
+        <img class="heart-icon heart-icon-empty" src="../assets/skin-v2/heart-icon.png" alt="">
         <span class="heart-icon-fill">
-          <img class="heart-icon" src="../assets/ui/heart-icon.png" alt="">
+          <img class="heart-icon" src="../assets/skin-v2/heart-icon.png" alt="">
         </span>
       </span>
     `;
@@ -186,14 +186,14 @@ function updateGameplayHud(isComplete = false) {
     questProgressEl.dataset.progress = String(questPercent);
     questProgressEl.setAttribute('aria-label', `Quest Progress ${questPercent}%`);
   }
-  if (questProgressValueEl) questProgressValueEl.textContent = `${questPercent}%`;
+  if (questProgressValueEl) questProgressValueEl.textContent = `${completed}/${totalDecisionNodes || 0} Completed`;
   if (questProgressFillEl) questProgressFillEl.style.width = `${questPercent}%`;
 
   if (scoreBadgeEl) {
     scoreBadgeEl.dataset.behaviorXp = String(behaviorXpPercent);
-    scoreBadgeEl.dataset.behaviorXpLabel = `${behaviorXpPercent}%`;
+    scoreBadgeEl.dataset.behaviorXpLabel = `${points} XP`;
     scoreBadgeEl.style.setProperty('--behavior-xp-percent', `${behaviorXpPercent}%`);
-    scoreBadgeEl.setAttribute('aria-label', `Behavior XP ${behaviorXpPercent}%`);
+    scoreBadgeEl.setAttribute('aria-label', `Behavior Plan XP ${points}`);
   }
 }
 
@@ -427,7 +427,7 @@ function showBipBriefingPopup(scn, briefingText, onContinue) {
     <div class="wizard-modal-card" role="dialog" aria-modal="true" aria-labelledby="wizard-modal-title">
       <div class="wizard-modal-top">
         <div class="wizard-modal-icon">
-          <img src="../assets/characters/wizard-guide.png" alt="MR Wizard">
+          <img src="../assets/skin-v2/wizard-guide.png" alt="MR Wizard">
         </div>
         <div>
           <h2 id="wizard-modal-title">BIP Briefing</h2>
@@ -813,7 +813,8 @@ function startMissionByType(type) {
 
 function renderSameDayReturnScreen(result) {
   setPlayMode(false);
-  document.body.classList.add('same-day-screen');
+  document.body.classList.remove('dashboard-screen', 'summary-screen');
+  document.body.classList.add('start-screen', 'same-day-screen');
 
   if (storyText) storyText.style.display = 'block';
 
@@ -833,55 +834,62 @@ function renderSameDayReturnScreen(result) {
   storyText.classList.add('same-day-return');
 
   storyText.innerHTML = `
-    <div class="same-day-lead">
-      You already completed a Mission: Reinforceable session today.
-    </div>
-
-    <div class="same-day-recap">
-      <strong>Today's recap:</strong><br>
-      Mission type: ${result.mode || "Mission"}<br>
-      Score: ${result.points} / ${result.max_possible} (${pct}%)<br>
-      Completed: ${completedTime}
-    </div>
-
-    <div class="same-day-feedback">
-      ${result.feedback_message || ""}
-    </div>
-
-    <div class="same-day-next">
-      <strong>What would you like to do next?</strong>
-    </div>
+    <section class="quest-hero same-day-hero" aria-labelledby="quest-hero-title">
+      <div class="quest-hero-heading">
+        <span class="quest-classroom-plaque">Mrs. Olson&rsquo;s Classroom</span>
+        <h2 id="quest-hero-title">Mission already logged today.</h2>
+        <p>${result.mode || "Mission"} complete at ${completedTime} with ${result.points} / ${result.max_possible} (${pct}%).</p>
+      </div>
+      <div class="quest-hero-art">
+        <img class="quest-classroom-background" src="../assets/skin-v2/classroom-image.png" alt="A magical pixel-art classroom">
+        <div class="same-day-bubbles" aria-label="Wizard message">
+          <span>Welcome back, we have already seen you today!</span>
+          <span>But feel free to play again!</span>
+          <span>Or check out your progress tab to review your mission!</span>
+        </div>
+        <img class="quest-map-wizard-guide same-day-wizard" src="../assets/skin-v2/wizard-guide.png" alt="Wizard guide">
+      </div>
+    </section>
   `;
 }
 
   if (!choicesDiv) return;
 
   choicesDiv.innerHTML = `
-    <div class="mission-intro">
-      <div class="mission-grid">
-        <div class="mission-card">
+      <div class="mission-intro">
+      <div class="quest-grid">
+        <article class="quest-card quest-card-daily">
+          <div class="quest-card-icon"><img src="../assets/skin-v2/daily-mission-icon.png" alt=""></div>
+          <div class="quest-card-copy">
           <h3>Daily Mission</h3>
           <p>Replay today's regular skill practice mission.</p>
-          <div class="action">
-            <button id="same-day-daily">Play the Daily Mission again ▶</button>
           </div>
-        </div>
+          <div class="action">
+            <button id="same-day-daily">Start Daily</button>
+          </div>
+        </article>
 
-        <div class="mission-card">
-          <h3>Wildcard Mission</h3>
+        <article class="quest-card quest-card-mystery">
+          <div class="quest-card-icon"><img src="../assets/skin-v2/mystery-mission-icon.png" alt=""></div>
+          <div class="quest-card-copy">
+          <h3>Mystery Mission</h3>
           <p>Try a less predictable classroom situation.</p>
-          <div class="action">
-            <button id="same-day-wildcard">Play a Wildcard Mission ▶</button>
           </div>
-        </div>
+          <div class="action">
+            <button id="same-day-wildcard">Start Mystery</button>
+          </div>
+        </article>
 
-        <div class="mission-card">
+        <article class="quest-card quest-card-crisis">
+          <div class="quest-card-icon"><img src="../assets/skin-v2/crisis-mission-icon.png" alt=""></div>
+          <div class="quest-card-copy">
           <h3>Crisis Mission</h3>
           <p>Practice a higher-intensity response scenario.</p>
-          <div class="action">
-            <button id="same-day-crisis">Play a Crisis Mission ▶</button>
           </div>
-        </div>
+          <div class="action">
+            <button id="same-day-crisis">Start Crisis</button>
+          </div>
+        </article>
       </div>
     </div>
   `;
@@ -1090,7 +1098,7 @@ if (!node.feedback) {
   wizardPrompt.className = 'choice-wizard-card';
   wizardPrompt.innerHTML = `
     <div class="choice-wizard-icon">
-      <img src="../assets/characters/wizard-guide.png" alt="MR Wizard">
+      <img src="../assets/skin-v2/wizard-guide.png" alt="MR Wizard">
     </div>
     <div class="choice-wizard-text">
       <strong>Wizard Check</strong>

@@ -5,9 +5,9 @@
  **********************************************************/
 
 const DASH_WIZ = {
-  plus:  "../mr-wizard-plus10.png",
-  meh:   "../mr-wizard-0.png",
-  minus: "../mr-wizard-minus10.png"
+  plus:  "../assets/skin-v2/wizard-success.png",
+  meh:   "../assets/skin-v2/wizard-meh.png",
+  minus: "../assets/skin-v2/wizard-dead.png"
 };
 
 function dashboardStateFromAccuracy(accuracy) {
@@ -222,7 +222,7 @@ function dashboardMissionPresentation(mode) {
   if (normalized.includes("crisis") || normalized.includes("emergency")) {
     return {
       label: "Crisis Mission",
-      icon: "../assets/ui/crisis-mission-icon.png",
+      icon: "../assets/skin-v2/crisis-mission-icon.png",
       type: "crisis"
     };
   }
@@ -230,14 +230,14 @@ function dashboardMissionPresentation(mode) {
   if (normalized.includes("wild") || normalized.includes("shuffle") || normalized.includes("mystery")) {
     return {
       label: "Mystery Mission",
-      icon: "../assets/ui/mystery-mission-icon.png",
+      icon: "../assets/skin-v2/mystery-mission-icon.png",
       type: "mystery"
     };
   }
 
   return {
     label: normalized.includes("daily") ? "Daily Mission" : value,
-    icon: "../assets/ui/daily-mission-icon.png",
+    icon: "../assets/skin-v2/daily-mission-icon.png",
     type: "daily"
   };
 }
@@ -427,34 +427,34 @@ function renderProgressDashboardFromHistory(history) {
   choicesDiv.innerHTML = `
     <div id="progress-dashboard">
       <header class="progress-guild-header">
-        <img class="progress-guild-wizard" src="../assets/characters/wizard-guide.png" alt="MR Wizard">
+        <img class="progress-guild-wizard" src="../assets/skin-v2/wizard-guide.png" alt="MR Wizard">
         <div class="progress-guild-heading">
-          <h2>MISSION PROGRESS</h2>
-          <p>Review your mission history, accuracy, and mission streak.</p>
+          <h2>MRS. OLSON'S MISSION PROGRESS</h2>
+          <p>${dashboardEscape(dashboardMakeCoachSummary(sessions, decisions))}</p>
         </div>
         <div class="progress-guild-mark" aria-hidden="true">
-          <img src="../assets/ui/bottom-bar-my-progress-icon.png" alt="">
+          <img src="../assets/skin-v2/bottom-bar-my-progress-icon.png" alt="">
         </div>
       </header>
 
       <div class="dashboard-grid">
         <div class="dashboard-card">
-          <img src="../assets/ui/crisis-mission-icon.png" alt="">
-          <div><div class="dashboard-label">Current Streak</div><div class="dashboard-number">${dashboardEscape(streak)} <small>days</small></div></div>
+          <img src="../assets/skin-v2/behavior-xp-icon.png" alt="">
+          <div><div class="dashboard-label">Overall Accuracy</div><div class="dashboard-number">${dashboardEscape(avg)}%</div></div>
         </div>
 
         <div class="dashboard-card">
-          <img src="../assets/ui/behavior-xp-icon.png" alt="">
-          <div><div class="dashboard-label">Average Accuracy</div><div class="dashboard-number">${dashboardEscape(avg)}%</div></div>
+          <img src="../assets/skin-v2/crisis-mission-icon.png" alt="">
+          <div><div class="dashboard-label">Day Streak</div><div class="dashboard-number">${dashboardEscape(streak)} <small>days</small></div></div>
         </div>
 
         <div class="dashboard-card">
-          <img src="../assets/ui/daily-mission-icon.png" alt="">
+          <img src="../assets/skin-v2/daily-mission-icon.png" alt="">
           <div><div class="dashboard-label">Missions Completed</div><div class="dashboard-number">${dashboardEscape(total)}</div></div>
         </div>
 
         <div class="dashboard-card">
-          <img src="../assets/ui/quest-progress-icon.png" alt="">
+          <img src="../assets/skin-v2/quest-progress-icon.png" alt="">
           <div><div class="dashboard-label">Best Score</div><div class="dashboard-number">${dashboardEscape(best)}%</div></div>
         </div>
       </div>
@@ -590,6 +590,7 @@ async function openProgressDashboard() {
   document.getElementById("wizard-modal")?.remove();
   document.body.classList.remove(
     "start-screen",
+    "same-day-screen",
     "summary-screen",
     "bip-briefing",
     "feedback-open",

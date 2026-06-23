@@ -18,7 +18,7 @@
 
 body.skin-v2 {
   --v2-bg-world: url("assets/skin-v2/mission-reinforceable-background.png");
-  --v2-menu-bg: url("assets/backgrounds/landing-page-main-menu-background.png");
+  --v2-menu-bg: url("assets/skin-v2/mission-reinforceable-background.png");
 
   --v2-frame-large: url("assets/skin-v2/large-frame.png");
   --v2-frame-small: url("assets/skin-v2/small-frame.png");
@@ -223,7 +223,7 @@ body.skin-v2.start-screen h1::before {
   font-size: clamp(2.35rem, 4.65vw, 4.65rem);
   font-weight: 900;
   line-height: .9;
-  letter-spacing: -0.07em;
+  letter-spacing: 0;
   white-space: nowrap;
   text-shadow:
     4px 0 0 #000,
@@ -342,7 +342,7 @@ body.skin-v2.start-screen .quest-hero-heading h2 {
   font-size: clamp(1rem, 1.55vw, 1.36rem) !important;
   font-weight: 900 !important;
   line-height: 1.12 !important;
-  letter-spacing: -0.045em !important;
+  letter-spacing: 0 !important;
   text-transform: uppercase !important;
   text-shadow: 0 3px 0 #12090a !important;
 }
@@ -725,7 +725,7 @@ body.skin-v2.same-day-screen h1::before {
   font-size: clamp(2.35rem, 4.65vw, 4.65rem);
   font-weight: 900;
   line-height: .9;
-  letter-spacing: -0.07em;
+  letter-spacing: 0;
   white-space: nowrap;
   text-shadow:
     4px 0 0 #000,
@@ -1470,7 +1470,7 @@ body.skin-v2.dashboard-screen h1::before {
   font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 900;
   line-height: .95;
-  letter-spacing: -0.07em;
+  letter-spacing: 0;
   white-space: nowrap;
   text-shadow:
     4px 0 0 #000,
@@ -2086,4 +2086,231 @@ body.skin-v2.start-screen #home-btn img {
   width: 32px !important;
   height: 32px !important;
   flex-basis: 32px !important;
+}
+
+/* Final V2 alignment for the current same-day and progress DOM. */
+body.skin-v2.same-day-screen #story-text {
+  display: contents !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+body.skin-v2.same-day-screen .quest-hero {
+  display: contents !important;
+}
+
+body.skin-v2.same-day-screen .quest-hero-heading {
+  grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
+}
+
+body.skin-v2.same-day-screen .quest-hero-art {
+  position: relative;
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  margin: 0 0 18px !important;
+  overflow: visible !important;
+  background: #11183d;
+  border: 3px solid var(--v2-blue-border);
+  box-shadow: 0 0 0 3px #0a0b22, 0 0 0 5px var(--v2-gold), inset 0 0 14px rgba(0, 0, 0, .35);
+}
+
+body.skin-v2.same-day-screen .same-day-bubbles {
+  position: absolute;
+  top: 8%;
+  left: 4%;
+  z-index: 5;
+  display: grid;
+  gap: 8px;
+  width: min(470px, 75%);
+}
+
+body.skin-v2.same-day-screen .same-day-bubbles span {
+  min-height: 54px;
+  padding: 15px 28px;
+  color: #160d09;
+  background: var(--v2-bubble-left) center / 100% 100% no-repeat;
+  font-family: "Courier New", monospace;
+  font-size: clamp(.62rem, .86vw, .84rem);
+  font-weight: 900;
+  line-height: 1.18;
+  text-align: center;
+}
+
+body.skin-v2.same-day-screen .same-day-wizard {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  z-index: 6;
+  width: 22%;
+  min-width: 82px;
+  image-rendering: pixelated;
+}
+
+body.skin-v2.same-day-screen #choices {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  padding: 20px 0 0 !important;
+}
+
+body.skin-v2.same-day-screen #choices::before {
+  content: "Mission Options";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  z-index: 8;
+  display: grid;
+  width: min(255px, 78%);
+  height: 48px;
+  place-items: center;
+  transform: translateX(-50%);
+  color: #fff;
+  background: var(--v2-button-brown) center / 100% 100% no-repeat;
+  font-family: var(--v2-fantasy);
+  font-weight: 900;
+  text-shadow: 0 2px 0 #2b1833;
+}
+
+body.skin-v2.same-day-screen .quest-grid {
+  display: grid !important;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  height: 100%;
+}
+
+body.skin-v2.same-day-screen .quest-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 10px 124px 10px 12px;
+  color: #fff;
+  background:
+    var(--v2-frame-small) center / 100% 100% no-repeat,
+    var(--v2-card);
+}
+
+body.skin-v2.same-day-screen .quest-card-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+body.skin-v2.same-day-screen .quest-card h3,
+body.skin-v2.same-day-screen .quest-card p {
+  margin: 0;
+  font-family: var(--v2-fantasy);
+}
+
+body.skin-v2.same-day-screen .quest-card h3 {
+  font-size: .88rem;
+  text-transform: uppercase;
+}
+
+body.skin-v2.same-day-screen .quest-card p {
+  margin-top: 4px;
+  font-size: .72rem;
+  line-height: 1.15;
+}
+
+body.skin-v2.same-day-screen .quest-card .action {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+body.skin-v2.same-day-screen .quest-card button {
+  width: 106px;
+  height: 40px;
+  color: #fff;
+  background: var(--v2-button-green) center / 100% 100% no-repeat;
+  border: 0;
+  font-family: var(--v2-fantasy);
+  font-size: .54rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) 72px;
+  gap: 18px;
+  align-items: center;
+  width: min(960px, 90%);
+  min-height: 118px;
+  margin: 0 auto;
+  padding: 18px 34px;
+  color: #130900;
+  background: var(--v2-bubble-screen) center / 100% 100% no-repeat;
+  font-family: "Courier New", monospace;
+  text-align: center;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-wizard {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-heading h2 {
+  margin: 0 0 6px;
+  color: #160d09;
+  font-family: var(--v2-pixel);
+  font-size: clamp(.95rem, 1.6vw, 1.35rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-heading p {
+  margin: 0;
+  font-size: clamp(.7rem, .92vw, .86rem);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-mark img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+body.skin-v2.dashboard-screen #progress-dashboard {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+body.skin-v2.dashboard-screen .dashboard-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  body.skin-v2.same-day-screen .screen-content-shell {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto minmax(360px, 54vw) auto !important;
+  }
+
+  body.skin-v2.same-day-screen .quest-hero-art,
+  body.skin-v2.same-day-screen #choices {
+    grid-column: 1 !important;
+  }
+
+  body.skin-v2.same-day-screen #choices {
+    grid-row: 3 !important;
+    min-height: 380px;
+  }
+
+  body.skin-v2.dashboard-screen .progress-guild-header {
+    grid-template-columns: 82px minmax(0, 1fr);
+    width: 100%;
+  }
+
+  body.skin-v2.dashboard-screen .progress-guild-mark {
+    display: none;
+  }
 }
