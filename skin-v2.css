@@ -5007,8 +5007,8 @@ body.skin-v2.same-day-screen .same-day-bubble-three {
 
 /* Gameplay HUD authority: one grid row above the scenario frame. */
 body.skin-v2.playing-mission #game-container {
-  grid-template-rows: 112px minmax(0, 1fr) 84px !important;
-  width: min(93vw, 1480px) !important;
+  grid-template-rows: 100px minmax(0, 1fr) 84px !important;
+  width: min(93vw, 1400px) !important;
 }
 
 body.skin-v2.playing-mission #toolbar {
