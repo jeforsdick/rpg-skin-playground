@@ -4984,30 +4984,45 @@ body.skin-v2.same-day-screen .same-day-bubble-three {
   aspect-ratio: 1.55 / 1 !important;
 }
 
-/* Gameplay HUD row authority: one aligned toolbar above the scenario frame. */
+/* Gameplay HUD authority: one grid row above the scenario frame. */
 body.skin-v2.playing-mission #game-container {
-  grid-template-rows: 150px minmax(0, 1fr) 104px !important;
+  grid-template-rows: 146px minmax(0, 1fr) 104px !important;
 }
 
 body.skin-v2.playing-mission #toolbar {
-  position: fixed !important;
-  top: clamp(52px, 6.6vh, 78px) !important;
-  left: 50% !important;
+  grid-row: 1 !important;
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
   z-index: 80 !important;
   display: grid !important;
-  grid-template-columns: minmax(280px, .9fr) minmax(320px, 1.25fr) minmax(320px, 1.25fr) !important;
+  grid-template-columns: minmax(250px, .82fr) minmax(360px, 1.25fr) minmax(360px, 1.25fr) !important;
   align-items: center !important;
-  column-gap: clamp(28px, 4vw, 64px) !important;
-  width: min(92vw, 1460px) !important;
+  column-gap: clamp(26px, 3.2vw, 56px) !important;
+  width: 100% !important;
+  min-height: 0 !important;
   margin: 0 !important;
-  padding: 0 clamp(26px, 2.6vw, 44px) !important;
-  transform: translateX(-50%) !important;
-  pointer-events: none !important;
+  padding: clamp(28px, 4.5vh, 44px) clamp(28px, 3vw, 48px) 12px !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.playing-mission #toolbar #teacher-badge,
+body.skin-v2.playing-mission #toolbar .scenario-progress-stat,
+body.skin-v2.playing-mission #toolbar #feedback {
+  display: none !important;
 }
 
 body.skin-v2.playing-mission #hearts-display {
   position: static !important;
   grid-column: 1 !important;
+  grid-row: 1 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
@@ -5018,9 +5033,9 @@ body.skin-v2.playing-mission #hearts-display {
 }
 
 body.skin-v2.playing-mission .zelda-heart {
-  width: clamp(40px, 3vw, 56px) !important;
-  height: clamp(36px, 2.7vw, 51px) !important;
-  flex: 0 0 clamp(40px, 3vw, 56px) !important;
+  width: clamp(38px, 3vw, 56px) !important;
+  height: clamp(34px, 2.7vw, 51px) !important;
+  flex: 0 0 clamp(38px, 3vw, 56px) !important;
 }
 
 body.skin-v2.playing-mission .quest-progress-stat,
@@ -5043,10 +5058,12 @@ body.skin-v2.playing-mission #score-badge {
 
 body.skin-v2.playing-mission .quest-progress-stat {
   grid-column: 2 !important;
+  grid-row: 1 !important;
 }
 
 body.skin-v2.playing-mission #score-badge {
   grid-column: 3 !important;
+  grid-row: 1 !important;
   font-size: 0 !important;
 }
 
