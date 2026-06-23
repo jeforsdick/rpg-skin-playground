@@ -2159,7 +2159,7 @@ body.skin-v2.same-day-screen .quest-hero-art {
   width: 100% !important;
   height: 100% !important;
   min-height: 360px !important;
-  margin: 0 0 8px !important;
+  margin: -28px 0 36px !important;
 }
 
 body.skin-v2.start-screen .quest-classroom-background,
@@ -2189,6 +2189,7 @@ body.skin-v2.same-day-screen .quest-grid {
   body.skin-v2.start-screen .quest-hero-art,
   body.skin-v2.same-day-screen .quest-hero-art {
     min-height: 340px !important;
+    margin: -22px 0 32px !important;
   }
 
   body.skin-v2.start-screen .quest-classroom-background,
