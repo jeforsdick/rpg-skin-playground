@@ -5176,3 +5176,36 @@ body.skin-v2.playing-mission #story-text::first-line {
   font-size: 1.18em !important;
   font-weight: 900 !important;
 }
+
+/* Landing footer scale: match the smaller gameplay menu treatment. */
+body.skin-v2.start-screen:not(.same-day-screen) #game-container {
+  grid-template-rows: 136px minmax(0, 1fr) 78px !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot {
+  width: min(1200px, 80%) !important;
+  justify-self: center !important;
+  margin: 5px auto 0 !important;
+  padding: 5px clamp(40px, 4vw, 58px) !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot .quest-bottom-nav {
+  gap: 22px !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot .quest-nav-link,
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot #progress-btn,
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot #home-btn {
+  min-height: 45px !important;
+  padding: 4px 18px !important;
+  gap: 8px !important;
+  font-size: clamp(.72rem, .86vw, .86rem) !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot .quest-nav-link img,
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot #progress-btn img,
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot #home-btn img {
+  width: 26px !important;
+  height: 26px !important;
+  flex-basis: 26px !important;
+}
