@@ -5132,16 +5132,17 @@ body.skin-v2.playing-mission #story-text {
   align-self: stretch !important;
   height: 100% !important;
   min-height: 0 !important;
+  box-sizing: border-box !important;
   padding:
-    clamp(82px, 6.3vw, 112px)
-    clamp(86px, 7vw, 128px)
-    clamp(82px, 6vw, 108px)
-    clamp(82px, 6.2vw, 112px) !important;
+    clamp(64px, 5vw, 84px)
+    clamp(58px, 5.2vw, 86px)
+    clamp(78px, 5.6vw, 96px)
+    clamp(58px, 5vw, 82px) !important;
   overflow: hidden !important;
   color: #090501 !important;
-  font-size: clamp(1rem, 1.22vw, 1.24rem) !important;
+  font-size: clamp(.82rem, .98vw, 1rem) !important;
   font-weight: 700 !important;
-  line-height: 1.35 !important;
+  line-height: 1.28 !important;
   letter-spacing: 0 !important;
   text-shadow: none !important;
 }
