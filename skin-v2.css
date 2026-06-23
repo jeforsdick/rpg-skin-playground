@@ -2130,10 +2130,10 @@ body.skin-v2.same-day-screen #game-container {
 
 body.skin-v2.start-screen .screen-content-shell,
 body.skin-v2.same-day-screen .screen-content-shell {
-  grid-template-columns: minmax(0, 64fr) minmax(405px, 36fr) !important;
-  grid-template-rows: 58px minmax(0, 1fr) !important;
-  column-gap: 24px !important;
-  padding: 42px 28px 24px !important;
+  grid-template-columns: minmax(0, 61fr) minmax(410px, 39fr) !important;
+  grid-template-rows: 64px minmax(0, 1fr) !important;
+  column-gap: 26px !important;
+  padding: 44px 30px 30px !important;
 }
 
 body.skin-v2.start-screen .quest-hero-heading,
@@ -2158,13 +2158,13 @@ body.skin-v2.same-day-screen .quest-hero-art {
   justify-self: stretch !important;
   width: 100% !important;
   height: 100% !important;
-  min-height: 420px !important;
-  margin: -4px 0 0 !important;
+  min-height: 360px !important;
+  margin: 0 0 8px !important;
 }
 
 body.skin-v2.start-screen .quest-classroom-background,
 body.skin-v2.same-day-screen .quest-classroom-background {
-  transform: scale(1.16);
+  transform: scale(1.04);
   transform-origin: center center;
 }
 
@@ -2181,19 +2181,19 @@ body.skin-v2.same-day-screen .quest-grid {
 @media (max-width: 1180px), (max-height: 760px) {
   body.skin-v2.start-screen .screen-content-shell,
   body.skin-v2.same-day-screen .screen-content-shell {
-    grid-template-columns: minmax(0, 62fr) minmax(385px, 38fr) !important;
-    grid-template-rows: 50px minmax(0, 1fr) !important;
-    padding: 38px 24px 22px !important;
+    grid-template-columns: minmax(0, 60fr) minmax(390px, 40fr) !important;
+    grid-template-rows: 56px minmax(0, 1fr) !important;
+    padding: 40px 24px 28px !important;
   }
 
   body.skin-v2.start-screen .quest-hero-art,
   body.skin-v2.same-day-screen .quest-hero-art {
-    min-height: 380px !important;
+    min-height: 340px !important;
   }
 
   body.skin-v2.start-screen .quest-classroom-background,
   body.skin-v2.same-day-screen .quest-classroom-background {
-    transform: scale(1.12);
+    transform: scale(1.02);
   }
 }
 
