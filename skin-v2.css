@@ -637,3 +637,600 @@ body.skin-v2.start-screen .quest-resources-link {
     height: 54px;
   }
 }
+
+
+/* ============================================================
+   SKIN V2 LANDING STRUCTURE PATCH
+   Purpose: stop old quest-hub.css layout rules from leaking into
+   the new mockup-based landing page.
+   ============================================================ */
+
+body.skin-v2.start-screen {
+  padding: 8px 0 10px;
+  overflow: hidden;
+}
+
+/* Main page composition: title / framed hub / bottom nav */
+body.skin-v2.start-screen #game-container {
+  display: grid !important;
+  grid-template-rows: 112px minmax(520px, 1fr) 92px !important;
+  width: min(92vw, 1380px) !important;
+  height: min(900px, calc(100vh - 18px)) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+/* Title should be big, visible, and outside the main frame */
+body.skin-v2.start-screen h1 {
+  order: initial !important;
+  flex: none !important;
+  grid-row: 1 !important;
+  align-self: center !important;
+  justify-self: center !important;
+  width: min(1120px, 86vw) !important;
+  height: 108px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: url("assets/skin-v2/mission-reinforceable-title.png") center / contain no-repeat !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Hide old HUD/title elements on landing only */
+body.skin-v2.start-screen #toolbar,
+body.skin-v2.start-screen #scenario-title,
+body.skin-v2.start-screen #game-container::before,
+body.skin-v2.start-screen #game-container::after {
+  display: none !important;
+}
+
+/* Main frame */
+body.skin-v2.start-screen .screen-content-shell {
+  order: initial !important;
+  flex: none !important;
+  grid-row: 2 !important;
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 63fr) minmax(360px, 37fr) !important;
+  grid-template-rows: 118px minmax(0, 1fr) !important;
+  column-gap: 34px !important;
+  row-gap: 10px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 54px 34px 34px !important;
+  overflow: visible !important;
+  background:
+    url("assets/skin-v2/large-frame.png") center / 100% 100% no-repeat,
+    radial-gradient(circle at 50% 34%, #26346f 0, #12194d 48%, #090d38 100%) !important;
+  border: 0 !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .45) !important;
+}
+
+/* CRITICAL: override inline display:block from engine.js */
+body.skin-v2.start-screen #story-text {
+  display: contents !important;
+  order: initial !important;
+  flex: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: normal !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.start-screen #story-text::before,
+body.skin-v2.start-screen #story-text::after {
+  display: none !important;
+}
+
+body.skin-v2.start-screen .quest-hero {
+  display: contents !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.skin-v2.start-screen .quest-hero::before,
+body.skin-v2.start-screen .quest-hero::after {
+  display: none !important;
+}
+
+/* Plaque overlaps frame border, not heading */
+body.skin-v2.start-screen .quest-classroom-plaque {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  z-index: 20 !important;
+  width: min(360px, 40%) !important;
+  height: 56px !important;
+  display: grid !important;
+  place-items: center !important;
+  transform: translate(-50%, -34%) !important;
+  margin: 0 !important;
+  padding: 8px 30px !important;
+  background: url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat !important;
+  color: #fff !important;
+  font-family: Georgia, serif !important;
+  font-size: clamp(1rem, 1.45vw, 1.32rem) !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  text-shadow: 0 2px 0 #241128 !important;
+}
+
+/* Heading row */
+body.skin-v2.start-screen .quest-hero-heading {
+  grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
+  align-self: center !important;
+  justify-self: stretch !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 10px 20px 0 !important;
+  text-align: center !important;
+}
+
+body.skin-v2.start-screen .quest-hero-heading h2 {
+  margin: 0 !important;
+  color: #ffd75f !important;
+  font-family: var(--font-pixel, "Courier New", monospace) !important;
+  font-size: clamp(1.05rem, 1.75vw, 1.55rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.04em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 3px 0 #12090a !important;
+}
+
+body.skin-v2.start-screen .quest-hero-heading p {
+  margin: 7px 0 0 !important;
+  color: #fff7df !important;
+  font-family: Georgia, serif !important;
+  font-size: clamp(.95rem, 1.22vw, 1.12rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  text-shadow: 0 2px 0 #111331 !important;
+}
+
+/* Classroom panel */
+body.skin-v2.start-screen .quest-hero-art {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  align-self: stretch !important;
+  position: relative !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: #10183d !important;
+  border: 3px solid #9fb7d2 !important;
+  box-shadow:
+    0 0 0 3px #07091f,
+    0 0 0 5px #e1aa2d,
+    inset 0 0 16px rgba(0,0,0,.38) !important;
+}
+
+body.skin-v2.start-screen .quest-classroom-background {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background: #10183d !important;
+  image-rendering: pixelated !important;
+}
+
+/* Wizard/bubble inside classroom */
+body.skin-v2.start-screen .quest-wizard-coach {
+  position: absolute !important;
+  top: 16px !important;
+  left: 18px !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 8 !important;
+  width: min(260px, 40%) !important;
+  height: 130px !important;
+  pointer-events: none !important;
+}
+
+body.skin-v2.start-screen .quest-wizard-bubble {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 86% !important;
+  height: 76% !important;
+  object-fit: fill !important;
+  image-rendering: pixelated !important;
+}
+
+body.skin-v2.start-screen .quest-wizard-coach span {
+  position: absolute !important;
+  top: 18% !important;
+  left: 7% !important;
+  z-index: 2 !important;
+  width: 63% !important;
+  color: #160d09 !important;
+  font-family: "Courier New", monospace !important;
+  font-size: clamp(.56rem, .72vw, .72rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.22 !important;
+  text-align: center !important;
+}
+
+body.skin-v2.start-screen .quest-map-wizard-guide {
+  position: absolute !important;
+  left: auto !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 21% !important;
+  max-width: 82px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  image-rendering: pixelated !important;
+  filter: drop-shadow(0 3px 0 rgba(2, 4, 15, .62)) !important;
+}
+
+/* Classroom CTA */
+body.skin-v2.start-screen .quest-hero-cta {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: -18px !important;
+  z-index: 12 !important;
+  width: min(330px, 58%) !important;
+  height: 58px !important;
+  margin: 0 !important;
+  padding: 8px 24px !important;
+  transform: translateX(-50%) !important;
+  background: url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  font-family: Georgia, serif !important;
+  font-size: clamp(.74rem, .95vw, .92rem) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 0 #3a160e !important;
+}
+
+/* Mission cards column */
+body.skin-v2.start-screen #choices {
+  order: initial !important;
+  flex: none !important;
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  position: relative !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 30px 0 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.skin-v2.start-screen #choices::before {
+  content: "Mission Options" !important;
+  position: absolute !important;
+  top: -18px !important;
+  left: 50% !important;
+  z-index: 12 !important;
+  display: grid !important;
+  width: min(260px, 78%) !important;
+  height: 50px !important;
+  place-items: center !important;
+  transform: translateX(-50%) !important;
+  background: url("assets/skin-v2/brown-button.png") center / 100% 100% no-repeat !important;
+  color: #fff !important;
+  font-family: Georgia, serif !important;
+  font-size: clamp(.9rem, 1.18vw, 1.1rem) !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 0 #2b1833 !important;
+}
+
+body.skin-v2.start-screen .mission-intro,
+body.skin-v2.start-screen .quest-grid {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.skin-v2.start-screen .quest-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: repeat(3, minmax(116px, 1fr)) !important;
+  gap: 12px !important;
+}
+
+/* Card layout: icon / copy / button */
+body.skin-v2.start-screen .quest-card {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 68px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 12px !important;
+  min-width: 0 !important;
+  min-height: 112px !important;
+  margin: 0 !important;
+  padding: 14px 128px 14px 14px !important;
+  overflow: hidden !important;
+  background:
+    url("assets/skin-v2/small-frame.png") center / 100% 100% no-repeat,
+    #1b2a5a !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: 0 4px 0 rgba(1, 3, 13, .45) !important;
+}
+
+body.skin-v2.start-screen .quest-card-icon {
+  display: grid !important;
+  width: 64px !important;
+  height: 64px !important;
+  place-items: center !important;
+  padding: 2px !important;
+  overflow: hidden !important;
+  background: rgba(3, 6, 21, .9) !important;
+  border: 2px solid #ffe289 !important;
+  box-shadow: 0 0 0 2px #2b1b0b !important;
+}
+
+body.skin-v2.start-screen .quest-card-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  image-rendering: pixelated !important;
+}
+
+body.skin-v2.start-screen .quest-card-copy {
+  min-width: 0 !important;
+}
+
+body.skin-v2.start-screen .quest-card h3 {
+  margin: 0 0 5px !important;
+  color: #fff !important;
+  font-family: Georgia, serif !important;
+  font-size: clamp(.8rem, 1.02vw, .96rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.05 !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 0 #090b20 !important;
+}
+
+body.skin-v2.start-screen .quest-card p {
+  margin: 0 !important;
+  color: #fff7e5 !important;
+  font-family: Georgia, serif !important;
+  font-size: clamp(.66rem, .78vw, .78rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+}
+
+/* CRITICAL: clear old inset:0 from quest-hub.css */
+body.skin-v2.start-screen .quest-card .action {
+  position: absolute !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: 14px !important;
+  bottom: 14px !important;
+  z-index: 4 !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.skin-v2.start-screen .quest-card button {
+  display: grid !important;
+  place-items: center !important;
+  width: 106px !important;
+  height: 40px !important;
+  padding: 4px 8px !important;
+  background: url("assets/skin-v2/green-button.png") center / 100% 100% no-repeat !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  font-family: Georgia, serif !important;
+  font-size: .62rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 0 #0a3119 !important;
+}
+
+/* Bottom nav */
+body.skin-v2.start-screen #bottom-action-slot {
+  order: initial !important;
+  flex: none !important;
+  grid-row: 3 !important;
+  align-self: stretch !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 8px 0 0 !important;
+  padding: 10px 78px !important;
+  overflow: hidden !important;
+  background:
+    url("assets/skin-v2/large-frame.png") center / 100% 100% no-repeat,
+    rgba(7, 12, 52, .97) !important;
+  border: 0 !important;
+  box-shadow: 0 7px 17px rgba(1, 4, 17, .35) !important;
+}
+
+body.skin-v2.start-screen #bottom-action-slot .quest-bottom-nav {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 26px !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+body.skin-v2.start-screen #bottom-action-slot .quest-nav-link:first-child {
+  display: none !important;
+}
+
+body.skin-v2.start-screen #home-btn { order: 1 !important; }
+body.skin-v2.start-screen #progress-btn { order: 2 !important; }
+body.skin-v2.start-screen .quest-resources-link { order: 3 !important; }
+
+body.skin-v2.start-screen .quest-nav-link,
+body.skin-v2.start-screen #progress-btn,
+body.skin-v2.start-screen #home-btn {
+  display: flex !important;
+  min-width: 0 !important;
+  min-height: 66px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  margin: 0 !important;
+  padding: 7px 24px !important;
+  background: url("assets/skin-v2/bottom-menu-scroll.png") center / 100% 100% no-repeat !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #2c190c !important;
+  font-family: Georgia, serif !important;
+  font-size: clamp(.78rem, 1.05vw, .98rem) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  text-shadow: 0 1px rgba(255, 244, 194, .78) !important;
+}
+
+body.skin-v2.start-screen .quest-nav-link img,
+body.skin-v2.start-screen #progress-btn img,
+body.skin-v2.start-screen #home-btn img {
+  width: 34px !important;
+  height: 34px !important;
+  flex: 0 0 34px !important;
+  object-fit: contain !important;
+  image-rendering: pixelated !important;
+}
+
+/* Resources is not clickable yet, but should not look faded */
+body.skin-v2.start-screen .quest-resources-link {
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+/* Smaller desktop/laptop fallback */
+@media (max-width: 1050px), (max-height: 735px) {
+  body.skin-v2.start-screen #game-container {
+    grid-template-rows: 88px minmax(500px, 1fr) 86px !important;
+    width: min(94vw, 1280px) !important;
+  }
+
+  body.skin-v2.start-screen h1 {
+    height: 84px !important;
+    width: min(980px, 86vw) !important;
+  }
+
+  body.skin-v2.start-screen .screen-content-shell {
+    grid-template-columns: minmax(0, 61fr) minmax(330px, 39fr) !important;
+    grid-template-rows: 94px minmax(0, 1fr) !important;
+    column-gap: 26px !important;
+    padding: 50px 28px 30px !important;
+  }
+
+  body.skin-v2.start-screen .quest-grid {
+    gap: 9px !important;
+  }
+
+  body.skin-v2.start-screen .quest-card {
+    min-height: 100px !important;
+    padding-right: 112px !important;
+  }
+
+  body.skin-v2.start-screen .quest-card button {
+    width: 94px !important;
+  }
+
+  body.skin-v2.start-screen #bottom-action-slot {
+    padding-inline: 56px !important;
+  }
+}
+
+/* Mobile: stack cleanly */
+@media (max-width: 860px) {
+  body.skin-v2.start-screen {
+    overflow: auto !important;
+    background-attachment: scroll !important;
+  }
+
+  body.skin-v2.start-screen #game-container {
+    grid-template-rows: 92px auto auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+
+  body.skin-v2.start-screen h1 {
+    width: 94vw !important;
+    height: 88px !important;
+  }
+
+  body.skin-v2.start-screen .screen-content-shell {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto minmax(390px, 56vw) auto !important;
+    gap: 22px !important;
+    padding: 56px 22px 34px !important;
+  }
+
+  body.skin-v2.start-screen .quest-hero-heading {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  body.skin-v2.start-screen .quest-hero-art {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+  }
+
+  body.skin-v2.start-screen #choices {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    min-height: 390px !important;
+  }
+
+  body.skin-v2.start-screen #bottom-action-slot {
+    min-height: 235px !important;
+    padding: 14px 20px !important;
+  }
+
+  body.skin-v2.start-screen #bottom-action-slot .quest-bottom-nav {
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+  }
+}
