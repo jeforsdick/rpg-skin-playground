@@ -3710,6 +3710,25 @@ body.skin-v2.same-day-screen .quest-hero-heading h2 {
 }
 
 /* ============================================================
+   CONTAINER SIZING — match scenario page (playing-mission)
+   on both landing page and same-day return page
+   ============================================================ */
+
+body.skin-v2.start-screen #game-container,
+body.skin-v2.same-day-screen #game-container {
+  width: min(92vw, 1500px) !important;
+  height: calc(100vh - 16px) !important;
+  grid-template-rows: 90px minmax(0, 1fr) 84px !important;
+}
+
+body.skin-v2.start-screen .screen-content-shell,
+body.skin-v2.same-day-screen .screen-content-shell {
+  padding: clamp(26px, 2.3vw, 38px) clamp(38px, 3.2vw, 56px) clamp(22px, 2vw, 34px) !important;
+  background: var(--v2-frame-large) center / 100% 100% no-repeat,
+    rgba(8, 13, 53, .28) !important;
+}
+
+/* ============================================================
    LANDING PAGE TWEAKS — appended overrides
    ============================================================ */
 
@@ -3743,6 +3762,14 @@ body.skin-v2.start-screen .quest-card button {
 /* Accommodate buttons in card padding */
 body.skin-v2.start-screen .quest-card {
   padding-right: 196px !important;
+}
+
+/* --- Ensure START buttons are clickable --- */
+body.skin-v2.start-screen .quest-card .action,
+body.skin-v2.start-screen .quest-card button {
+  pointer-events: auto !important;
+  z-index: 50 !important;
+  position: relative !important;
 }
 
 /* ============================================================
@@ -3791,6 +3818,16 @@ body.skin-v2.same-day-screen .mission-card button {
 body.skin-v2.same-day-screen .quest-card,
 body.skin-v2.same-day-screen .mission-card {
   padding-right: 196px !important;
+}
+
+/* --- Ensure START buttons are clickable on same-day screen --- */
+body.skin-v2.same-day-screen .quest-card .action,
+body.skin-v2.same-day-screen .mission-card .action,
+body.skin-v2.same-day-screen .quest-card button,
+body.skin-v2.same-day-screen .mission-card button {
+  pointer-events: auto !important;
+  z-index: 50 !important;
+  position: relative !important;
 }
 
 /* Match hero classroom image sizing to landing page */
