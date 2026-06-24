@@ -5868,3 +5868,89 @@ body.skin-v2.dashboard-screen #bottom-action-slot #home-btn img {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
+
+/* ============================================================
+   LANDING PAGE RESIZE OVERRIDES — append to end of skin-v2.css
+   ============================================================ */
+
+/* 1. TITLE LOGO IMAGE — replaces CSS text with the title PNG */
+body.skin-v2.start-screen h1 {
+  background: url("assets/mission-reinforceable-title.png") center / contain no-repeat !important;
+  height: 160px !important;
+}
+body.skin-v2.start-screen h1::before {
+  display: none !important;
+  content: "" !important;
+}
+
+/* 2. BIGGER CLASSROOM IMAGE — give more width to the left column */
+body.skin-v2.start-screen .screen-content-shell {
+  grid-template-columns: minmax(0, 64fr) minmax(360px, 36fr) !important;
+}
+body.skin-v2.start-screen .quest-classroom-background {
+  transform: scale(1.1) !important;
+  transform-origin: center center !important;
+}
+
+/* 3. BIGGER MISSION CARDS + BIGGER TEXT */
+body.skin-v2.start-screen .quest-card {
+  grid-template-columns: 82px minmax(0, 1fr) !important;
+  padding: 20px 165px 20px 18px !important;
+  min-height: 130px !important;
+}
+body.skin-v2.start-screen .quest-card-icon {
+  width: 82px !important;
+  height: 82px !important;
+}
+body.skin-v2.start-screen .quest-card h3 {
+  font-size: clamp(1.15rem, 1.45vw, 1.4rem) !important;
+  margin-bottom: 6px !important;
+}
+body.skin-v2.start-screen .quest-card p {
+  font-size: clamp(.88rem, 1.05vw, 1.02rem) !important;
+  line-height: 1.2 !important;
+}
+
+/* 4. BIGGER START BUTTONS on mission cards */
+body.skin-v2.start-screen .quest-card .action {
+  width: 145px !important;
+  height: 58px !important;
+}
+body.skin-v2.start-screen .quest-card button {
+  width: 145px !important;
+  height: 58px !important;
+  font-size: .8rem !important;
+  padding: 6px 12px !important;
+}
+
+/* 5. BIGGER "START YOUR DAILY MISSION" CTA */
+body.skin-v2.start-screen .quest-hero-cta {
+  width: min(340px, 56%) !important;
+  height: 58px !important;
+  font-size: clamp(.8rem, 1vw, .95rem) !important;
+}
+
+/* Responsive overrides — must come after existing media queries */
+@media (max-width: 900px) {
+  body.skin-v2.start-screen .quest-card {
+    grid-template-columns: 72px minmax(0, 1fr) !important;
+    padding: 16px 145px 16px 16px !important;
+    min-height: 115px !important;
+  }
+  body.skin-v2.start-screen .quest-card-icon {
+    width: 72px !important;
+    height: 72px !important;
+  }
+  body.skin-v2.start-screen .quest-card h3 {
+    font-size: clamp(1rem, 1.3vw, 1.2rem) !important;
+  }
+  body.skin-v2.start-screen .quest-card p {
+    font-size: clamp(.8rem, .95vw, .92rem) !important;
+  }
+  body.skin-v2.start-screen .quest-card .action,
+  body.skin-v2.start-screen .quest-card button {
+    width: 128px !important;
+    height: 50px !important;
+    font-size: .72rem !important;
+  }
+}
