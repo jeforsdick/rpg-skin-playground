@@ -3854,3 +3854,24 @@ body.skin-v2.same-day-screen .quest-classroom-background {
     height: 68px !important;
   }
 }
+
+/* ============================================================
+   FINAL SHARED PAGE SIZE
+   Landing, same-day return, and scenario use the same game container.
+   ============================================================ */
+
+body.skin-v2.start-screen #game-container,
+body.skin-v2.start-screen.same-day-screen #game-container,
+body.skin-v2.same-day-screen #game-container,
+body.skin-v2.playing-mission #game-container {
+  display: grid !important;
+  grid-template-rows: 90px minmax(0, 1fr) 84px !important;
+  width: min(92vw, 1500px) !important;
+  height: calc(100vh - 16px) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
