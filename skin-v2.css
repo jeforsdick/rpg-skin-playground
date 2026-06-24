@@ -3777,3 +3777,75 @@ body.skin-v2.start-screen .quest-card button {
 body.skin-v2.start-screen .quest-card {
   padding-right: 205px !important;
 }
+
+
+/* ============================================================
+   LANDING PAGE TWEAKS — appended overrides
+   ============================================================ */
+
+/* --- Title image at 680px, pushed slightly lower --- */
+body.skin-v2.start-screen h1 {
+  height: 680px !important;
+  margin-top: 20px !important;
+}
+
+/* --- "embark on a journey" text 15% bigger --- */
+body.skin-v2.start-screen .quest-hero-heading h2,
+body.skin-v2.start-screen .quest-hero-heading p,
+body.skin-v2.start-screen .quest-hero-text,
+body.skin-v2.start-screen .embark-text {
+  font-size: calc(1em * 1.15) !important;
+}
+
+/* --- Green START buttons 5% smaller (185→176 × 72→68px) --- */
+body.skin-v2.start-screen .quest-card .action {
+  width: 176px !important;
+  height: 68px !important;
+  right: 10px !important;
+}
+
+body.skin-v2.start-screen .quest-card button {
+  width: 176px !important;
+  height: 68px !important;
+  font-size: .88rem !important;
+}
+
+/* Accommodate buttons in card padding */
+body.skin-v2.start-screen .quest-card {
+  padding-right: 196px !important;
+}
+
+/* ============================================================
+   SAME-DAY RETURN SCREEN — match landing page look
+   ============================================================ */
+
+/* Match hero heading sizing to landing page */
+body.skin-v2.same-day-screen .quest-hero-heading h2 {
+  font-size: calc(1em * 1.15) !important;
+}
+
+body.skin-v2.same-day-screen .quest-hero-heading p {
+  font-size: calc(1em * 1.15) !important;
+}
+
+/* Match mission card button sizing to landing page */
+body.skin-v2.same-day-screen .quest-card .action {
+  width: 176px !important;
+  height: 68px !important;
+  right: 10px !important;
+}
+
+body.skin-v2.same-day-screen .quest-card button {
+  width: 176px !important;
+  height: 68px !important;
+  font-size: .88rem !important;
+}
+
+body.skin-v2.same-day-screen .quest-card {
+  padding-right: 196px !important;
+}
+
+/* Match hero classroom image sizing to landing page */
+body.skin-v2.same-day-screen .quest-classroom-background {
+  max-width: 100% !important;
+}
