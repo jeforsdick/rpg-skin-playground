@@ -5473,3 +5473,398 @@ body.skin-v2.summary-screen #bottom-action-slot #home-btn img {
   height: 27px !important;
   flex-basis: 27px !important;
 }
+
+/* ============================================================
+   PROGRESS PAGE AUTHORITY
+   Final dashboard layout pass: title, growth bubble, badges, log, footer.
+   ============================================================ */
+
+body.skin-v2.dashboard-screen {
+  min-height: 100vh !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(rgba(20, 19, 95, .08), rgba(3, 17, 34, .20)),
+    var(--v2-bg-world) center / cover fixed no-repeat !important;
+}
+
+body.skin-v2.dashboard-screen #game-container {
+  display: grid !important;
+  grid-template-rows: 142px minmax(0, 1fr) 84px !important;
+  width: min(92vw, 1500px) !important;
+  height: calc(100vh - 8px) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.skin-v2.dashboard-screen h1 {
+  grid-row: 1 !important;
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: 142px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  color: transparent !important;
+  background: transparent !important;
+  border: 0 !important;
+  font-size: 0 !important;
+}
+
+body.skin-v2.dashboard-screen h1::before {
+  content: "MRS. OLSON'S MISSION PROGRESS" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 62% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 100vw !important;
+  color: #ffd56a !important;
+  font-family: var(--v2-pixel) !important;
+  font-size: clamp(2.2rem, 4.15vw, 4.7rem) !important;
+  font-weight: 900 !important;
+  line-height: .9 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  text-shadow:
+    5px 0 0 #000,
+    -5px 0 0 #000,
+    0 5px 0 #000,
+    0 -5px 0 #000,
+    5px 5px 0 #000,
+    -5px 5px 0 #000,
+    5px -5px 0 #000,
+    -5px -5px 0 #000 !important;
+}
+
+body.skin-v2.dashboard-screen .screen-content-shell {
+  grid-row: 2 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.skin-v2.dashboard-screen #choices {
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.dashboard-screen #progress-dashboard {
+  display: grid !important;
+  grid-template-rows: clamp(112px, 15vh, 158px) clamp(148px, 18vh, 210px) minmax(0, 1fr) !important;
+  gap: clamp(8px, 1.15vh, 14px) !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  color: #fff !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-header {
+  position: relative !important;
+  align-self: start !important;
+  justify-self: center !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  place-items: center !important;
+  width: min(1040px, 72vw) !important;
+  min-height: clamp(104px, 13.5vh, 148px) !important;
+  margin: 0 auto !important;
+  padding: clamp(20px, 2.2vw, 34px) clamp(92px, 7vw, 130px) !important;
+  color: #1b100a !important;
+  background: var(--v2-bubble-screen) center / 100% 100% no-repeat !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-align: center !important;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-wizard {
+  content: url("assets/skin-v2/wizard-dead.png") !important;
+  position: absolute !important;
+  right: clamp(-134px, -8vw, -92px) !important;
+  top: clamp(-24px, -2vh, -10px) !important;
+  width: clamp(96px, 8.2vw, 138px) !important;
+  height: auto !important;
+  object-fit: contain !important;
+  image-rendering: pixelated !important;
+  transform: none !important;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-mark {
+  display: none !important;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-heading {
+  max-width: 860px !important;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-heading h2 {
+  display: none !important;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-heading p {
+  margin: 0 !important;
+  color: #1a100b !important;
+  font-family: "Courier New", monospace !important;
+  font-size: clamp(1rem, 1.55vw, 1.7rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+  letter-spacing: .03em !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+}
+
+body.skin-v2.dashboard-screen .progress-guild-heading p::before {
+  content: "GROWTH FOCUS: ";
+}
+
+body.skin-v2.dashboard-screen .dashboard-grid {
+  align-self: center !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(22px, 4vw, 74px) !important;
+  width: min(1120px, 78vw) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-card {
+  position: relative !important;
+  display: grid !important;
+  place-items: start center !important;
+  min-height: clamp(142px, 17vh, 198px) !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-align: center !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-card > img {
+  display: none !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-card > div {
+  display: contents !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-card::before {
+  content: "" !important;
+  display: block !important;
+  width: clamp(92px, 8vw, 132px) !important;
+  height: clamp(92px, 8vw, 132px) !important;
+  margin: 0 auto !important;
+  background: var(--badge-img, url("assets/skin-v2/purple-badge.png")) center / contain no-repeat !important;
+  image-rendering: pixelated !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-card:nth-child(1)::before { --badge-img: url("assets/skin-v2/purple-badge.png"); }
+body.skin-v2.dashboard-screen .dashboard-card:nth-child(2)::before { --badge-img: url("assets/skin-v2/green-badge.png"); }
+body.skin-v2.dashboard-screen .dashboard-card:nth-child(3)::before { --badge-img: url("assets/skin-v2/blue-badge.png"); }
+body.skin-v2.dashboard-screen .dashboard-card:nth-child(4)::before { --badge-img: url("assets/skin-v2/orange-badge.png"); }
+
+body.skin-v2.dashboard-screen .dashboard-number {
+  position: absolute !important;
+  top: clamp(33px, 3.7vw, 56px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+  color: #0c0705 !important;
+  font-family: var(--v2-pixel) !important;
+  font-size: clamp(1.35rem, 2.2vw, 2.25rem) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  text-shadow: 1px 1px 0 rgba(255,255,255,.55) !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-number small {
+  font-size: .55em !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-label {
+  position: absolute !important;
+  top: clamp(103px, 9.4vw, 146px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: grid !important;
+  place-items: center !important;
+  width: clamp(132px, 11vw, 176px) !important;
+  min-height: clamp(34px, 3.3vw, 46px) !important;
+  margin: 0 !important;
+  padding: 4px 10px !important;
+  color: #1a100a !important;
+  background: var(--v2-title-frame) center / 100% 100% no-repeat !important;
+  font-family: var(--v2-fantasy) !important;
+  font-size: clamp(.7rem, .95vw, 1rem) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+body.skin-v2.dashboard-screen .weekly-mission-path {
+  display: none !important;
+}
+
+body.skin-v2.dashboard-screen .recent-mission-log {
+  position: relative !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+  padding: clamp(34px, 3.2vw, 52px) clamp(34px, 3.6vw, 56px) clamp(22px, 2vw, 34px) !important;
+  overflow: hidden !important;
+  background:
+    var(--v2-frame-large) center / 100% 100% no-repeat,
+    rgba(7, 10, 47, .92) !important;
+  border: 0 !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .28) !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-section-heading {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-section-heading h3 {
+  margin: 0 !important;
+  color: #ffd760 !important;
+  font-family: var(--v2-pixel) !important;
+  font-size: clamp(.9rem, 1.25vw, 1.15rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  text-shadow: 2px 2px 0 #101 !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-hint,
+body.skin-v2.dashboard-screen #dashboard-back-btn {
+  display: none !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-session-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  align-content: start !important;
+  gap: clamp(14px, 1.7vw, 22px) !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  max-height: none !important;
+  padding: 8px 22px 16px 8px !important;
+  overflow: auto !important;
+  scrollbar-color: #6c3fc6 #dedcff;
+}
+
+body.skin-v2.dashboard-screen .dashboard-session-card {
+  display: grid !important;
+  grid-template-columns: clamp(68px, 6vw, 88px) minmax(0, 1fr) clamp(96px, 8vw, 128px) !important;
+  align-items: center !important;
+  gap: clamp(12px, 1.6vw, 20px) !important;
+  min-height: clamp(94px, 10.5vh, 128px) !important;
+  padding: clamp(12px, 1.4vw, 18px) clamp(16px, 1.7vw, 24px) !important;
+  color: #fff !important;
+  background:
+    var(--v2-frame-small) center / 100% 100% no-repeat,
+    var(--v2-card) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-align: left !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-session-icon {
+  width: clamp(54px, 5vw, 72px) !important;
+  height: clamp(54px, 5vw, 72px) !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-session-date {
+  color: #ffd760 !important;
+  font-family: var(--v2-pixel) !important;
+  font-size: clamp(.72rem, 1vw, .95rem) !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-session-main strong {
+  font-size: clamp(.78rem, 1.05vw, 1rem) !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-session-metrics {
+  font-size: clamp(.72rem, .98vw, .95rem) !important;
+}
+
+body.skin-v2.dashboard-screen .dashboard-session-link {
+  width: clamp(86px, 7vw, 112px) !important;
+  height: clamp(34px, 3.4vw, 44px) !important;
+  font-size: clamp(.6rem, .78vw, .72rem) !important;
+}
+
+body.skin-v2.dashboard-screen #bottom-action-slot {
+  grid-row: 3 !important;
+  align-self: stretch !important;
+  width: min(832px, 72%) !important;
+  margin: 6px auto 0 !important;
+  padding: 5px clamp(34px, 4vw, 62px) !important;
+  z-index: 25 !important;
+}
+
+body.skin-v2.dashboard-screen #bottom-action-slot .quest-bottom-nav {
+  gap: 24px !important;
+}
+
+body.skin-v2.dashboard-screen #bottom-action-slot .quest-nav-link,
+body.skin-v2.dashboard-screen #bottom-action-slot #progress-btn,
+body.skin-v2.dashboard-screen #bottom-action-slot #home-btn {
+  min-height: 48px !important;
+  padding: 5px 19px !important;
+  gap: 8px !important;
+  font-size: clamp(.76rem, .9vw, .92rem) !important;
+}
+
+body.skin-v2.dashboard-screen #bottom-action-slot .quest-nav-link img,
+body.skin-v2.dashboard-screen #bottom-action-slot #progress-btn img,
+body.skin-v2.dashboard-screen #bottom-action-slot #home-btn img {
+  width: 27px !important;
+  height: 27px !important;
+  flex-basis: 27px !important;
+}
+
+@media (max-width: 980px) {
+  body.skin-v2.dashboard-screen #game-container {
+    grid-template-rows: 106px minmax(0, 1fr) 84px !important;
+  }
+
+  body.skin-v2.dashboard-screen h1 {
+    height: 106px !important;
+  }
+
+  body.skin-v2.dashboard-screen h1::before {
+    font-size: clamp(1.4rem, 7vw, 2.4rem) !important;
+  }
+
+  body.skin-v2.dashboard-screen #progress-dashboard {
+    grid-template-rows: auto auto minmax(0, 1fr) !important;
+  }
+
+  body.skin-v2.dashboard-screen .dashboard-grid,
+  body.skin-v2.dashboard-screen .dashboard-session-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
