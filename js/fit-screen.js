@@ -3,7 +3,7 @@ function fitGameToViewport() {
   if (!app) return;
 
   const designWidth = 1500;
-  const designHeight = 900;
+  const designHeight = 923;
 
   const scale = Math.min(
     window.innerWidth / designWidth,

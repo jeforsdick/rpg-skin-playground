@@ -1260,3 +1260,475 @@ body {
   overflow: visible;
   white-space: normal;
 }
+
+/* ============================================================
+   FIXED 1500x923 ARTBOARD MAP
+   Mockups are fixed game screens. Only .mr-app scales; each
+   screen owns its own absolute coordinate map.
+   ============================================================ */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: #14286b;
+}
+
+.mr-app {
+  --game-width: 1500px;
+  --game-height: 923px;
+  --fit-scale: 1;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: var(--game-width);
+  height: var(--game-height);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -50%) scale(var(--fit-scale));
+  transform-origin: center center;
+  overflow: hidden;
+  background: url("../assets/skin-v2/mission-reinforceable-background.png") center center / cover no-repeat;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.screen.is-active {
+  display: block;
+}
+
+/* Temporary alignment guide hook. Add an img.mockup-guide per screen when tracing. */
+.mockup-guide {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1500px;
+  height: 923px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.mr-app.show-mockups .mockup-guide {
+  opacity: .35;
+}
+
+.home-return .mockup-guide-home,
+.screen-home:not(.home-return) .mockup-guide-return {
+  display: none;
+}
+
+/* Shared nav, positioned by active body screen state because the nav is outside sections. */
+.bottom-nav {
+  position: absolute;
+  left: 136px;
+  top: 765px;
+  width: 1260px;
+  height: 119px;
+  transform: none;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 42px;
+  padding: 14px 95px;
+}
+
+.scroll-nav-btn {
+  flex: 1 1 0;
+  height: 70px;
+  font-size: 24px;
+}
+
+body[data-screen="play"] .bottom-nav,
+body[data-screen="results"] .bottom-nav {
+  left: 200px;
+  top: 789px;
+  width: 1160px;
+  height: 108px;
+}
+
+/* LANDING + SAME-DAY RETURN TARGET MAP */
+.screen-home .title-logo {
+  position: absolute;
+  left: 318px;
+  top: 87px;
+  width: 905px;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  transform: none;
+}
+
+.screen-home .home-panel {
+  position: absolute;
+  left: 136px;
+  top: 169px;
+  width: 1260px;
+  height: 591px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  transform: none;
+}
+
+.screen-home .classroom-plaque {
+  position: absolute;
+  left: 590px;
+  top: -17px;
+  width: 320px;
+  height: 58px;
+  min-width: 0;
+  transform: none;
+  z-index: 5;
+}
+
+.screen-home .home-tagline {
+  position: absolute;
+  left: 190px;
+  top: 56px;
+  width: 880px;
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.screen-home .home-subtitle {
+  position: absolute;
+  left: 350px;
+  top: 91px;
+  width: 560px;
+  margin: 0;
+  text-align: center;
+  font-size: 23px;
+  line-height: 1;
+  overflow: visible;
+}
+
+.screen-home .home-layout {
+  display: block;
+  height: auto;
+  overflow: visible;
+}
+
+.screen-home .classroom-stage {
+  position: absolute;
+  left: 45px;
+  top: 138px;
+  width: 725px;
+  height: 406px;
+  overflow: hidden;
+}
+
+.screen-home .classroom-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.screen-home .start-classroom-btn {
+  left: 260px;
+  bottom: 14px;
+  width: 310px;
+  height: 64px;
+  transform: none;
+}
+
+.screen-home .mission-menu {
+  position: absolute;
+  left: 810px;
+  top: 138px;
+  width: 407px;
+  height: 406px;
+  display: block;
+  overflow: visible;
+}
+
+.screen-home .menu-title {
+  left: 50%;
+  top: -31px;
+  transform: translateX(-50%);
+}
+
+.screen-home .mission-card {
+  position: relative;
+  width: 407px;
+  height: 128px;
+  min-height: 128px;
+  margin: 0 0 14px;
+  padding: 15px 18px;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 17px;
+}
+
+.screen-home .mission-card img {
+  width: 82px;
+  height: 82px;
+}
+
+.screen-home .mission-card h2 {
+  font-size: 20px;
+  line-height: 1;
+  margin: 0 0 4px;
+}
+
+.screen-home .mission-card p {
+  font-size: 16px;
+  line-height: 1.05;
+  margin: 0;
+  padding-right: 126px;
+  overflow: visible;
+}
+
+.screen-home .mission-card .green-btn {
+  right: 16px;
+  bottom: 16px;
+  width: 136px;
+  height: 46px;
+}
+
+/* GAMEPLAY TARGET MAP */
+.screen-play .hud {
+  position: absolute;
+  left: 80px;
+  top: 65px;
+  width: 1340px;
+  height: 80px;
+  margin: 0;
+  transform: none;
+  grid-template-columns: 390px 1fr 1fr;
+  gap: 34px;
+}
+
+.screen-play .play-panel {
+  position: absolute;
+  left: 137px;
+  top: 151px;
+  width: 1260px;
+  height: 619px;
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+  transform: none;
+  display: block;
+}
+
+.screen-play .scenario-area,
+.screen-play .choices-area {
+  position: static;
+  height: auto;
+}
+
+.screen-play .scenario-scroll {
+  position: absolute;
+  left: 25px;
+  top: 28px;
+  width: 748px;
+  height: 536px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.screen-play .scenario-scroll-content {
+  position: absolute;
+  left: 90px;
+  right: 90px;
+  top: 110px;
+  bottom: 88px;
+  padding-right: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.screen-play .scenario-scroll-content .scene-label {
+  display: block;
+  font-size: 30px;
+  line-height: 1;
+  margin: 0 0 8px;
+}
+
+.screen-play .scenario-scroll-content,
+.screen-play .scenario-scroll-content p {
+  font-size: 19px;
+  line-height: 1.28;
+}
+
+.screen-play .wizard-hint-wrap {
+  position: absolute;
+  left: 807px;
+  top: 0;
+  width: 420px;
+  height: 135px;
+  min-height: 0;
+  overflow: visible;
+}
+
+.screen-play .scenario-hint {
+  left: 0;
+  right: auto;
+  top: 0;
+  width: 330px;
+  height: 126px;
+  padding: 26px 38px 34px;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.screen-play .wizard-sidekick {
+  right: 0;
+  top: 8px;
+  width: 106px;
+  height: 128px;
+}
+
+.screen-play .choice-list {
+  position: absolute;
+  left: 785px;
+  top: 165px;
+  width: 455px;
+  height: 395px;
+  display: block;
+}
+
+.screen-play .choice-btn {
+  width: 455px;
+  height: 115px;
+  min-height: 0;
+  margin: 0 0 18px;
+  padding: 14px 26px;
+  overflow: visible;
+  font-size: 24px;
+  line-height: .98;
+  white-space: normal;
+}
+
+/* RESULTS TARGET MAP */
+.screen-results .hud {
+  position: absolute;
+  left: 80px;
+  top: 65px;
+  width: 1340px;
+  height: 80px;
+  margin: 0;
+  transform: none;
+  grid-template-columns: 390px 1fr 1fr;
+  gap: 34px;
+}
+
+.screen-results .results-panel {
+  position: absolute;
+  left: 137px;
+  top: 151px;
+  width: 1260px;
+  height: 619px;
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+  transform: none;
+}
+
+.screen-results .feedback-scroll {
+  position: absolute;
+  left: 25px;
+  top: 28px;
+  width: 1210px;
+  height: 536px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.screen-results .feedback-scroll-content {
+  position: absolute;
+  left: 90px;
+  right: 90px;
+  top: 88px;
+  bottom: 85px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.screen-results .results-wizard-note {
+  right: 42px;
+  bottom: 34px;
+}
+
+/* Dedicated popup layout on the fixed stage */
+.wizard-modal {
+  position: absolute;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, .18);
+}
+
+.wizard-modal .modal-backdrop {
+  display: none;
+}
+
+.wizard-modal-card {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  transform: none;
+}
+
+.wizard-modal-bubble {
+  position: absolute;
+  left: 292px;
+  top: 78px;
+  width: 900px;
+  height: 640px;
+  inset: auto;
+  background: transparent url("../assets/skin-v2/wizard-speech-bubble.png") center / 100% 100% no-repeat;
+  padding: 115px 145px 150px 160px;
+  box-sizing: border-box;
+  overflow: visible;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.wizard-modal-bubble h2 {
+  font-size: 27px;
+}
+
+.wizard-modal-bubble p {
+  max-height: 310px;
+  overflow-y: auto;
+  font-size: 21px;
+  line-height: 1.28;
+}
+
+.wizard-modal-bubble .green-btn {
+  bottom: 76px;
+}
+
+.wizard-modal-img {
+  position: absolute;
+  right: 170px;
+  bottom: 80px;
+  width: 260px;
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 310;
+}
