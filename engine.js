@@ -303,7 +303,7 @@ function wizardButtonTextFromDelta(delta) {
 
 function wizardPopupFrameForState(state, variant) {
   if (variant === 'briefing') {
-    return '../assets/skin-v2/wizard-feedback-popup-mockup-neutral.png';
+    return '../assets/skin-v2/wizard-pop-up-scroll.png';
   }
 
   if (variant === 'dead') {
@@ -849,7 +849,7 @@ function renderSameDayReturnScreen(result) {
       </div>
 
       <div class="quest-hero-art same-day-hero-art">
-        <img class="quest-classroom-background" src="../assets/skin-v2/classroom-image.png" alt="A magical pixel-art classroom">
+        <img class="quest-classroom-background" src="../assets/skin-v2/same-day-return-page-classroom.png" alt="A magical pixel-art classroom">
 
         <div class="same-day-bubble same-day-bubble-one">
           <img src="../assets/skin-v2/speech-bubble-left.png" alt="">

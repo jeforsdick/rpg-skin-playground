@@ -4673,3 +4673,638 @@ body.skin-v2.same-day-screen #bottom-action-slot #home-btn img {
     min-height: 390px !important;
   }
 }
+
+/* ============================================================
+   MOCKUP ALIGNMENT PASS — 2026-06-24
+   The supplied RPG mockups are 3250 x 2000. Keep the live screens
+   on that same stage rhythm: big title, full gold frame, full nav.
+   ============================================================ */
+
+body.skin-v2 {
+  --mr-mockup-stage-width: min(84vw, 1360px);
+  --mr-mockup-stage-height: calc(100vh - 10px);
+  --mr-mockup-title-row: clamp(128px, 15.6vh, 168px);
+  --mr-mockup-nav-row: clamp(78px, 9.5vh, 99px);
+  --mr-mockup-frame-pad-x: clamp(34px, 3.2vw, 58px);
+  --mr-mockup-frame-pad-y: clamp(28px, 3vh, 42px);
+}
+
+body.skin-v2.start-screen,
+body.skin-v2.same-day-screen,
+body.skin-v2.playing-mission,
+body.skin-v2.summary-screen,
+body.skin-v2.dashboard-screen {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body.skin-v2.start-screen #game-container,
+body.skin-v2.same-day-screen #game-container {
+  grid-template-rows: var(--mr-mockup-title-row) minmax(0, 1fr) var(--mr-mockup-nav-row) !important;
+  width: var(--mr-mockup-stage-width) !important;
+  max-width: 1360px !important;
+  height: var(--mr-mockup-stage-height) !important;
+  min-height: 0 !important;
+  transform: none !important;
+}
+
+body.skin-v2.start-screen h1,
+body.skin-v2.same-day-screen h1 {
+  height: var(--mr-mockup-title-row) !important;
+  background: url("assets/skin-v2/mission-reinforceable-title.png") center 82% / min(940px, 72vw) auto no-repeat !important;
+}
+
+body.skin-v2.start-screen .screen-content-shell,
+body.skin-v2.same-day-screen .screen-content-shell {
+  grid-template-columns: minmax(0, 1.45fr) minmax(360px, .86fr) !important;
+  grid-template-rows: clamp(74px, 8.6vh, 96px) minmax(0, 1fr) !important;
+  column-gap: clamp(28px, 3vw, 48px) !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: var(--mr-mockup-frame-pad-y) var(--mr-mockup-frame-pad-x) clamp(28px, 3vh, 44px) !important;
+  background:
+    var(--v2-frame-large) center / 100% 100% no-repeat,
+    radial-gradient(circle at 50% 34%, rgba(31, 41, 98, .94) 0, rgba(8, 12, 54, .98) 66%) !important;
+}
+
+body.skin-v2.start-screen .quest-classroom-plaque,
+body.skin-v2.same-day-screen .quest-classroom-plaque {
+  width: clamp(280px, 25vw, 390px) !important;
+  height: clamp(44px, 5vh, 58px) !important;
+  transform: translate(-50%, -45%) !important;
+  font-size: clamp(1rem, 1.38vw, 1.32rem) !important;
+}
+
+body.skin-v2.start-screen .quest-hero-heading,
+body.skin-v2.same-day-screen .quest-hero-heading,
+body.skin-v2.same-day-screen .same-day-hero-heading {
+  padding-top: clamp(10px, 1.3vh, 16px) !important;
+}
+
+body.skin-v2.start-screen .quest-hero-heading h2,
+body.skin-v2.same-day-screen .quest-hero-heading h2,
+body.skin-v2.same-day-screen .same-day-hero-heading h2 {
+  font-size: clamp(1.1rem, 1.68vw, 1.55rem) !important;
+  letter-spacing: 0 !important;
+}
+
+body.skin-v2.start-screen .quest-hero-heading p,
+body.skin-v2.same-day-screen .quest-hero-heading p,
+body.skin-v2.same-day-screen .same-day-hero-heading p {
+  font-size: clamp(.92rem, 1.18vw, 1.12rem) !important;
+}
+
+body.skin-v2.start-screen .quest-classroom-background,
+body.skin-v2.same-day-screen .quest-classroom-background {
+  object-fit: fill !important;
+  object-position: center !important;
+}
+
+body.skin-v2.same-day-screen .quest-classroom-background {
+  content: url("assets/skin-v2/same-day-return-page-classroom.png") !important;
+}
+
+body.skin-v2.start-screen .quest-hero-cta {
+  bottom: clamp(16px, 2vh, 26px) !important;
+  width: min(360px, 58%) !important;
+  height: clamp(54px, 6vh, 70px) !important;
+  font-size: clamp(.82rem, 1.04vw, 1rem) !important;
+}
+
+body.skin-v2.start-screen #choices,
+body.skin-v2.same-day-screen #choices {
+  padding-top: clamp(28px, 3.6vh, 44px) !important;
+}
+
+body.skin-v2.start-screen #choices::before,
+body.skin-v2.same-day-screen #choices::before {
+  top: clamp(-22px, -2vh, -14px) !important;
+  height: clamp(42px, 4.8vh, 54px) !important;
+  font-size: clamp(.9rem, 1.16vw, 1.08rem) !important;
+}
+
+body.skin-v2.start-screen .quest-card,
+body.skin-v2.same-day-screen .quest-card,
+body.skin-v2.same-day-screen .mission-card {
+  grid-template-columns: clamp(70px, 6.1vw, 92px) minmax(0, 1fr) !important;
+  padding: clamp(12px, 1.3vw, 20px) clamp(130px, 9.8vw, 164px) clamp(12px, 1.3vw, 20px) clamp(16px, 1.5vw, 24px) !important;
+}
+
+body.skin-v2.start-screen .quest-card-icon,
+body.skin-v2.same-day-screen .quest-card-icon {
+  width: clamp(70px, 6.1vw, 92px) !important;
+  height: clamp(70px, 6.1vw, 92px) !important;
+}
+
+body.skin-v2.start-screen .quest-card h3,
+body.skin-v2.same-day-screen .quest-card h3 {
+  font-size: clamp(1.08rem, 1.42vw, 1.38rem) !important;
+}
+
+body.skin-v2.start-screen .quest-card p,
+body.skin-v2.same-day-screen .quest-card p {
+  font-size: clamp(.84rem, 1.08vw, 1.05rem) !important;
+}
+
+body.skin-v2.start-screen .quest-card .action,
+body.skin-v2.same-day-screen .quest-card .action,
+body.skin-v2.same-day-screen .mission-card .action {
+  top: auto !important;
+  right: clamp(18px, 1.6vw, 28px) !important;
+  bottom: clamp(10px, 1.3vh, 18px) !important;
+  width: clamp(118px, 9vw, 148px) !important;
+  height: clamp(40px, 4vh, 52px) !important;
+  transform: none !important;
+}
+
+body.skin-v2.start-screen .quest-card button,
+body.skin-v2.same-day-screen .quest-card button,
+body.skin-v2.same-day-screen .mission-card button {
+  border-radius: 0 !important;
+  font-size: clamp(.58rem, .66vw, .72rem) !important;
+  white-space: nowrap !important;
+}
+
+body.skin-v2.same-day-screen .same-day-bubble-one {
+  top: -1% !important;
+  left: 2% !important;
+  width: 31% !important;
+}
+
+body.skin-v2.same-day-screen .same-day-bubble-two {
+  top: 24% !important;
+  right: 7% !important;
+  width: 32% !important;
+}
+
+body.skin-v2.same-day-screen .same-day-bubble-three {
+  bottom: 6% !important;
+  left: 1% !important;
+  width: 32% !important;
+}
+
+body.skin-v2.start-screen #bottom-action-slot,
+body.skin-v2.same-day-screen #bottom-action-slot,
+body.skin-v2.playing-mission #bottom-action-slot,
+body.skin-v2.summary-screen #bottom-action-slot,
+body.skin-v2.dashboard-screen #bottom-action-slot {
+  width: var(--mr-mockup-stage-width) !important;
+  max-width: 1360px !important;
+  height: var(--mr-mockup-nav-row) !important;
+  min-height: 0 !important;
+  margin: 0 auto !important;
+  padding: clamp(10px, 1.25vh, 15px) clamp(102px, 9.35vw, 153px) !important;
+}
+
+body.skin-v2.start-screen #bottom-action-slot .quest-bottom-nav,
+body.skin-v2.same-day-screen #bottom-action-slot .quest-bottom-nav,
+body.skin-v2.playing-mission #bottom-action-slot .quest-bottom-nav,
+body.skin-v2.summary-screen #bottom-action-slot .quest-bottom-nav,
+body.skin-v2.dashboard-screen #bottom-action-slot .quest-bottom-nav {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(29px, 3.4vw, 54px) !important;
+}
+
+body.skin-v2.start-screen #bottom-action-slot .quest-nav-link,
+body.skin-v2.start-screen #bottom-action-slot #progress-btn,
+body.skin-v2.start-screen #bottom-action-slot #home-btn,
+body.skin-v2.same-day-screen #bottom-action-slot .quest-nav-link,
+body.skin-v2.same-day-screen #bottom-action-slot #progress-btn,
+body.skin-v2.same-day-screen #bottom-action-slot #home-btn,
+body.skin-v2.playing-mission #bottom-action-slot .quest-nav-link,
+body.skin-v2.playing-mission #bottom-action-slot #progress-btn,
+body.skin-v2.playing-mission #bottom-action-slot #home-btn,
+body.skin-v2.summary-screen #bottom-action-slot .quest-nav-link,
+body.skin-v2.summary-screen #bottom-action-slot #progress-btn,
+body.skin-v2.summary-screen #bottom-action-slot #home-btn,
+body.skin-v2.dashboard-screen #bottom-action-slot .quest-nav-link,
+body.skin-v2.dashboard-screen #bottom-action-slot #progress-btn,
+body.skin-v2.dashboard-screen #bottom-action-slot #home-btn {
+  min-height: clamp(46px, 5.45vh, 61px) !important;
+  padding: 6px clamp(15px, 1.7vw, 24px) !important;
+  font-size: clamp(.78rem, 1.04vw, .95rem) !important;
+}
+
+body.skin-v2.start-screen #bottom-action-slot .quest-nav-link img,
+body.skin-v2.start-screen #bottom-action-slot #progress-btn img,
+body.skin-v2.start-screen #bottom-action-slot #home-btn img,
+body.skin-v2.same-day-screen #bottom-action-slot .quest-nav-link img,
+body.skin-v2.same-day-screen #bottom-action-slot #progress-btn img,
+body.skin-v2.same-day-screen #bottom-action-slot #home-btn img,
+body.skin-v2.playing-mission #bottom-action-slot .quest-nav-link img,
+body.skin-v2.playing-mission #bottom-action-slot #progress-btn img,
+body.skin-v2.playing-mission #bottom-action-slot #home-btn img,
+body.skin-v2.summary-screen #bottom-action-slot .quest-nav-link img,
+body.skin-v2.summary-screen #bottom-action-slot #progress-btn img,
+body.skin-v2.summary-screen #bottom-action-slot #home-btn img,
+body.skin-v2.dashboard-screen #bottom-action-slot .quest-nav-link img,
+body.skin-v2.dashboard-screen #bottom-action-slot #progress-btn img,
+body.skin-v2.dashboard-screen #bottom-action-slot #home-btn img {
+  width: clamp(26px, 2.55vw, 36px) !important;
+  height: clamp(26px, 2.55vw, 36px) !important;
+  flex-basis: clamp(26px, 2.55vw, 36px) !important;
+}
+
+body.skin-v2.playing-mission #game-container,
+body.skin-v2.summary-screen #game-container {
+  width: var(--mr-mockup-stage-width) !important;
+  max-width: 1360px !important;
+  height: var(--mr-mockup-stage-height) !important;
+  grid-template-rows: clamp(88px, 10.5vh, 116px) minmax(0, 1fr) var(--mr-mockup-nav-row) !important;
+}
+
+body.skin-v2.playing-mission .screen-content-shell,
+body.skin-v2.summary-screen .screen-content-shell {
+  padding: clamp(28px, 3vh, 44px) var(--mr-mockup-frame-pad-x) clamp(28px, 3vh, 44px) !important;
+}
+
+body.skin-v2.summary-screen #feedback {
+  top: auto !important;
+  right: max(6vw, calc((100vw - 1360px) / 2 + 92px)) !important;
+  bottom: clamp(122px, 14vh, 156px) !important;
+  grid-template-columns: minmax(230px, 330px) clamp(74px, 7vw, 108px) !important;
+  align-items: end !important;
+}
+
+body.skin-v2.summary-screen #feedback::before {
+  height: clamp(82px, 9.6vh, 112px) !important;
+}
+
+body.skin-v2.summary-screen #coach-icon {
+  display: block !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  width: clamp(74px, 7vw, 108px) !important;
+  height: clamp(74px, 7vw, 108px) !important;
+  align-self: end !important;
+}
+
+body.skin-v2.summary-screen #coach-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+body.skin-v2.dashboard-screen #game-container {
+  width: var(--mr-mockup-stage-width) !important;
+  max-width: 1360px !important;
+  height: var(--mr-mockup-stage-height) !important;
+  grid-template-rows: clamp(136px, 16vh, 176px) minmax(0, 1fr) var(--mr-mockup-nav-row) !important;
+}
+
+body.skin-v2.dashboard-screen .recent-mission-log {
+  max-width: 100% !important;
+}
+
+body.skin-v2.wizard-popup-open #game-container,
+body.skin-v2.modal-open #game-container,
+body.skin-v2.wizard-popup-open .screen-content-shell,
+body.skin-v2.wizard-popup-open #story-text,
+body.skin-v2.wizard-popup-open #choices,
+body.skin-v2.wizard-popup-open #feedback {
+  visibility: visible !important;
+}
+
+body.skin-v2.wizard-popup-open #wizard-modal.wizard-popup-overlay,
+body.skin-v2.modal-open #wizard-modal.wizard-popup-overlay,
+#wizard-modal.wizard-popup-overlay.active {
+  padding: 0 !important;
+  background: rgba(0, 0, 0, .34) !important;
+}
+
+body.skin-v2.wizard-popup-open .wizard-popup,
+body.skin-v2.modal-open .wizard-popup,
+#wizard-modal .wizard-popup {
+  width: min(100vw, calc(100vh * 1.625)) !important;
+  max-width: none !important;
+  max-height: 100vh !important;
+  aspect-ratio: 3250 / 2000 !important;
+  transform: none !important;
+}
+
+body.skin-v2.feedback-open .wizard-popup,
+body.skin-v2.feedback-open #wizard-modal .wizard-popup {
+  width: min(100vw, calc(100vh * 1.625)) !important;
+  max-height: 100vh !important;
+}
+
+body.skin-v2.wizard-popup-open .wizard-popup-copy,
+body.skin-v2.modal-open .wizard-popup-copy,
+#wizard-modal .wizard-popup-copy {
+  left: 30% !important;
+  top: 17% !important;
+  width: 38% !important;
+  height: 37% !important;
+  max-height: 37% !important;
+  display: grid !important;
+  place-items: start center !important;
+  align-content: start !important;
+  padding-top: clamp(10px, 2vh, 28px) !important;
+  text-align: center !important;
+}
+
+body.skin-v2.wizard-popup-open .wizard-popup-button,
+body.skin-v2.modal-open .wizard-popup-button,
+#wizard-modal .wizard-popup-button {
+  left: 37% !important;
+  bottom: 14% !important;
+}
+
+body.skin-v2.bip-briefing #wizard-modal.wizard-popup-overlay,
+body.skin-v2.bip-briefing.modal-open #wizard-modal.wizard-popup-overlay {
+  padding: clamp(18px, 3vw, 34px) !important;
+  background: rgba(0, 0, 0, .42) !important;
+}
+
+body.skin-v2.bip-briefing .wizard-popup,
+body.skin-v2.bip-briefing #wizard-modal .wizard-popup {
+  width: min(78vw, 860px) !important;
+  aspect-ratio: 953 / 681 !important;
+  max-height: 82vh !important;
+}
+
+body.skin-v2.bip-briefing .wizard-popup-copy,
+body.skin-v2.bip-briefing #wizard-modal .wizard-popup-copy {
+  left: 13% !important;
+  top: 16% !important;
+  width: 58% !important;
+  height: 55% !important;
+  max-height: 55% !important;
+  display: block !important;
+  padding: 0 8px 0 0 !important;
+  text-align: left !important;
+  font-size: clamp(12px, 1vw, 16px) !important;
+}
+
+body.skin-v2.bip-briefing .wizard-popup-button,
+body.skin-v2.bip-briefing #wizard-modal .wizard-popup-button {
+  left: 14% !important;
+  bottom: 9% !important;
+}
+
+@media (max-width: 900px) {
+  body.skin-v2 {
+    --mr-mockup-stage-width: min(96vw, 760px);
+    --mr-mockup-stage-height: auto;
+  }
+
+  body.skin-v2.start-screen #game-container,
+  body.skin-v2.same-day-screen #game-container {
+    grid-template-rows: 96px auto auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+
+  body.skin-v2.start-screen h1,
+  body.skin-v2.same-day-screen h1 {
+    background-size: min(92vw, 620px) auto !important;
+  }
+
+  body.skin-v2.start-screen .screen-content-shell,
+  body.skin-v2.same-day-screen .screen-content-shell {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto minmax(320px, 56vw) auto !important;
+  }
+
+  body.skin-v2.start-screen #bottom-action-slot,
+  body.skin-v2.same-day-screen #bottom-action-slot,
+  body.skin-v2.playing-mission #bottom-action-slot,
+  body.skin-v2.summary-screen #bottom-action-slot,
+  body.skin-v2.dashboard-screen #bottom-action-slot {
+    height: auto !important;
+    padding: 14px 20px !important;
+  }
+}
+
+/* ============================================================
+   LANDING PAGE ONLY — focused alignment pass
+   ============================================================ */
+
+body.skin-v2.start-screen:not(.same-day-screen) {
+  --landing-stage-width: min(84vw, 1500px);
+  --landing-title-row: clamp(150px, 18vh, 196px);
+  --landing-nav-row: clamp(78px, 9.5vh, 99px);
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) #game-container {
+  display: grid !important;
+  grid-template-rows: var(--landing-title-row) minmax(0, 1fr) var(--landing-nav-row) !important;
+  width: var(--landing-stage-width) !important;
+  max-width: 1500px !important;
+  height: calc(100vh - 10px) !important;
+  margin: 0 auto !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) h1 {
+  position: relative !important;
+  display: block !important;
+  grid-row: 1 !important;
+  align-self: stretch !important;
+  justify-self: center !important;
+  width: 100% !important;
+  height: var(--landing-title-row) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: none !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  z-index: 80 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) h1::before {
+  content: "MISSION : REINFORCEABLE" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 74% !important;
+  display: block !important;
+  transform: translate(-50%, -50%) !important;
+  color: #ffd56a !important;
+  font-family: var(--v2-pixel) !important;
+  font-size: clamp(2.8rem, 5.2vw, 5rem) !important;
+  font-weight: 900 !important;
+  line-height: .9 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  text-shadow:
+    5px 0 0 #000,
+    -5px 0 0 #000,
+    0 5px 0 #000,
+    0 -5px 0 #000,
+    5px 5px 0 #000,
+    -5px 5px 0 #000,
+    5px -5px 0 #000,
+    -5px -5px 0 #000 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) h1::after {
+  content: none !important;
+  display: none !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .screen-content-shell {
+  grid-row: 2 !important;
+  align-self: stretch !important;
+  justify-self: center !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.35fr) minmax(360px, .8fr) !important;
+  grid-template-rows: clamp(70px, 8vh, 92px) minmax(0, 1fr) !important;
+  column-gap: clamp(32px, 3.2vw, 56px) !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 auto !important;
+  padding: clamp(26px, 3vh, 42px) clamp(40px, 3.8vw, 66px) clamp(34px, 3.2vh, 48px) !important;
+  overflow: visible !important;
+  background:
+    var(--v2-frame-large) center / 100% 100% no-repeat,
+    radial-gradient(circle at 50% 34%, rgba(29, 38, 93, .94), rgba(7, 10, 45, .98) 68%) !important;
+  box-shadow: none !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-hero-heading {
+  grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
+  align-self: center !important;
+  justify-self: center !important;
+  padding: 6px 18px 0 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-hero-heading h2 {
+  font-size: clamp(1.18rem, 1.7vw, 1.55rem) !important;
+  line-height: 1.05 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-hero-heading p {
+  font-size: clamp(.95rem, 1.18vw, 1.12rem) !important;
+  line-height: 1.06 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-classroom-plaque {
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%, -45%) !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-hero-art {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  align-self: stretch !important;
+  justify-self: stretch !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-classroom-background {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill !important;
+  transform: none !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-hero-cta {
+  bottom: clamp(16px, 2.1vh, 28px) !important;
+  width: min(370px, 58%) !important;
+  height: clamp(52px, 5.8vh, 68px) !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) #choices {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  align-self: stretch !important;
+  justify-self: stretch !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: clamp(34px, 4vh, 48px) 0 0 !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) #choices::before {
+  top: clamp(-18px, -1.8vh, -12px) !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .mission-intro,
+body.skin-v2.start-screen:not(.same-day-screen) .quest-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(14px, 2.1vh, 24px) !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-card {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: clamp(68px, 5.8vw, 92px) minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: clamp(12px, 1.2vw, 18px) !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: clamp(12px, 1.3vw, 18px) clamp(142px, 10vw, 172px) clamp(12px, 1.3vw, 18px) clamp(16px, 1.5vw, 22px) !important;
+  overflow: visible !important;
+  background:
+    var(--v2-frame-small) center / 100% 100% no-repeat,
+    var(--v2-card) !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-card-icon {
+  width: clamp(68px, 5.8vw, 92px) !important;
+  height: clamp(68px, 5.8vw, 92px) !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-card-copy {
+  align-self: center !important;
+  min-width: 0 !important;
+  padding-right: 0 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-card h3 {
+  margin: 0 0 5px !important;
+  font-size: clamp(1rem, 1.25vw, 1.28rem) !important;
+  line-height: 1.02 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-card p {
+  margin: 0 !important;
+  font-size: clamp(.78rem, .95vw, .98rem) !important;
+  line-height: 1.08 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-card .action {
+  position: absolute !important;
+  right: clamp(14px, 1.4vw, 24px) !important;
+  bottom: clamp(12px, 1.4vh, 18px) !important;
+  top: auto !important;
+  left: auto !important;
+  width: clamp(120px, 8.6vw, 150px) !important;
+  height: clamp(40px, 4.2vh, 54px) !important;
+  transform: none !important;
+  z-index: 6 !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) .quest-card button {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 5px 9px !important;
+  font-size: clamp(.58rem, .68vw, .74rem) !important;
+  white-space: nowrap !important;
+}
+
+body.skin-v2.start-screen:not(.same-day-screen) #bottom-action-slot {
+  grid-row: 3 !important;
+  width: var(--landing-stage-width) !important;
+  max-width: 1500px !important;
+  height: var(--landing-nav-row) !important;
+  margin: 0 auto !important;
+}
