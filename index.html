@@ -133,22 +133,12 @@
       <div class="progress-list gold-frame" id="progress-list"></div>
     </section>
 
-    <section id="resources-screen" class="screen screen-resources" aria-label="Resources">
+    <section id="resources-screen" class="screen screen-resources" aria-label="BIP resources">
       <img class="title-logo small" data-asset="title" alt="Mission: Reinforceable" />
       <div class="resources-panel gold-frame star-panel">
-        <h1>Resources</h1>
-        <p>This page is intentionally teacher-specific. Add plan reminders, BSP steps, visuals, or links here without touching the base game engine.</p>
-        <div class="resource-card">
-          <h2>School-Day Browser Reminder</h2>
-          <p>Set a preferred reminder time for this browser. Browser notifications work best when this site has been opened recently on the same device.</p>
-          <label for="reminder-time">Reminder time</label>
-          <input id="reminder-time" type="time" />
-          <button id="save-reminder-btn" class="pixel-btn green-btn" type="button">Save Reminder</button>
-          <p id="reminder-status" class="muted"></p>
-        </div>
-        <div class="resource-card">
-          <h2>Teacher Folder Rule</h2>
-          <p>To make a new teacher game, duplicate <code>teachers/olson</code>, rename the folder, edit <code>config.js</code>, and replace or revise the mission files in that teacher’s <code>content</code> folder.</p>
+        <h1 id="resources-title" class="page-title">BIP Resources</h1>
+        <div class="resources-scroll">
+          <div id="resources-content"></div>
         </div>
       </div>
     </section>
@@ -178,6 +168,7 @@
   <script src="js/dashboard.js"></script>
   <script src="js/engine.js"></script>
   <script src="js/reminders.js"></script>
+  <script src="js/resources.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -41,6 +41,7 @@
       actionMid: '<ul><li>Shift from general encouragement to one observable first action.</li><li>Make sure breaks, help, or choices include a clear return-to-routine step.</li><li>Move reinforcement closer to the exact behavior the BIP is trying to build.</li></ul>',
       actionLow: '<ul><li>Reduce public correction, threats, and extended explanations during activation.</li><li>Do not remove the student from the task or peer routine unless safety requires it.</li><li>Return to the sequence: prevent, prompt replacement, reinforce re-entry, then problem solve later.</li></ul>'
     },
+    resourcesFile: '',
     missionFiles: []
   };
 
@@ -96,7 +97,15 @@
       await MR.loadScript(src);
     }
 
+    if (teacherConfig.resourcesFile) {
+      const src = teacherConfig.resourcesFile.startsWith('http') || teacherConfig.resourcesFile.startsWith('/')
+        ? teacherConfig.resourcesFile
+        : `${folder}/${teacherConfig.resourcesFile}`;
+      await MR.loadScript(src);
+    }
+
     MR.pool = window.POOL || { daily: [], wild: [], crisis: [] };
+    MR.resourcesData = window.MR_RESOURCES || null;
     return { config: teacherConfig, pool: MR.pool };
   };
 

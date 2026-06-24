@@ -174,13 +174,20 @@ button:focus-visible, input:focus-visible { outline: 4px solid #fff1a3; outline-
 .empty-progress { grid-column: 1 / -1; text-align: center; font: 800 22px var(--mono); padding: 70px 20px; }
 
 /* RESOURCES */
-.resources-panel { width: min(980px, 88vw); margin: 18px auto; padding: 42px 56px; color: #fff; }
-.resources-panel h1 { margin: 0 0 12px; color: #ffc54a; text-transform: uppercase; font: 900 44px var(--mono); }
-.resource-card { background: rgba(255,255,255,.08); border: 3px solid rgba(249,190,37,.8); border-radius: 14px; padding: 22px; margin-top: 18px; }
-.resource-card h2 { margin-top: 0; color: #fff4b3; }
-.resource-card label { display: block; font-weight: 900; margin-bottom: 8px; }
-.resource-card input { font: 900 20px var(--mono); padding: 10px; border-radius: 8px; border: 3px solid #d59b42; }
-.resource-card .green-btn { width: 180px; height: 58px; margin-left: 14px; }
+.resources-panel { width: min(1120px, 88vw); margin: 18px auto; padding: 38px 56px 46px; color: #fff; }
+.resources-panel h1 { margin: 0 0 18px; color: #ffc54a; text-align: center; text-transform: uppercase; font: 900 42px var(--mono); text-shadow: 3px 3px #281200; }
+.resources-scroll { height: 520px; color: #0b0400; background: transparent url("../assets/skin-v2/feedback-scroll.png") center / 100% 100% no-repeat; padding: 86px 90px 82px 104px; overflow: hidden; }
+#resources-content { height: 100%; overflow-y: auto; padding-right: 12px; font: 700 18px/1.35 var(--mono); }
+.bip-section { margin: 0 0 22px; }
+.bip-section h2 { margin: 0 0 8px; color: #130700; font: 900 25px/1 var(--display); }
+.bip-section p { margin: 0 0 8px; }
+.bip-section ul { margin: 6px 0 0 22px; padding: 0; }
+.bip-section li { margin: 0 0 6px; }
+.snapshot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; }
+.behavior-basics { display: grid; gap: 10px; margin: 0; }
+.behavior-basics div { display: grid; grid-template-columns: 190px 1fr; gap: 16px; }
+.behavior-basics dt { font-weight: 900; }
+.behavior-basics dd { margin: 0; }
 .muted { color: #dad6ff; font: 700 15px var(--mono); }
 code { background: rgba(0,0,0,.28); padding: 2px 5px; border-radius: 4px; }
 

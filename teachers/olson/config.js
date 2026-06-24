@@ -31,6 +31,8 @@ window.MR_TEACHER_CONFIG = {
     sameDayClassroom: 'assets/skin-v2/same-day-return-page-classroom.png'
   },
 
+  resourcesFile: 'content/resources.js',
+
   missionFiles: [
     'content/daily-mission-1.js',
     'content/daily-mission-2.js',

@@ -36,15 +36,18 @@
       MR.setScreen('progress');
     });
     MR.$('#nav-resources').addEventListener('click', () => {
-      MR.reminders.hydrateControls();
+      MR.resources.render();
       MR.setScreen('resources');
     });
 
     MR.$('#wizard-modal-continue').addEventListener('click', () => MR.engine.continueAfterFeedback());
-    MR.$('#save-reminder-btn').addEventListener('click', async () => {
-      const status = await MR.reminders.save(MR.$('#reminder-time').value);
-      MR.$('#reminder-status').textContent = status;
-    });
+    const saveReminder = MR.$('#save-reminder-btn');
+    if (saveReminder) {
+      saveReminder.addEventListener('click', async () => {
+        const status = await MR.reminders.save(MR.$('#reminder-time').value);
+        MR.$('#reminder-status').textContent = status;
+      });
+    }
   }
 
   async function init() {
@@ -55,6 +58,7 @@
       applyAssets();
       wireEvents();
       MR.reminders.hydrateControls();
+      MR.resources.render();
       renderHome();
       MR.setScreen('home');
       console.info('Mission: Reinforceable loaded', { teacher: MR.teacherConfig, pool: MR.pool });
