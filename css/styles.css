@@ -612,6 +612,7 @@ body {
     inset 0 0 32px rgba(255, 215, 94, 0.08);
 }
 
+.home-panel,
 .play-panel,
 .results-panel {
   background: transparent url("../assets/skin-v2/large-frame.png") center / 100% 100% no-repeat;
