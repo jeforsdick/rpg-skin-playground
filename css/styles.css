@@ -640,3 +640,41 @@ body {
   background: rgba(0, 0, 0, .28);
   backdrop-filter: blur(3px);
 }
+
+
+/* POLISH OVERRIDES — bigger gameplay screen */
+
+.play-panel {
+  width: min(1650px, 96vw);
+  min-height: 760px;
+  padding: 46px 48px;
+  grid-template-columns: 1.32fr .9fr;
+  gap: 44px;
+}
+
+.scenario-scroll {
+  min-height: 620px;
+  padding: 115px 92px 92px 112px;
+}
+
+.scenario-text {
+  font-size: clamp(20px, 1.55vw, 25px);
+}
+
+.scenario-text .scene-label {
+  font-size: 36px;
+}
+
+.choices-area {
+  padding-top: 165px;
+}
+
+.choice-list {
+  gap: 24px;
+}
+
+.choice-btn {
+  min-height: 145px;
+  font-size: clamp(23px, 1.85vw, 31px);
+  padding: 22px 42px;
+}
