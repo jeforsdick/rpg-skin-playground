@@ -1205,6 +1205,10 @@ body {
     display: none;
   }
 
+  .wizard-modal-bubble p {
+    font-size: 14px;
+  }
+
   .wizard-modal-img {
     cursor: pointer;
   }
