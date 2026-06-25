@@ -659,6 +659,13 @@ body {
 }
 
 .bottom-nav {
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: min(1260px, 92vw);
+  height: 112px;
+  padding: 18px 110px;
+  gap: 58px;
   background: url("../assets/skin-v2/large-frame.png") center / 100% 100% no-repeat, linear-gradient(rgba(8, 22, 82, .72), rgba(8, 22, 82, .72));
   border: 0;
   border-radius: 0;
