@@ -1144,18 +1144,18 @@ body {
     width: 100%;
     min-height: auto;
     margin: 0 auto;
-    padding: 14px 0 20px;
+    padding: 14px 4px 20px;
     background: transparent;
     border: 0;
     box-shadow: none;
   }
 
   .feedback-scroll {
-    width: calc(100% + 44px);
+    width: 100%;
     min-height: auto;
     max-height: none;
-    margin-left: -22px;
-    padding: 76px 42px 62px 48px;
+    margin-left: 0;
+    padding: 76px 28px 62px;
     background: transparent url("../assets/skin-v2/feedback-scroll.png") center / 100% 100% no-repeat;
     overflow: visible;
   }
@@ -1166,7 +1166,7 @@ body {
   }
 
   .results-content h1 {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.05;
     margin-bottom: 10px;
   }
@@ -1181,24 +1181,24 @@ body {
     right: auto;
     bottom: auto;
     width: 100%;
-    height: 146px;
+    height: 150px;
     margin: 12px auto 0;
   }
 
   .results-wizard-note img {
     right: 4px;
     bottom: 0;
-    width: 102px;
-    height: 108px;
+    width: 123px;
+    height: 129px;
   }
 
   .small-result-bubble {
-    right: 88px;
+    right: 100px;
     bottom: 10px;
-    width: calc(100% - 102px);
+    width: calc(100% - 118px);
     height: 118px;
     font-size: 14px;
-    line-height: 1.25;
+    line-height: 1.22;
     padding: 22px 26px;
   }
 
@@ -1289,8 +1289,11 @@ body {
     height: auto;
     max-height: none;
     margin: 10px auto 0;
-    padding: 18px 12px 22px;
+    padding: 0;
     overflow: visible;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
     display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
