@@ -628,7 +628,7 @@ body {
   inset: 14px 18px;
   z-index: 0;
   pointer-events: none;
-  background: transparent url("../assets/skin-v2/home-panel-background.png") center / 100% 100% no-repeat;
+  background: rgba(8, 22, 82, .72);
 }
 
 .home-panel > * {
