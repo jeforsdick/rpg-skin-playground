@@ -612,6 +612,14 @@ body {
     inset 0 0 32px rgba(255, 215, 94, 0.08);
 }
 
+.play-panel,
+.results-panel {
+  background: transparent url("../assets/skin-v2/large-frame.png") center / 100% 100% no-repeat;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
 .choice-button,
 .choice-btn {
   background: #14235f;
