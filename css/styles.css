@@ -906,13 +906,29 @@ body {
 
   .classroom-stage {
     width: 100%;
-    min-height: 260px;
-    margin: 0 auto 14px;
+    min-height: 205px;
+    margin: 0 auto 4px;
     background: transparent url("../assets/skin-v2/mobile-landing-page-wizard.png") center / contain no-repeat;
   }
 
   .classroom-img {
     display: none;
+    max-height: 150px;
+    object-fit: contain;
+  }
+
+  .wizard-chime {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 130px;
+  }
+
+  .speech {
+    font-size: 16px;
+    line-height: 1.25;
+    padding: 14px;
   }
 
   .start-classroom-btn {
@@ -925,7 +941,8 @@ body {
 
   .mission-menu {
     width: 100%;
-    padding-top: 42px;
+    margin-top: 0;
+    padding-top: 34px;
     gap: 14px;
   }
 
@@ -963,5 +980,38 @@ body {
     right: 16px;
     bottom: -12px;
     font-size: 12px;
+  }
+
+  .bottom-nav {
+    position: sticky;
+    bottom: 0;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: 78px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    align-items: center;
+    padding: 8px 8px;
+    margin: 14px auto 0;
+    background: url("../assets/skin-v2/large-frame.png") center / 100% 100% no-repeat,
+      linear-gradient(rgba(8, 22, 82, .72), rgba(8, 22, 82, .72));
+    z-index: 50;
+  }
+
+  .scroll-nav-btn {
+    height: 54px;
+    min-width: 0;
+    padding: 0 6px;
+    font-size: 13px;
+    line-height: 1;
+    gap: 4px;
+    background: transparent url("../assets/skin-v2/bottom-menu-scroll.png") center / 100% 100% no-repeat;
+  }
+
+  .scroll-nav-btn img {
+    width: 22px;
+    height: 22px;
   }
 }
