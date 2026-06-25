@@ -247,7 +247,9 @@
   }
 
   function missedAnswerReview(run) {
-    const missed = (run.history || []).filter(item => Number(item.score || 0) === 0);
+    const history = Array.isArray(run.history) ? run.history : [];
+    console.log('Missed-answer audit', history);
+    const missed = history.filter(item => Number(item.score) === 0);
     if (!missed.length) {
       return '<p><strong>Missed-answer review:</strong><br />No incorrect answers to review &mdash; nice work!</p>';
     }
@@ -256,7 +258,7 @@
       <p><strong>Missed-answer review:</strong></p>
       ${missed.map(item => `
         <div class="missed-answer-review">
-          <p><strong>Scene:</strong> ${MR.escapeHTML(item.stepId || 'Review step')}</p>
+          <p><strong>Scene:</strong> ${MR.escapeHTML(item.prompt || item.stepId || 'Review step')}</p>
           <p><strong>Your answer:</strong> ${MR.escapeHTML(item.choiceText || 'No answer text saved')}</p>
           <p><strong>Feedback:</strong> ${MR.escapeHTML(item.wizard || item.feedback || 'No feedback saved')}</p>
         </div>
