@@ -105,7 +105,7 @@ button:focus-visible, input:focus-visible { outline: 4px solid #fff1a3; outline-
 }
 .mission-card {
   position: relative; min-height: 118px; display: grid; grid-template-columns: 83px 1fr; gap: 18px; align-items: center;
-  padding: 17px 20px 18px 20px; background: transparent url("../assets/skin-v2/mission-cards-border-frame.png") center / 100% 100% no-repeat; border: 0; border-radius: 0;
+  padding: 17px 20px 18px 20px; background: transparent url("../assets/skin-v2/answer-choice-frame.png") center / 100% 100% no-repeat; border: 0; border-radius: 0;
   box-shadow: none;
 }
 .mission-card img { width: 83px; height: 83px; object-fit: contain; image-rendering: auto; }
