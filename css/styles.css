@@ -873,7 +873,7 @@ body {
     width: 100%;
     min-height: auto;
     margin: 0 auto;
-    padding: 72px 14px 24px;
+    padding: 58px 14px 24px;
     background: transparent;
     border: 0;
     box-shadow: none;
@@ -884,7 +884,7 @@ body {
   }
 
   .home-panel > .classroom-plaque {
-    top: 10px;
+    top: 2px;
     width: min(320px, 86vw);
     min-width: 0;
     height: 46px;
@@ -906,9 +906,9 @@ body {
 
   .classroom-stage {
     width: 100%;
-    min-height: 205px;
-    margin: 0 auto 4px;
-    background: transparent url("../assets/skin-v2/mobile-landing-page-wizard.png") center / contain no-repeat;
+    min-height: 240px;
+    margin: -8px auto -8px;
+    background: transparent url("../assets/skin-v2/mobile-landing-page-wizard.png") center / 112% auto no-repeat;
   }
 
   .classroom-img {
@@ -942,7 +942,7 @@ body {
   .mission-menu {
     width: 100%;
     margin-top: 0;
-    padding-top: 34px;
+    padding-top: 26px;
     gap: 14px;
   }
 
