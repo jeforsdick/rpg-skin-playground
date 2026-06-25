@@ -150,7 +150,7 @@ button:focus-visible, input:focus-visible { outline: 4px solid #fff1a3; outline-
 
 /* PROGRESS */
 .screen-progress { padding-top: 55px; }
-.progress-title { margin: 18px auto 5px; width: min(1160px, 90vw); color: #ffc54a; text-align: left; text-transform: uppercase; font: 900 clamp(46px, 5.5vw, 76px)/1 var(--mono); text-shadow: 4px 4px 0 #050005, 0 8px 0 rgba(0,0,0,.25); }
+.progress-title { margin: 18px auto 5px; width: min(1160px, 90vw); color: #ffc54a; text-align: center; text-transform: uppercase; letter-spacing: 2px; font: 900 clamp(46px, 5.5vw, 76px)/1 var(--mono); text-shadow: 4px 0 0 #050005, -4px 0 0 #050005, 0 4px 0 #050005, 0 -4px 0 #050005, 4px 4px 0 #050005, 0 8px 0 rgba(0,0,0,.3); }
 .progress-bubble-wrap { position: relative; width: min(1050px, 78vw); min-height: 135px; margin: -8px auto 12px; }
 .progress-bubble { position: absolute; inset: 0 110px 0 0; display: flex; align-items: center; justify-content: center; text-align: center; color: #111; text-transform: uppercase; font: 900 clamp(18px, 1.7vw, 27px)/1.15 var(--mono); background: transparent url("../assets/skin-v2/progress-speech-bubble.png") center / 100% 100% no-repeat; padding: 18px 72px 28px; filter: drop-shadow(8px 8px 0 #080008); }
 .progress-wizard { position: absolute; right: 0; top: 3px; width: 130px; height: 130px; object-fit: contain; filter: drop-shadow(5px 5px 0 #080008); transform: rotate(6deg); }
@@ -174,9 +174,9 @@ button:focus-visible, input:focus-visible { outline: 4px solid #fff1a3; outline-
 .empty-progress { grid-column: 1 / -1; text-align: center; font: 800 22px var(--mono); padding: 70px 20px; }
 
 /* RESOURCES */
-.resources-panel { width: min(1120px, 88vw); margin: -150px auto; padding: 60px 56px 46px; color: #fff; }
-.resources-panel h1 { margin: 0 0 -150px; color: #ffc54a; text-align: center; text-transform: uppercase; font: 900 42px var(--mono); text-shadow: 3px 3px #281200; }
-.resources-scroll { height: 520px; color: #0b0400; background: transparent url("../assets/skin-v2/feedback-scroll.png") center / 100% 100% no-repeat; padding: 86px 90px 82px 104px; overflow: hidden; }
+.resources-panel { width: min(1180px, 90vw); margin: 42px auto 0; padding: 34px 56px 44px; color: #fff; }
+.resources-panel h1 { margin: 0 0 18px; color: #ffc54a; text-align: center; text-transform: uppercase; letter-spacing: 2px; font: 900 48px/1 var(--mono); text-shadow: 4px 0 0 #050005, -4px 0 0 #050005, 0 4px 0 #050005, 0 -4px 0 #050005, 4px 4px 0 #050005, 0 8px 0 rgba(0,0,0,.3); }
+.resources-scroll { height: 610px; color: #0b0400; background: transparent url("../assets/skin-v2/feedback-scroll.png") center / 100% 100% no-repeat; padding: 86px 90px 82px 104px; overflow: hidden; }
 #resources-content { height: 100%; overflow-y: auto; padding-right: 12px; font: 700 18px/1.35 var(--mono); }
 .bip-section { margin: 0 0 22px; }
 .bip-section h2 { margin: 0 0 8px; color: #130700; font: 900 25px/1 var(--display); }
