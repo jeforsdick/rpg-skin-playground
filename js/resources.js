@@ -51,9 +51,10 @@
       const title = MR.$('#resources-title');
       if (!root) return;
 
-      if (title) title.textContent = data.title || 'BIP Resources';
+      if (title) title.textContent = 'Resources';
 
       root.innerHTML = [
+        section('BIP Overview', `<p>${MR.escapeHTML(data.title || 'Teacher BIP Overview')}</p>`),
         section('Student Snapshot', snapshot(data)),
         section('Target Routine', `<p>${MR.escapeHTML((data.studentSnapshot && data.studentSnapshot.routine) || '')}</p>`),
         section('Target Behavior', `<p>${MR.escapeHTML((data.studentSnapshot && data.studentSnapshot.targetBehavior) || '')}</p>`),
