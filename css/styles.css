@@ -358,7 +358,7 @@ code { background: rgba(0,0,0,.28); padding: 2px 5px; border-radius: 4px; }
 
 .scroll-nav-btn {
   height: 78px;
-  font-size: 28px;
+  font-size: 22px;
   gap: 18px;
   padding: 0 34px;
   background: transparent url("../assets/skin-v2/bottom-menu-scroll.png") center / 100% 100% no-repeat;
