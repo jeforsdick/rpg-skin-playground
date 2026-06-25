@@ -29,6 +29,23 @@
     return scores.length ? Math.max(...scores, 10) : 10;
   }
 
+  function expectedStepsForMission(mission) {
+    const expected = Number(mission && mission.expectedSteps);
+    return expected > 0 ? expected : 3;
+  }
+
+  function behaviorXPFor(score, expectedSteps, xpMax) {
+    const maxXP = Number(xpMax) || 1000;
+    const maxPossibleScore = Math.max(1, (Number(expectedSteps) || 3) * 10);
+    const rawXP = Math.round((Number(score || 0) / maxPossibleScore) * maxXP);
+    const behaviorXP = Math.max(0, Math.min(maxXP, rawXP));
+    return {
+      behaviorXP,
+      behaviorXPMax: maxXP,
+      behaviorXPPct: Math.max(0, Math.min(100, Math.round((behaviorXP / maxXP) * 100)))
+    };
+  }
+
   function chooseMission(mode) {
     const pool = (MR.pool && MR.pool[mode]) || [];
     if (!pool.length) throw new Error(`No missions found for mode: ${mode}`);
@@ -103,17 +120,17 @@
 
   function renderHUD() {
     if (!current) return;
-    const stepNumber = Math.min(current.history.length + 1, current.missionSteps);
-    const progressPct = Math.max(0, Math.min(100, (stepNumber / current.missionSteps) * 100));
-    const xp = Math.min(current.xpMax, current.score * current.xpMultiplier);
-    const xpPct = Math.max(0, Math.min(100, (xp / current.xpMax) * 100));
+    const totalSteps = current.expectedSteps || 3;
+    const completedSteps = Math.min(current.history.length, totalSteps);
+    const progressPct = Math.max(0, Math.min(100, (completedSteps / totalSteps) * 100));
+    const xp = behaviorXPFor(current.score, totalSteps, current.xpMax);
 
     renderHearts('#heart-row');
-    MR.$('#mission-progress-label').textContent = `Mission Progress: ${stepNumber}/${current.missionSteps} Completed`;
-    MR.$('#mission-progress-count').textContent = `${stepNumber}/${current.missionSteps}`;
+    MR.$('#mission-progress-label').textContent = `Mission Progress: ${completedSteps}/${totalSteps} Completed`;
+    MR.$('#mission-progress-count').textContent = `${completedSteps}/${totalSteps}`;
     MR.$('#mission-progress-fill').style.width = `${progressPct}%`;
-    MR.$('#xp-label').textContent = `Behavior Plan XP: ${xp}/${current.xpMax}`;
-    MR.$('#xp-fill').style.width = `${xpPct}%`;
+    MR.$('#xp-label').textContent = `Behavior Plan XP: ${xp.behaviorXP}/${xp.behaviorXPMax}`;
+    MR.$('#xp-fill').style.width = `${xp.behaviorXPPct}%`;
     MR.$('#score-label').textContent = `${current.score}`;
   }
 
@@ -231,6 +248,7 @@
 
   function finishMission() {
     const accuracy = current.maxScore ? Math.round((current.score / current.maxScore) * 100) : 0;
+    const xp = behaviorXPFor(current.score, current.expectedSteps || 3, current.xpMax);
     const timing = MR.SessionTimer && MR.SessionTimer.stop ? MR.SessionTimer.stop() : null;
     const run = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
@@ -247,6 +265,9 @@
       accuracy,
       hearts: current.hearts,
       maxHearts: current.maxHearts,
+      behaviorXP: xp.behaviorXP,
+      behaviorXPMax: xp.behaviorXPMax,
+      behaviorXPPct: xp.behaviorXPPct,
       sessionStartedAt: timing ? timing.sessionStartedAt : null,
       sessionEndedAt: timing ? timing.sessionEndedAt : null,
       durationSeconds: timing ? timing.durationSeconds : 0,
@@ -277,11 +298,14 @@
 
   function renderResults(run) {
     const summary = summaryForRun(run);
-    const xp = Math.min(MR.teacherConfig.xpMax, run.score * MR.teacherConfig.xpMultiplier);
-    const xpPct = Math.max(0, Math.min(100, (xp / MR.teacherConfig.xpMax) * 100));
+    const xp = behaviorXPFor(
+      run.score,
+      run.expectedSteps || (run.history && run.history.length) || 3,
+      run.behaviorXPMax || MR.teacherConfig.xpMax
+    );
     renderHearts('#results-heart-row', run.hearts, run.maxHearts);
-    MR.$('#results-xp-label').textContent = `Behavior Plan XP: ${xp}/${MR.teacherConfig.xpMax}`;
-    MR.$('#results-xp-fill').style.width = `${xpPct}%`;
+    MR.$('#results-xp-label').textContent = `Behavior Plan XP: ${xp.behaviorXP}/${xp.behaviorXPMax}`;
+    MR.$('#results-xp-fill').style.width = `${xp.behaviorXPPct}%`;
     MR.$('#results-score-label').textContent = `${run.score}`;
 
     MR.$('#results-content').innerHTML = `
@@ -296,15 +320,17 @@
 
   MR.engine = {
     start(mode) {
+      const mission = chooseMission(mode);
       current = {
         mode,
-        mission: chooseMission(mode),
+        mission,
         stepId: null,
         score: 0,
         maxScore: 0,
         hearts: Number(MR.teacherConfig.defaultHearts || 5),
         maxHearts: Number(MR.teacherConfig.defaultHearts || 5),
         missionSteps: Number(MR.teacherConfig.missionSteps || 5),
+        expectedSteps: expectedStepsForMission(mission),
         xpMax: Number(MR.teacherConfig.xpMax || 1000),
         xpMultiplier: Number(MR.teacherConfig.xpMultiplier || 5),
         history: []
