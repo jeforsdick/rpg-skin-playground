@@ -796,18 +796,18 @@ body {
 /* POLISH OVERRIDES — feedback page scroll fit */
 
 .screen-results .results-panel {
-  min-height: 500px;
+  min-height: 620px;
   padding: 24px 48px;
 }
 
 .screen-results .feedback-scroll {
-  min-height: 360px;
-  max-height: 390px;
+  min-height: 468px;
+  max-height: 507px;
   padding: 72px 68px 70px 82px;
   overflow: hidden;
 }
 
 .screen-results .results-content {
-  max-height: 248px;
+  max-height: 355px;
   overflow-y: auto;
 }
