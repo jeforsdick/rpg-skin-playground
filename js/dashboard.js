@@ -20,6 +20,18 @@
     return streak;
   }
 
+  function activeSeconds(run) {
+    return Number(run && (run.activeDurationSeconds || run.durationSeconds) || 0);
+  }
+
+  function formatTime(seconds) {
+    if (MR.SessionTimer && MR.SessionTimer.formatSeconds) return MR.SessionTimer.formatSeconds(seconds);
+    const value = Math.max(0, Math.round(Number(seconds) || 0));
+    const mins = Math.floor(value / 60);
+    const secs = value % 60;
+    return `${mins}:${String(secs).padStart(2, '0')}`;
+  }
+
   MR.dashboard = {
     metrics(runs) {
       const safeRuns = runs || [];
@@ -28,11 +40,17 @@
       const overall = totalMax ? Math.round((totalScore / totalMax) * 100) : 0;
       const best = safeRuns.length ? Math.max(...safeRuns.map(run => Number(run.accuracy || 0))) : 0;
       const dates = uniqueSortedDates(safeRuns);
+      const timedRuns = safeRuns.filter(run => activeSeconds(run) > 0);
+      const totalActiveSeconds = timedRuns.reduce((sum, run) => sum + activeSeconds(run), 0);
+      const recentTimedRun = timedRuns[0];
       return {
         overall,
         best,
         completed: safeRuns.length,
-        streak: computeStreak(dates)
+        streak: computeStreak(dates),
+        averageActiveSeconds: timedRuns.length ? totalActiveSeconds / timedRuns.length : 0,
+        recentActiveSeconds: recentTimedRun ? activeSeconds(recentTimedRun) : 0,
+        totalActiveSeconds
       };
     },
 
@@ -49,17 +67,35 @@
 
       const list = MR.$('#progress-list');
       if (!runs.length) {
-        list.innerHTML = '<div class="empty-progress">No missions saved yet. Complete a mission and your results will appear here.</div>';
+        list.innerHTML = `${this.timeSummaryCard(metrics)}<div class="empty-progress">No missions saved yet. Complete a mission and your results will appear here.</div>`;
         return;
       }
 
-      list.innerHTML = runs.map((run, index) => this.runCard(run, index)).join('');
+      list.innerHTML = [
+        this.timeSummaryCard(metrics),
+        ...runs.map((run, index) => this.runCard(run, index))
+      ].join('');
       MR.$$('.run-card button', list).forEach(button => {
         button.addEventListener('click', () => {
           const run = runs[Number(button.dataset.index)];
           if (run) MR.engine.showStoredRunDetails(run);
         });
       });
+    },
+
+    timeSummaryCard(metrics) {
+      return `
+        <article class="run-card">
+          <img src="${MR.asset('progressIcon')}" alt="" />
+          <div>
+            <h3>Time Played</h3>
+            <p><strong>Average Mission Time:</strong> ${formatTime(metrics.averageActiveSeconds)}</p>
+            <p><strong>Most Recent Mission:</strong> ${formatTime(metrics.recentActiveSeconds)}</p>
+            <p><strong>Total Time Played:</strong> ${formatTime(metrics.totalActiveSeconds)}</p>
+          </div>
+          <span aria-hidden="true"></span>
+        </article>
+      `;
     },
 
     runCard(run, index) {

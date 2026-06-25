@@ -231,6 +231,7 @@
 
   function finishMission() {
     const accuracy = current.maxScore ? Math.round((current.score / current.maxScore) * 100) : 0;
+    const timing = MR.SessionTimer && MR.SessionTimer.stop ? MR.SessionTimer.stop() : null;
     const run = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
       teacherId: MR.teacherConfig.teacherId,
@@ -246,6 +247,11 @@
       accuracy,
       hearts: current.hearts,
       maxHearts: current.maxHearts,
+      sessionStartedAt: timing ? timing.sessionStartedAt : null,
+      sessionEndedAt: timing ? timing.sessionEndedAt : null,
+      durationSeconds: timing ? timing.durationSeconds : 0,
+      activeDurationSeconds: timing ? timing.activeDurationSeconds : 0,
+      durationFormatted: timing ? timing.durationFormatted : '0:00',
       history: current.history
     };
 
@@ -304,6 +310,7 @@
         history: []
       };
       current.stepId = current.mission.start || Object.keys(current.mission.steps || {})[0];
+      if (MR.SessionTimer && MR.SessionTimer.start) MR.SessionTimer.start();
       MR.setScreen('play');
       renderStep();
       const firstStep = current.mission.steps[current.stepId];
