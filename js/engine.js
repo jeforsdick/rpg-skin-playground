@@ -491,6 +491,42 @@
     });
   }
 
+  function scrollToBetaSurvey() {
+    const root = MR.$('#results-content');
+    const survey = MR.$('#beta-survey-section');
+    if (!root || !survey) return;
+
+    try {
+      root.scrollTo({
+        top: Math.max(0, survey.offsetTop - root.offsetTop),
+        behavior: 'smooth'
+      });
+    } catch (error) {
+      root.scrollTop = Math.max(0, survey.offsetTop - root.offsetTop);
+    }
+  }
+
+  function wireResultsSurveyInvite() {
+    const targets = [
+      MR.$('.results-wizard-note'),
+      MR.$('.results-wizard-note img'),
+      MR.$('.results-wizard-note .small-result-bubble')
+    ].filter(Boolean);
+    if (!targets.length) return;
+
+    targets.forEach(target => {
+      target.addEventListener('click', scrollToBetaSurvey);
+    });
+
+    const note = MR.$('.results-wizard-note');
+    if (!note) return;
+    note.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      scrollToBetaSurvey();
+    });
+  }
+
   function renderResults(run) {
     const summary = summaryForRun(run);
     const xp = behaviorXPFor(
@@ -513,6 +549,7 @@
       ${betaSurveyHTML()}
     `;
     wireBetaSurvey(run);
+    wireResultsSurveyInvite();
     MR.setScreen('results');
   }
 
