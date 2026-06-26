@@ -324,6 +324,157 @@
     }
   }
 
+  function ratingOptions() {
+    return '<option value="">Select</option>' + [1, 2, 3, 4, 5].map(value => `<option value="${value}">${value}</option>`).join('');
+  }
+
+  function selectOptions(options) {
+    return '<option value="">Select</option>' + options.map(option => `<option value="${MR.escapeHTML(option)}">${MR.escapeHTML(option)}</option>`).join('');
+  }
+
+  function surveySelect(name, label, optionsHTML) {
+    return `
+      <p>
+        <label for="${name}"><strong>${MR.escapeHTML(label)}</strong></label><br />
+        <select id="${name}" name="${name}">${optionsHTML}</select>
+      </p>
+    `;
+  }
+
+  function surveyTextarea(name, label) {
+    return `
+      <p>
+        <label for="${name}"><strong>${MR.escapeHTML(label)}</strong></label><br />
+        <textarea id="${name}" name="${name}" rows="3"></textarea>
+      </p>
+    `;
+  }
+
+  function betaSurveyHTML() {
+    const roleOptions = selectOptions([
+      'Teacher',
+      'Behavior specialist',
+      'Parent/caregiver',
+      'Student/graduate student',
+      'General adult/non-teacher',
+      'Other'
+    ]);
+    const difficultyOptions = selectOptions(['Too easy', 'About right', 'Too hard', "I'm not sure"]);
+    const permissionOptions = selectOptions(['Yes', 'No']);
+    const ratings = ratingOptions();
+
+    return `
+      <section id="beta-survey-section">
+        <h2>Beta Survey</h2>
+        <p>Thank you for beta testing Mission: Reinforceable. You do not need to be a teacher to answer these questions. Please focus on whether the game was clear, usable, and helpful.</p>
+        <p><strong>Privacy reminder:</strong> Please do not include real student names, school names, or identifying information.</p>
+        <form id="beta-survey-form">
+          ${surveySelect('testerRole', 'Which best describes you?', roleOptions)}
+          ${surveySelect('understoodTask', 'I understood what I was supposed to do in the game.', ratings)}
+          ${surveySelect('bipClear', "Jordan's behavior plan was clear enough for me to use during the mission.", ratings)}
+          ${surveySelect('choicesMadeMeThink', 'The answer choices made me think carefully.', ratings)}
+          ${surveySelect('feedbackHelpful', 'The feedback helped me understand why my choices were or were not plan-aligned.', ratings)}
+          ${surveySelect('easyToNavigate', 'The game was easy to navigate.', ratings)}
+          ${surveySelect('lookedPolished', 'The game looked polished enough for beta testing with educators.', ratings)}
+          ${surveySelect('difficulty', 'How did the difficulty feel?', difficultyOptions)}
+          ${surveySelect('branchingClear', 'I could tell that my choices affected what happened next in the scenario.', ratings)}
+          ${surveyTextarea('confusingPart', 'What, if anything, was confusing?')}
+          ${surveyTextarea('favoritePart', 'What did you like best?')}
+          ${surveyTextarea('changeSuggestion', 'What would you change before educators use this game with real student plans?')}
+          ${surveyTextarea('openComments', 'Is there anything else you want Jess to know?')}
+          ${surveySelect('permissionToUseFeedback', 'May Jess use your anonymous feedback to improve Mission: Reinforceable?', permissionOptions)}
+          <p>
+            <button id="beta-survey-submit" class="pixel-btn green-btn" type="submit">Submit Beta Feedback</button>
+          </p>
+          <p id="beta-survey-status" aria-live="polite"></p>
+        </form>
+      </section>
+    `;
+  }
+
+  function betaSurveyPayload(run, form) {
+    const data = new FormData(form);
+    const history = Array.isArray(run.history) ? run.history : [];
+    const scores = history.map(item => Number(item.score || 0));
+
+    return {
+      action: 'betaSurvey',
+      timestamp: new Date().toISOString(),
+      sessionId: run.id,
+      teacherId: run.teacherId,
+      teacherName: run.teacherName,
+      mode: run.mode,
+      modeLabel: run.modeLabel,
+      missionId: run.missionId,
+      missionTitle: run.missionTitle,
+      score: run.score,
+      maxScore: run.maxScore,
+      accuracy: run.accuracy,
+      durationSeconds: run.durationSeconds,
+      activeDurationSeconds: run.activeDurationSeconds,
+      testerRole: data.get('testerRole') || '',
+      understoodTask: data.get('understoodTask') || '',
+      bipClear: data.get('bipClear') || '',
+      choicesMadeMeThink: data.get('choicesMadeMeThink') || '',
+      feedbackHelpful: data.get('feedbackHelpful') || '',
+      easyToNavigate: data.get('easyToNavigate') || '',
+      lookedPolished: data.get('lookedPolished') || '',
+      difficulty: data.get('difficulty') || '',
+      branchingClear: data.get('branchingClear') || '',
+      confusingPart: data.get('confusingPart') || '',
+      favoritePart: data.get('favoritePart') || '',
+      changeSuggestion: data.get('changeSuggestion') || '',
+      openComments: data.get('openComments') || '',
+      permissionToUseFeedback: data.get('permissionToUseFeedback') || '',
+      screenWidth: window.innerWidth,
+      screenHeight: window.innerHeight,
+      userAgent: navigator.userAgent,
+      choiceHistory: history,
+      scoreHistory: scores,
+      branchPath: history.map(item => item.stepId),
+      missedReviewCount: scores.filter(score => score === 0).length,
+      neutralChoiceCount: scores.filter(score => score > 0 && score < 10).length,
+      incorrectChoiceCount: scores.filter(score => score === 0).length,
+      correctChoiceCount: scores.filter(score => score >= 10).length
+    };
+  }
+
+  function submitBetaSurvey(run, form, status, button) {
+    const endpoint = MR.teacherConfig.resultEndpoint || '';
+    if (!endpoint || endpoint.includes('PASTE_')) {
+      status.textContent = 'Something went wrong and your survey was not submitted. Please check your connection and try again.';
+      return;
+    }
+
+    button.disabled = true;
+    status.textContent = 'Submitting beta feedback...';
+
+    fetch(endpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(betaSurveyPayload(run, form))
+    }).then(() => {
+      button.disabled = false;
+      status.textContent = 'Thank you — your beta feedback was submitted!';
+    }).catch(error => {
+      console.warn('Beta survey submission failed:', error);
+      button.disabled = false;
+      status.textContent = 'Something went wrong and your survey was not submitted. Please check your connection and try again.';
+    });
+  }
+
+  function wireBetaSurvey(run) {
+    const form = MR.$('#beta-survey-form');
+    if (!form) return;
+    const status = MR.$('#beta-survey-status');
+    const button = MR.$('#beta-survey-submit');
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      submitBetaSurvey(run, form, status, button);
+    });
+  }
+
   function renderResults(run) {
     const summary = summaryForRun(run);
     const xp = behaviorXPFor(
@@ -343,7 +494,9 @@
       <p><strong>Action steps for teachers:</strong></p>
       ${summary.actions}
       ${missedAnswerReview(run)}
+      ${betaSurveyHTML()}
     `;
+    wireBetaSurvey(run);
     MR.setScreen('results');
   }
 
