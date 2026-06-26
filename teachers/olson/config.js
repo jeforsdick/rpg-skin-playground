@@ -7,7 +7,7 @@ window.MR_TEACHER_CONFIG = {
   // GitHub Pages-safe privacy rule: use teacher IDs and student pseudonyms only.
   defaultHearts: 5,
   missionSteps: 5,
-  shuffleChoices: false,
+  shuffleChoices: true,
 
   // Optional: paste your Google Apps Script web app URL here when ready.
   // The base game always saves locally first, even if this is blank.
