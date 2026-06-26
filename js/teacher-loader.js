@@ -5,8 +5,8 @@
 
   const DEFAULT_CONFIG = {
     teacherId: 'olson',
-    displayName: "Mrs. Olson",
-    classroomLabel: "Mrs. Olson's Classroom",
+    displayName: 'Beta Classroom',
+    classroomLabel: 'Beta Classroom',
     studentAlias: 'Student',
     defaultHearts: 5,
     missionSteps: 5,

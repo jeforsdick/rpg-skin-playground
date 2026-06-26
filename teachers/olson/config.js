@@ -1,7 +1,7 @@
 window.MR_TEACHER_CONFIG = {
   teacherId: 'olson',
-  displayName: 'Mrs. Olson',
-  classroomLabel: "Mrs. Olson's Classroom",
+  displayName: 'Beta Classroom',
+  classroomLabel: 'Beta Classroom',
   studentAlias: 'Student',
 
   // GitHub Pages-safe privacy rule: use teacher IDs and student pseudonyms only.
