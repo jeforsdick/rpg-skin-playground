@@ -492,22 +492,21 @@
     });
   }
 
-  function scrollToBetaSurvey() {
-    const root = MR.$('#results-content');
-    const survey = MR.$('#beta-survey-section');
-    if (!root || !survey) return;
+  function renderBetaSurveyScreen(run) {
+    const root = MR.$('#survey-content');
+    if (!root || !run) return;
 
-    try {
-      root.scrollTo({
-        top: Math.max(0, survey.offsetTop - root.offsetTop),
-        behavior: 'smooth'
-      });
-    } catch (error) {
-      root.scrollTop = Math.max(0, survey.offsetTop - root.offsetTop);
-    }
+    root.innerHTML = `
+      <p><button id="survey-back-results" class="pixel-btn brown-btn" type="button">Back to Results</button></p>
+      ${betaSurveyHTML()}
+    `;
+    const backButton = MR.$('#survey-back-results');
+    if (backButton) backButton.addEventListener('click', () => MR.setScreen('results'));
+    wireBetaSurvey(run);
+    MR.setScreen('survey');
   }
 
-  function wireResultsSurveyInvite() {
+  function wireResultsSurveyInvite(run) {
     const targets = [
       MR.$('.results-wizard-note'),
       MR.$('.results-wizard-note img'),
@@ -516,7 +515,7 @@
     if (!targets.length) return;
 
     targets.forEach(target => {
-      target.addEventListener('click', scrollToBetaSurvey);
+      target.addEventListener('click', () => renderBetaSurveyScreen(run));
     });
 
     const note = MR.$('.results-wizard-note');
@@ -524,7 +523,7 @@
     note.addEventListener('keydown', event => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault();
-      scrollToBetaSurvey();
+      renderBetaSurveyScreen(run);
     });
   }
 
@@ -547,10 +546,8 @@
       <p><strong>Action steps for teachers:</strong></p>
       ${summary.actions}
       ${missedAnswerReview(run)}
-      ${betaSurveyHTML()}
     `;
-    wireBetaSurvey(run);
-    wireResultsSurveyInvite();
+    wireResultsSurveyInvite(run);
     MR.setScreen('results');
   }
 
