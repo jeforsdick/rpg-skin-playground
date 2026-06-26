@@ -201,6 +201,7 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     modalMode = 'briefing';
     const modal = MR.$('#wizard-modal');
     const img = MR.$('#wizard-modal-img');
+    modal.dataset.mode = 'briefing';
     MR.$('#wizard-modal-title').textContent = 'BIP Briefing';
     MR.$('#wizard-modal-text').textContent = text;
     img.src = MR.asset('wizardGuide') || MR.asset('wizardThink');
@@ -214,6 +215,7 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     const sprite = wizardSpriteForScore(score);
     const modal = MR.$('#wizard-modal');
     const img = MR.$('#wizard-modal-img');
+    modal.dataset.mode = 'feedback';
     MR.$('#wizard-modal-title').textContent = sprite.title;
     MR.$('#wizard-modal-text').textContent = choice.wizard || choice.feedback || 'The classroom shifts in response to your decision.';
     img.src = sprite.src;
@@ -227,6 +229,7 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     const sprite = wizardSpriteForScore(10);
     const modal = MR.$('#wizard-modal');
     const img = MR.$('#wizard-modal-img');
+    modal.dataset.mode = 'surveySuccess';
     MR.$('#wizard-modal-title').textContent = 'Quest Complete!';
     MR.$('#wizard-modal-text').textContent = 'Thank you for helping improve Mission: Reinforceable. Your beta survey was submitted successfully.';
     img.src = sprite.src;
@@ -236,7 +239,9 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
   }
 
   function hideWizardFeedback() {
-    MR.$('#wizard-modal').hidden = true;
+    const modal = MR.$('#wizard-modal');
+    modal.hidden = true;
+    modal.dataset.mode = '';
   }
 
   function continueAfterFeedback() {
