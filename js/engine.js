@@ -367,26 +367,27 @@
       <section id="beta-survey-section">
         <h2>Beta Survey</h2>
         <p>Thank you for beta testing Mission: Reinforceable. You do not need to be a teacher to answer these questions. Please focus on whether the game was clear, usable, and helpful.</p>
+        <p>For rating questions, use 1 = strongly disagree and 5 = strongly agree.</p>
         <p><strong>Privacy reminder:</strong> Please do not include real student names, school names, or identifying information.</p>
         <form id="beta-survey-form">
           <h3>About You</h3>
           ${surveySelect('testerRole', 'Which best describes you?', roleOptions)}
           <h3>Mission Experience</h3>
-          ${surveySelect('understoodTask', 'I understood what I was supposed to do in the game.', ratings)}
-          ${surveySelect('bipClear', "Jordan's behavior plan was clear enough for me to use during the mission.", ratings)}
-          ${surveySelect('choicesMadeMeThink', 'The answer choices made me think carefully.', ratings)}
-          ${surveySelect('feedbackHelpful', 'The feedback helped me understand why my choices were or were not plan-aligned.', ratings)}
-          ${surveySelect('easyToNavigate', 'The game was easy to navigate.', ratings)}
-          ${surveySelect('lookedPolished', 'The game looked polished enough for beta testing with educators.', ratings)}
+          ${surveySelect('understoodTask', 'I understood what I was supposed to do in the game. (1 = strongly disagree, 5 = strongly agree)', ratings)}
+          ${surveySelect('bipClear', "Jordan's behavior plan was clear enough for me to use during the mission. (1 = strongly disagree, 5 = strongly agree)", ratings)}
+          ${surveySelect('choicesMadeMeThink', 'The answer choices made me think carefully. (1 = strongly disagree, 5 = strongly agree)', ratings)}
+          ${surveySelect('feedbackHelpful', 'The feedback helped me understand why my choices were or were not plan-aligned. (1 = strongly disagree, 5 = strongly agree)', ratings)}
+          ${surveySelect('easyToNavigate', 'The game was easy to navigate. (1 = strongly disagree, 5 = strongly agree)', ratings)}
+          ${surveySelect('lookedPolished', 'The game looked polished enough for beta testing with educators. (1 = strongly disagree, 5 = strongly agree)', ratings)}
           ${surveySelect('difficulty', 'How did the difficulty feel?', difficultyOptions)}
-          ${surveySelect('branchingClear', 'I could tell that my choices affected what happened next in the scenario.', ratings)}
+          ${surveySelect('branchingClear', 'I could tell that my choices affected what happened next in the scenario. (1 = strongly disagree, 5 = strongly agree)', ratings)}
           <h3>Resources</h3>
-          ${surveySelect('resourcesEasyToFind', "Jordan's plan on the Resources page was easy to find.", ratings)}
-          ${surveySelect('resourcesShortEnough', "Jordan's plan was short enough to read before playing.", ratings)}
-          ${surveySelect('resourcesHelpful', 'The Resources page helped me make choices during the mission.', ratings)}
+          ${surveySelect('resourcesEasyToFind', "Jordan's plan on the Resources page was easy to find. (1 = strongly disagree, 5 = strongly agree)", ratings)}
+          ${surveySelect('resourcesShortEnough', "Jordan's plan was short enough to read before playing. (1 = strongly disagree, 5 = strongly agree)", ratings)}
+          ${surveySelect('resourcesHelpful', 'The Resources page helped me make choices during the mission. (1 = strongly disagree, 5 = strongly agree)', ratings)}
           <h3>Progress and Review</h3>
-          ${surveySelect('progressHelpful', 'The Progress page helped me understand my game history or results.', ratings)}
-          ${surveySelect('missedReviewHelpful', 'The missed-answer review helped me understand what to improve.', ratings)}
+          ${surveySelect('progressHelpful', 'The Progress page helped me understand my game history or results. (1 = strongly disagree, 5 = strongly agree)', ratings)}
+          ${surveySelect('missedReviewHelpful', 'The missed-answer review helped me understand what to improve. (1 = strongly disagree, 5 = strongly agree)', ratings)}
           <h3>Open Feedback</h3>
           ${surveyTextarea('confusingPart', 'What, if anything, was confusing?')}
           ${surveyTextarea('favoritePart', 'What did you like best?')}
