@@ -18,12 +18,12 @@ window.MR_TEACHER_CONFIG = {
   xpMultiplier: 5,
 
   feedback: {
-    high: "High fidelity. You recognized the function of Student's behavior, kept access to the routine available, prompted the replacement behavior, and reinforced the first plan-aligned response quickly enough to strengthen future implementation.",
-    mid: "Developing fidelity. Your response included supportive elements, but one active ingredient was missing or delayed. Tighten the next move by making the first step observable, prompting the replacement behavior earlier, or reinforcing re-entry faster.",
-    low: "Low fidelity. The response drifted from the BIP and may have increased escape, adult attention, peer attention, or escalation. Reset by reducing language, returning to the function-based plan, and reinforcing the first safe step back into the routine.",
-    actionHigh: '<ul><li>Keep using private pre-correction before predictable triggers.</li><li>Prompt Student\'s replacement behavior before refusal becomes public.</li><li>Reinforce the first small step back into instruction, peers, or routines.</li></ul>',
-    actionMid: '<ul><li>Shift from general encouragement to one observable first action.</li><li>Make sure breaks, help, or choices include a clear return-to-routine step.</li><li>Move reinforcement closer to the exact behavior the BIP is trying to build.</li></ul>',
-    actionLow: '<ul><li>Reduce public correction, threats, and extended explanations during activation.</li><li>Do not remove Student from the task or peer routine unless safety requires it.</li><li>Return to the sequence: prevent, prompt replacement, reinforce re-entry, then problem solve later.</li></ul>'
+    high: "Strong Plan Alignment\n\nGreat work. Your choices mostly matched Jordan's plan. You helped Jordan by making the writing task smaller, staying calm and private, prompting help or break requests, and reinforcing small steps back toward writing.",
+    mid: "Mixed Plan Alignment\n\nYou used some helpful responses, but a few choices missed important parts of Jordan's plan. Look for moments where Jordan needed a smaller first step, a prompt to ask for help, a short break with a return plan, or calm private support.",
+    low: "Needs Review\n\nSome choices may have made the writing routine harder for Jordan. Responses that add pressure, make the situation public, remove support, or turn writing into a power struggle can make Jordan more likely to avoid the task.",
+    actionHigh: "<p>Keep using the plan: help, break, small step, calm return.</p>",
+    actionMid: "<p>Review the moments where Jordan needed a clearer path back to the plan.</p>",
+    actionLow: "<p>Review Jordan's plan and focus on calm, private responses that help Jordan ask for help, ask for a short break, or return to one small writing step.</p>"
   },
 
   assets: {

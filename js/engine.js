@@ -230,7 +230,15 @@
     }
   }
 
-  function classifyRun(accuracy) {
+  function classifyRun(run) {
+    if (Number(run && run.maxScore) === 50) {
+      const score = Number(run.score || 0);
+      if (score >= 40) return 'high';
+      if (score >= 25) return 'mid';
+      return 'low';
+    }
+
+    const accuracy = Number(run && run.accuracy) || 0;
     if (accuracy >= 80) return 'high';
     if (accuracy >= 50) return 'mid';
     return 'low';
@@ -238,7 +246,7 @@
 
   function summaryForRun(run) {
     const config = MR.teacherConfig;
-    const level = classifyRun(run.accuracy);
+    const level = classifyRun(run);
     const feedback = config.feedback[level] || config.feedback.mid;
     const actions = level === 'high' ? config.feedback.actionHigh : level === 'mid' ? config.feedback.actionMid : config.feedback.actionLow;
     const lastStrong = run.history.slice().reverse().find(item => item.score >= 10);
