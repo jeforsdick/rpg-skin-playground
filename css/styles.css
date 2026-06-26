@@ -732,12 +732,12 @@ body {
 }
 
 .scenario-text {
-  font-size: clamp(21px, 1.6vw, 26px);
+  font-size: clamp(20px, 1.5vw, 25px);
   line-height: 1.42;
 }
 
 .scenario-text .scene-label {
-  font-size: 34px;
+  font-size: 33px;
 }
 
 .choices-area {
@@ -842,8 +842,8 @@ body {
 }
 
 .results-wizard-note {
-  width: 540px;
-  height: 220px;
+  width: 600px;
+  height: 240px;
 }
 
 .results-wizard-note img {
@@ -852,10 +852,41 @@ body {
 }
 
 .small-result-bubble {
-  right: 150px;
-  width: 330px;
-  height: 120px;
-  font-size: 17px;
+  right: 174px;
+  width: 396px;
+  height: 144px;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.survey-wizard-note {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  width: 500px;
+  height: 205px;
+  pointer-events: none;
+}
+
+.survey-wizard-note img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 182px;
+  height: 177px;
+  object-fit: contain;
+  transform: rotate(4deg);
+  filter: drop-shadow(5px 5px 0 #080008);
+}
+
+.survey-wizard-bubble {
+  right: 164px;
+  bottom: 42px;
+  width: 285px;
+  height: 110px;
+  font-size: 18px;
+  line-height: 1.25;
+  background-image: url("../assets/skin-v2/speech-bubble-left.png");
 }
 
 @media (min-width: 701px) {
