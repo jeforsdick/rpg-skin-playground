@@ -274,7 +274,6 @@
 
   function missedAnswerReview(run) {
     const history = Array.isArray(run.history) ? run.history : [];
-    console.log('Missed-answer audit', history);
     const missed = history.filter(item => Number(item.score) === 0);
     if (!missed.length) {
       return '<p><strong>Missed-answer review:</strong><br />No incorrect answers to review &mdash; nice work!</p>';
@@ -562,7 +561,7 @@
       <h1>Score: ${run.score} / ${run.maxScore} (${run.accuracy}%)</h1>
       <p><strong>Overall feedback:</strong><br />${MR.escapeHTML(summary.feedback)}</p>
       <p>${MR.escapeHTML(summary.lastText)}</p>
-      <p><strong>Action steps for teachers:</strong></p>
+      <p><strong>Plan reminder:</strong></p>
       ${summary.actions}
       ${missedAnswerReview(run)}
     `;

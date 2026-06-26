@@ -31,6 +31,14 @@
     `;
   }
 
+  function definitionsByTerm(items, term) {
+    if (!Array.isArray(items) || !items.length) return [];
+    return items
+      .filter(item => item && item.term === term)
+      .map(item => item.definition)
+      .filter(Boolean);
+  }
+
   function snapshot(data) {
     const snap = data.studentSnapshot || {};
     return `
@@ -51,20 +59,33 @@
       const title = MR.$('#resources-title');
       if (!root) return;
 
-      if (title) title.textContent = 'Resources';
+      if (title) title.textContent = data.title || 'Beta Mission Briefing: Jordan';
+
+      const harderExamples = definitionsByTerm(data.behaviorBasics, 'Less helpful');
+      const reminder = definitionsByTerm(data.behaviorBasics, 'Remember');
 
       root.innerHTML = [
-        section('BIP Overview', `<p>${MR.escapeHTML(data.title || 'Teacher BIP Overview')}</p>`),
-        section('Student Snapshot', snapshot(data)),
-        section('Target Routine', `<p>${MR.escapeHTML((data.studentSnapshot && data.studentSnapshot.routine) || '')}</p>`),
-        section('Target Behavior', `<p>${MR.escapeHTML((data.studentSnapshot && data.studentSnapshot.targetBehavior) || '')}</p>`),
-        section('Hypothesized Function', `<p>${MR.escapeHTML((data.studentSnapshot && data.studentSnapshot.function) || '')}</p>`),
-        section('Prevention Strategies', list(pathway.prevention)),
-        section('Replacement Behavior to Teach/Prompt', list(pathway.replacementBehavior)),
-        section('Reinforcement Plan', list(pathway.reinforcement)),
-        section('Response Plan if Behavior Occurs', list(pathway.responsePlan)),
-        section('Quick Behavior Basics', definitionList(data.behaviorBasics)),
-        section('Fidelity Checklist', list(data.fidelityChecklist))
+        section(data.title || 'Beta Mission Briefing: Jordan', `<p>Read this short briefing before you play.</p>`),
+        section('Your Goal', list(pathway.settingEvents)),
+        section('Jordan’s Writing Plan', [
+          `<p>${MR.escapeHTML((data.studentSnapshot && data.studentSnapshot.function) || '')}</p>`,
+          list([
+            (data.studentSnapshot && data.studentSnapshot.routine) ? `Routine: ${data.studentSnapshot.routine}` : '',
+            (data.studentSnapshot && data.studentSnapshot.targetBehavior) || ''
+          ].filter(Boolean)),
+          list(pathway.antecedents)
+        ].join('')),
+        section('What Helps Jordan', [
+          list(pathway.replacementBehavior),
+          list(pathway.prevention),
+          list(pathway.responsePlan),
+          list(pathway.reinforcement)
+        ].join('')),
+        section('What Makes It Harder', list(harderExamples)),
+        section('Quick Reminder', [
+          reminder.map(item => `<p>${MR.escapeHTML(item)}</p>`).join(''),
+          list(data.fidelityChecklist)
+        ].join(''))
       ].join('');
     }
   };
