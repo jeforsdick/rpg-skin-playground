@@ -149,8 +149,13 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     let html = '';
     for (let i = 0; i < max; i++) {
       const remaining = hearts - i;
-      const cls = remaining >= 1 ? '' : remaining > 0 ? 'half' : 'heart-empty';
-      html += `<img class="${cls}" src="${heartPath}" alt="${remaining > 0 ? 'heart' : 'empty heart'}" />`;
+      if (remaining >= 1) {
+        html += `<img src="${heartPath}" alt="heart" />`;
+      } else if (remaining > 0) {
+        html += `<span class="heart-half" aria-label="half heart"><img class="half" src="${heartPath}" alt="" /></span>`;
+      } else {
+        html += `<img class="heart-empty" src="${heartPath}" alt="empty heart" />`;
+      }
     }
     root.innerHTML = html;
     root.setAttribute('aria-label', `${hearts} out of ${max} hearts`);

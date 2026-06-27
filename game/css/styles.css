@@ -127,9 +127,13 @@ button:focus-visible, input:focus-visible { outline: 4px solid #fff1a3; outline-
 .screen-play, .screen-results { padding-top: 58px; }
 .hud { width: min(1328px, 94vw); margin: 0 auto 14px; display: grid; grid-template-columns: 390px 1fr 1fr; gap: 34px; align-items: center; }
 .heart-row { display: flex; gap: 11px; align-items: center; min-height: 70px; }
-.heart-row img { width: 58px; height: 50px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(5px 5px 0 #080008); }
+.heart-row img,
+.heart-half { width: 58px; height: 50px; }
+.heart-row img { object-fit: contain; image-rendering: pixelated; filter: drop-shadow(5px 5px 0 #080008); }
 .heart-row img.heart-empty { opacity: .23; filter: grayscale(1) drop-shadow(5px 5px 0 #080008); }
-.heart-row img.half { clip-path: inset(0 50% 0 0); }
+.heart-half { position: relative; display: inline-block; flex: 0 0 auto; filter: drop-shadow(5px 5px 0 #080008); }
+.heart-half img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; filter: none; }
+.heart-half img.half { clip-path: inset(0 50% 0 0); }
 .hud-meter { color: #fff; text-align: center; font-family: Arial, sans-serif; font-weight: 900; text-shadow: 0 2px 0 #17103d; }
 .hud-meter strong { display: block; margin-bottom: 8px; font-size: 16px; }
 .hud-meter small { display: block; margin-top: 8px; font-size: 15px; }
@@ -382,7 +386,8 @@ code { background: rgba(0,0,0,.28); padding: 2px 5px; border-radius: 4px; }
   margin-bottom: 10px;
 }
 
-.heart-row img {
+.heart-row img,
+.heart-half {
   width: 52px;
   height: 46px;
 }
@@ -1205,7 +1210,8 @@ body {
     gap: 6px;
   }
 
-  .heart-row img {
+  .heart-row img,
+  .heart-half {
     width: 38px;
     height: 34px;
   }
