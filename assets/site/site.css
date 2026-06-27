@@ -54,7 +54,11 @@ a {
   backdrop-filter: blur(18px);
 }
 
-.nav-wrap,
+.nav-wrap {
+  width: min(1320px, calc(100% - 36px));
+  margin: 0 auto;
+}
+
 .section,
 .hero-inner {
   width: min(1120px, calc(100% - 36px));
@@ -91,7 +95,7 @@ a {
 }
 
 .brand-logo {
-  width: clamp(280px, 28vw, 460px);
+  width: clamp(420px, 42vw, 640px);
   height: auto;
   object-fit: contain;
   object-position: left center;
@@ -682,7 +686,7 @@ p {
   }
 
   .brand-logo {
-    width: clamp(260px, 62vw, 420px);
+    width: clamp(390px, 72vw, 540px);
   }
 
   .brand-icon {
@@ -737,7 +741,7 @@ p {
   }
 
   .brand-logo {
-    width: min(300px, calc(100vw - 92px));
+    width: min(390px, calc(100vw - 76px));
   }
 
   .brand-icon {
