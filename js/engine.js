@@ -358,6 +358,47 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     `;
   }
 
+  function isMobileView() {
+    return Boolean(window.matchMedia && window.matchMedia('(max-width: 700px)').matches);
+  }
+
+  function feedbackParts(feedback) {
+    const parts = String(feedback || '').split(/\n\s*\n/);
+    return {
+      title: parts.shift() || 'Mission Results',
+      body: parts.join(' ').trim()
+    };
+  }
+
+  function mobileResultsHTML(run, summary) {
+    const history = Array.isArray(run.history) ? run.history : [];
+    const strongCount = history.filter(item => Number(item.score || 0) >= 10).length;
+    const partialCount = history.filter(item => {
+      const score = Number(item.score || 0);
+      return score > 0 && score < 10;
+    }).length;
+    const missedCount = history.filter(item => Number(item.score || 0) === 0).length;
+    const feedback = feedbackParts(summary.feedback);
+    const reminder = Number(run.accuracy || 0) < 80
+      ? '<p class="mobile-results-reminder"><strong>Quick reminder:</strong> Review the BIP Briefing or Resources before playing again.</p>'
+      : '';
+
+    return `
+      <section class="mobile-results-summary">
+        <h1>${MR.escapeHTML(feedback.title)}</h1>
+        <p class="mobile-results-score"><strong>Score:</strong> ${run.score} / ${run.maxScore} (${run.accuracy}%)</p>
+        <p>${MR.escapeHTML(feedback.body || summary.feedback)}</p>
+        <h2>Quick feedback</h2>
+        <ul>
+          <li>Strong choices: ${strongCount}</li>
+          <li>Partial choices: ${partialCount}</li>
+          <li>Missed choices: ${missedCount}</li>
+        </ul>
+        ${reminder}
+      </section>
+    `;
+  }
+
   function finishMission() {
     const accuracy = current.maxScore ? Math.round((current.score / current.maxScore) * 100) : 0;
     const xp = behaviorXPFor(current.score, current.expectedSteps || 3, current.xpMax);
@@ -616,7 +657,7 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     MR.$('#results-xp-fill').style.width = `${xp.behaviorXPPct}%`;
     MR.$('#results-score-label').textContent = `${run.score}`;
 
-    MR.$('#results-content').innerHTML = `
+    MR.$('#results-content').innerHTML = isMobileView() ? mobileResultsHTML(run, summary) : `
       <h1>Score: ${run.score} / ${run.maxScore} (${run.accuracy}%)</h1>
       <p><strong>Overall feedback:</strong><br />${MR.escapeHTML(summary.feedback)}</p>
       <p>${MR.escapeHTML(summary.lastText)}</p>
