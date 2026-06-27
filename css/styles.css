@@ -541,7 +541,7 @@ code { background: rgba(0,0,0,.28); padding: 2px 5px; border-radius: 4px; }
 .wizard-modal[data-mode="briefing"] .wizard-modal-bubble p {
   max-height: 320px;
   overflow-y: scroll;
-  font: 900 clamp(17px, 1.25vw, 22px)/1.42 var(--mono);
+  font: 900 clamp(15px, 1.1vw, 19px)/1.35 var(--mono);
 }
 
 .wizard-modal-bubble .green-btn {
