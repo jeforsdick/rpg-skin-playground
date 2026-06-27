@@ -983,47 +983,6 @@ body {
   }
 }
 
-.scenario-scroll,
-.screen-results .results-content,
-#resources-content,
-.progress-list,
-.wizard-modal-bubble p {
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
-  scrollbar-width: auto;
-  scrollbar-color: #ffc54a #2b1648;
-}
-
-.scenario-scroll::-webkit-scrollbar,
-.screen-results .results-content::-webkit-scrollbar,
-#resources-content::-webkit-scrollbar,
-.progress-list::-webkit-scrollbar,
-.wizard-modal-bubble p::-webkit-scrollbar {
-  width: 20px;
-  height: 20px;
-}
-
-.scenario-scroll::-webkit-scrollbar-track,
-.screen-results .results-content::-webkit-scrollbar-track,
-#resources-content::-webkit-scrollbar-track,
-.progress-list::-webkit-scrollbar-track,
-.wizard-modal-bubble p::-webkit-scrollbar-track {
-  background: #2b1648;
-  border: 4px solid #0b0418;
-  box-shadow: inset 0 0 0 3px #6b3a8f;
-}
-
-.scenario-scroll::-webkit-scrollbar-thumb,
-.screen-results .results-content::-webkit-scrollbar-thumb,
-#resources-content::-webkit-scrollbar-thumb,
-.progress-list::-webkit-scrollbar-thumb,
-.wizard-modal-bubble p::-webkit-scrollbar-thumb {
-  background: #ffc54a;
-  border: 4px solid #0b0418;
-  border-radius: 0;
-  box-shadow: inset 0 0 0 3px #fff1a3;
-}
-
 /* POLISH OVERRIDES — keep start/play-again button centered */
 
 .start-classroom-btn:hover,
