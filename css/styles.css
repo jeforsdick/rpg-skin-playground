@@ -521,6 +521,23 @@ code { background: rgba(0,0,0,.28); padding: 2px 5px; border-radius: 4px; }
   white-space: pre-line;
 }
 
+.wizard-modal[data-mode="welcome"] .wizard-modal-bubble h2 {
+  width: 78%;
+  max-width: 560px;
+  margin-bottom: 12px;
+  font-size: 42px;
+  line-height: 1.05;
+}
+
+.wizard-modal[data-mode="welcome"] .wizard-modal-bubble p {
+  width: 76%;
+  max-width: 540px;
+  max-height: none;
+  overflow-y: hidden;
+  font-size: 25px;
+  line-height: 1.22;
+}
+
 .wizard-modal[data-mode="briefing"] .wizard-modal-bubble p {
   max-height: 320px;
   overflow-y: scroll;
