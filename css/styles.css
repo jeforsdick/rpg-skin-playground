@@ -960,6 +960,27 @@ body {
   #survey-screen .results-content {
     max-height: 426px;
   }
+
+  #survey-screen select,
+  #survey-screen textarea {
+    width: min(100%, 720px);
+    max-width: 100%;
+    padding: 10px 14px;
+    color: #160927;
+    background: #fff8d9;
+    border: 3px solid #ffc54a;
+    box-shadow: 3px 3px 0 #080008;
+    font: 700 21px/1.25 var(--mono);
+  }
+
+  #survey-screen select {
+    min-height: 54px;
+  }
+
+  #survey-screen textarea {
+    min-height: 132px;
+    resize: vertical;
+  }
 }
 
 .scenario-scroll,
