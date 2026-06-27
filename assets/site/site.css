@@ -343,6 +343,47 @@ p {
   font-weight: 900;
 }
 
+.practice-loop-section {
+  padding-top: 44px;
+}
+
+.process-strip {
+  width: min(1120px, calc(100% - 36px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid rgba(217, 224, 231, .92);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 18px 44px rgba(16, 36, 63, .1);
+}
+
+.process-strip article {
+  padding: 26px 24px;
+}
+
+.process-strip article + article {
+  border-left: 1px solid #dfe7ee;
+}
+
+.process-strip span {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--teal-dark);
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.process-strip p {
+  margin: 0;
+  color: #26374a;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
 .section {
   padding: 56px 0;
 }
@@ -361,6 +402,16 @@ p {
   grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
   gap: 26px;
   align-items: start;
+}
+
+.refined-split {
+  align-items: stretch;
+}
+
+.refined-split .panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .panel {
@@ -570,6 +621,10 @@ p {
   line-height: 1.45;
 }
 
+.homepage-stats .stat-card {
+  min-height: 170px;
+}
+
 .researcher-note {
   color: #31465c;
   font-weight: 750;
@@ -700,6 +755,15 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .process-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .process-strip article + article {
+    border-left: 0;
+    border-top: 1px solid #dfe7ee;
+  }
+
   .grid-3,
   .grid-5 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -756,6 +820,7 @@ p {
 
   .outcome-grid,
   .stat-grid,
+  .process-strip,
   .section-note {
     width: min(100% - 24px, 1120px);
   }
