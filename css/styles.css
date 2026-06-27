@@ -749,8 +749,7 @@ body {
 }
 
 .scenario-text {
-  font-size: clamp(20px, 1.5vw, 25px);
-  line-height: 1.42;
+  font: 900 clamp(18px, 1.35vw, 22px)/1.42 var(--mono);
 }
 
 .scenario-text .scene-label {
