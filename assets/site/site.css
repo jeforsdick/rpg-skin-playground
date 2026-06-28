@@ -568,6 +568,10 @@ p {
   font-weight: 750;
 }
 
+.preview-note {
+  margin-top: 18px;
+}
+
 .practice-loop-section {
   padding-top: 35px;
 }
