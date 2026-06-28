@@ -1959,6 +1959,29 @@ body {
 
 @media (max-width: 700px) {
   .sound-toggle {
-    display: none;
+    position: static;
+    display: flex;
+    width: min(100% - 20px, 360px);
+    justify-content: center;
+    margin: 10px auto 14px;
+    padding: 9px 10px 10px;
+    font-size: 11px;
+    box-shadow:
+      inset 0 0 0 2px #3b237c,
+      3px 3px 0 #080008;
+  }
+
+  .sound-toggle__switch {
+    width: 40px;
+    height: 22px;
+  }
+
+  .sound-toggle__knob {
+    width: 12px;
+    height: 12px;
+  }
+
+  .sound-toggle[aria-pressed="true"] .sound-toggle__knob {
+    transform: translateX(18px);
   }
 }
