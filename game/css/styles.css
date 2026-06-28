@@ -1887,3 +1887,89 @@ body {
   z-index: 21;
   pointer-events: auto;
 }
+
+.sound-toggle {
+  position: fixed;
+  top: clamp(8px, 2vw, 18px);
+  right: clamp(8px, 2vw, 18px);
+  z-index: 10000;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 2px solid #f6c94c;
+  border-radius: 10px;
+  background: rgba(15, 36, 61, .94);
+  color: #fff4cf;
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .35);
+  cursor: pointer;
+}
+
+.sound-toggle:hover,
+.sound-toggle:focus-visible {
+  filter: brightness(1.08);
+  outline: 3px solid rgba(246, 201, 76, .45);
+  outline-offset: 3px;
+}
+
+.sound-toggle__switch {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  border: 2px solid #f6c94c;
+  border-radius: 999px;
+  background: #17243a;
+}
+
+.sound-toggle__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff4cf;
+  box-shadow: 0 2px 0 #000;
+  transition: transform .15s ease;
+}
+
+.sound-toggle[aria-pressed="true"] .sound-toggle__switch {
+  background: #5b3aa4;
+}
+
+.sound-toggle[aria-pressed="true"] .sound-toggle__knob {
+  transform: translateX(20px);
+}
+
+.sound-toggle__state {
+  min-width: 24px;
+  text-align: left;
+}
+
+@media (max-width: 700px) {
+  .sound-toggle {
+    top: 8px;
+    right: 8px;
+    gap: 6px;
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+  .sound-toggle__switch {
+    width: 36px;
+    height: 20px;
+  }
+
+  .sound-toggle__knob {
+    width: 12px;
+    height: 12px;
+  }
+
+  .sound-toggle[aria-pressed="true"] .sound-toggle__knob {
+    transform: translateX(16px);
+  }
+}

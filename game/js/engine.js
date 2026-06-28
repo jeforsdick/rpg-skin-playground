@@ -140,6 +140,17 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     return { before, after: current.hearts };
   }
 
+  function playAudioCue(name, volume) {
+    if (MR.audio && MR.audio.playSfx) MR.audio.playSfx(name, volume);
+  }
+
+  function soundForScore(score) {
+    const value = Number(score) || 0;
+    if (value >= 10) return 'correct';
+    if (value >= 5) return 'neutral';
+    return 'incorrect';
+  }
+
   function renderHearts(rootSelector = '#heart-row', hearts = current ? current.hearts : 0, max = current ? current.maxHearts : 5) {
     const root = MR.$(rootSelector);
     if (!root) return;
@@ -204,6 +215,7 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     const score = getScore(choice);
     const maxScore = stepMax(step);
     const heartChange = updateHeartsForChoice(score);
+    playAudioCue(soundForScore(score));
 
     current.score += score;
     current.maxScore += maxScore;
@@ -706,7 +718,10 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     if (!targets.length) return;
 
     targets.forEach(target => {
-      target.addEventListener('click', () => renderBetaSurveyScreen(run));
+      target.addEventListener('click', () => {
+        playAudioCue('click', 0.24);
+        renderBetaSurveyScreen(run);
+      });
     });
 
     const note = MR.$('.results-wizard-note');
@@ -714,11 +729,13 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     note.addEventListener('keydown', event => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault();
+      playAudioCue('click', 0.24);
       renderBetaSurveyScreen(run);
     });
   }
 
-  function renderResults(run) {
+  function renderResults(run, options = {}) {
+    const shouldPlayCompletion = options.playCompletion !== false;
     const summary = summaryForRun(run);
     const xp = behaviorXPFor(
       run.score,
@@ -742,6 +759,9 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     `;
     updateResultsWizard(run);
     wireResultsSurveyInvite(run);
+    if (shouldPlayCompletion) {
+      playAudioCue(summary.level === 'perfect' ? 'correct' : 'missionStart', summary.level === 'perfect' ? 0.26 : 0.18);
+    }
     MR.setScreen('results');
   }
 
@@ -764,6 +784,8 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
       };
       current.stepId = current.mission.start || Object.keys(current.mission.steps || {})[0];
       if (MR.SessionTimer && MR.SessionTimer.start) MR.SessionTimer.start();
+      if (MR.audio && MR.audio.startBgm) MR.audio.startBgm();
+      playAudioCue('missionStart', 0.26);
       MR.setScreen('play');
       renderStep();
       const firstStep = current.mission.steps[current.stepId];
@@ -775,7 +797,7 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     showWelcomePopup,
 
     showStoredRunDetails(run) {
-      renderResults(run);
+      renderResults(run, { playCompletion: false });
     },
 
     renderHearts,
