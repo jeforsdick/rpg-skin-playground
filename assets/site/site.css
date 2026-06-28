@@ -400,11 +400,11 @@ p {
 
 .hero-preview-wide {
   width: min(1120px, calc(100% - 36px));
-  margin-top: 28px;
-  padding: 12px;
+  margin-top: 22px;
+  padding: 10px;
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(280px, .8fr);
-  gap: clamp(24px, 4vw, 48px);
+  grid-template-columns: minmax(0, 1.85fr) minmax(280px, .75fr);
+  gap: clamp(18px, 3vw, 34px);
   align-items: center;
   border: 1px solid rgba(240, 201, 90, .46);
   border-radius: 8px;
@@ -414,7 +414,7 @@ p {
 
 .preview-gif-row {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: center;
   overflow-x: auto;
   padding: 8px;
@@ -461,7 +461,7 @@ p {
 }
 
 .game-preview-gif {
-  width: clamp(220px, 18vw, 320px);
+  width: clamp(260px, 20vw, 360px);
   height: auto;
   max-width: none;
   border-radius: 6px;
@@ -476,7 +476,7 @@ p {
 }
 
 .inside-game {
-  padding-top: 36px;
+  padding-top: 18px;
 }
 
 .inside-game-intro {
@@ -1327,7 +1327,7 @@ p {
   }
 
   .game-preview-gif {
-    width: clamp(210px, 72vw, 280px);
+    width: clamp(240px, 78vw, 330px);
   }
 
   .section {
