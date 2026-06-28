@@ -403,15 +403,19 @@ p {
 .hero-preview-wide {
   width: min(1120px, calc(100% - 36px));
   margin-top: 18px;
-  padding: 10px;
+  padding: 14px;
   display: grid;
-  grid-template-columns: minmax(0, 1.85fr) minmax(280px, .75fr);
-  gap: clamp(18px, 3vw, 34px);
-  align-items: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 20px);
+  align-items: stretch;
   border: 1px solid rgba(240, 201, 90, .46);
   border-radius: 8px;
   background: rgba(255, 255, 255, .86);
   box-shadow: 0 18px 42px rgba(12, 31, 54, .13);
+}
+
+.preview-quad {
+  max-width: 1050px;
 }
 
 .preview-gif-row {
@@ -427,6 +431,9 @@ p {
   flex: 0 0 auto;
   overflow: hidden;
   padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid rgba(17, 42, 70, .12);
   border-radius: 8px;
   background: rgba(255, 255, 255, .94);
@@ -435,6 +442,13 @@ p {
 
 .preview-copy {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(12px, 2vw, 24px);
+  border: 1px solid rgba(109, 75, 179, .16);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(251, 247, 237, .9), rgba(255, 255, 255, .96));
 }
 
 .preview-label {
@@ -477,9 +491,8 @@ p {
 }
 
 .game-preview-gif {
-  width: clamp(260px, 20vw, 360px);
+  width: min(100%, clamp(312px, 24vw, 432px));
   height: auto;
-  max-width: none;
   border-radius: 6px;
   background: #fff;
 }
@@ -1349,7 +1362,7 @@ p {
   }
 
   .game-preview-gif {
-    width: clamp(240px, 78vw, 330px);
+    width: min(100%, clamp(288px, 84vw, 396px));
   }
 
   .section {
