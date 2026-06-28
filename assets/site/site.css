@@ -1387,7 +1387,7 @@ p {
   .briefing-panel,
   .briefing-panel.reverse {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 0;
     padding: 24px 22px;
   }
 
@@ -1397,8 +1397,7 @@ p {
   }
 
   .briefing-wizard {
-    width: 86px;
-    justify-self: start;
+    display: none;
   }
 
   .briefing-copy p {
