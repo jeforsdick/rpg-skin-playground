@@ -693,7 +693,7 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     status.textContent = 'Submitting beta feedback...';
 
     const payload = betaSurveyPayload(run, form);
-    console.info('Submitting beta survey payload device/email v4', payload);
+    console.info('Beta survey payload final', payload);
 
     fetch(endpoint, {
       method: 'POST',
