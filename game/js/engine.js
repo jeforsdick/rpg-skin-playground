@@ -543,11 +543,12 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     return '<option value="">Select</option>' + options.map(option => `<option value="${MR.escapeHTML(option)}">${MR.escapeHTML(option)}</option>`).join('');
   }
 
-  function surveySelect(name, label, optionsHTML) {
+  function surveySelect(name, label, optionsHTML, required = false) {
+    const requiredAttr = required ? ' required' : '';
     return `
       <p>
         <label for="${name}"><strong>${MR.escapeHTML(label)}</strong></label><br />
-        <select id="${name}" name="${name}">${optionsHTML}</select>
+        <select id="${name}" name="${name}"${requiredAttr}>${optionsHTML}</select>
       </p>
     `;
   }
@@ -561,6 +562,16 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     `;
   }
 
+  function surveyEmail(name, label, placeholder, helperText) {
+    return `
+      <p>
+        <label for="${name}"><strong>${MR.escapeHTML(label)}</strong></label><br />
+        <input id="${name}" name="${name}" type="email" placeholder="${MR.escapeHTML(placeholder)}" />
+        <small class="survey-helper">${MR.escapeHTML(helperText)}</small>
+      </p>
+    `;
+  }
+
   function betaSurveyHTML() {
     const roleOptions = selectOptions([
       'Classroom teacher',
@@ -569,6 +580,13 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
       'Parent/caregiver',
       'Other educator',
       'Other adult'
+    ]);
+    const deviceOptions = selectOptions([
+      'Desktop/laptop',
+      'Phone',
+      'Tablet',
+      'I tried more than one device',
+      'Other'
     ]);
     const difficultyOptions = selectOptions(['Too easy', 'About right', 'Too hard', "I'm not sure"]);
     const permissionOptions = selectOptions(['Yes', 'No']);
@@ -580,6 +598,7 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
         <p>For rating questions, use 1 = strongly disagree and 5 = strongly agree.</p>
         <form id="beta-survey-form">
           <h3>About You</h3>
+          ${surveySelect('device_type', 'What device did you primarily use to test the beta?', deviceOptions, true)}
           ${surveySelect('testerRole', 'Which best describes you?', roleOptions)}
           <h3>Playtest Ratings</h3>
           ${surveyRating('understoodTask', 'I understood what to do without needing extra help. (1 = strongly disagree, 5 = strongly agree)')}
@@ -597,6 +616,7 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
           ${surveyTextarea('changeSuggestion', 'What would make the game more fun, useful, or challenging?')}
           ${surveyTextarea('openComments', 'Anything else you want to share?')}
           ${surveySelect('permissionToUseFeedback', 'May I use your anonymous feedback when describing beta testing or future revisions?', permissionOptions)}
+          ${surveyEmail('follow_up_email', 'If you are willing to answer follow-up questions if needed, you may leave your email here.', 'name@example.com', 'Optional. Leave blank if you prefer not to be contacted.')}
           <p>
             <button id="beta-survey-submit" class="pixel-btn green-btn" type="submit">Submit Beta Feedback</button>
           </p>
@@ -626,6 +646,8 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
       accuracy: run.accuracy,
       durationSeconds: run.durationSeconds,
       activeDurationSeconds: run.activeDurationSeconds,
+      device_type: data.get('device_type') || '',
+      follow_up_email: data.get('follow_up_email') || '',
       testerRole: data.get('testerRole') || '',
       understoodTask: data.get('understoodTask') || '',
       bipClear: data.get('bipClear') || '',
@@ -691,6 +713,10 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     const button = MR.$('#beta-survey-submit');
     form.addEventListener('submit', event => {
       event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       submitBetaSurvey(run, form, status, button);
     });
   }

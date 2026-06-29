@@ -981,6 +981,13 @@ body {
   accent-color: #ffc54a;
 }
 
+.survey-helper {
+  display: block;
+  margin-top: 7px;
+  color: #3a2311;
+  font: 700 16px/1.35 var(--mono);
+}
+
 @media (min-width: 701px) {
   .scenario-scroll {
     max-height: 572px;
@@ -1000,7 +1007,8 @@ body {
   }
 
   #survey-screen select,
-  #survey-screen textarea {
+  #survey-screen textarea,
+  #survey-screen input[type="email"] {
     width: min(100%, 720px);
     max-width: 100%;
     padding: 10px 14px;
@@ -1011,7 +1019,8 @@ body {
     font: 700 21px/1.25 var(--mono);
   }
 
-  #survey-screen select {
+  #survey-screen select,
+  #survey-screen input[type="email"] {
     min-height: 54px;
   }
 
@@ -1532,7 +1541,8 @@ body {
   }
 
   #survey-screen select,
-  #survey-screen textarea {
+  #survey-screen textarea,
+  #survey-screen input[type="email"] {
     width: 100%;
     max-width: 100%;
     min-height: 44px;
@@ -1541,6 +1551,14 @@ body {
     background: #fff8d9;
     border: 3px solid #ffc54a;
     box-shadow: 2px 2px 0 #080008;
+  }
+
+  #survey-screen .survey-helper {
+    display: block;
+    margin-top: 6px;
+    color: #fff8d9;
+    font-size: 14px;
+    line-height: 1.35;
   }
 
   #survey-screen textarea {
