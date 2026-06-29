@@ -630,6 +630,8 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     const data = new FormData(form);
     const history = Array.isArray(run.history) ? run.history : [];
     const scores = history.map(item => Number(item.score || 0));
+    const deviceType = data.get('device_type') || '';
+    const followUpEmail = data.get('follow_up_email') || '';
 
     return {
       action: 'betaSurvey',
@@ -646,8 +648,11 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
       accuracy: run.accuracy,
       durationSeconds: run.durationSeconds,
       activeDurationSeconds: run.activeDurationSeconds,
-      device_type: data.get('device_type') || '',
-      follow_up_email: data.get('follow_up_email') || '',
+      device_type: deviceType,
+      deviceType,
+      follow_up_email: followUpEmail,
+      followUpEmail,
+      email: followUpEmail,
       testerRole: data.get('testerRole') || '',
       understoodTask: data.get('understoodTask') || '',
       bipClear: data.get('bipClear') || '',
