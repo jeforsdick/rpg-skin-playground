@@ -177,6 +177,19 @@ button:focus-visible, input:focus-visible { outline: 4px solid #fff1a3; outline-
 .results-content { font: 700 clamp(17px, 1.3vw, 21px)/1.35 var(--mono); }
 .results-content h1 { margin: 0 0 6px; font: 900 30px var(--display); }
 .results-content ul { margin-top: 8px; }
+.results-debrief { display: grid; gap: 14px; }
+.results-debrief h1 { margin-bottom: 0; }
+.results-card { padding: 14px 16px; background: rgba(255, 248, 217, .58); border: 3px solid rgba(120, 70, 14, .65); border-radius: 8px; }
+.results-card h2 { margin: 0 0 8px; color: #130700; font: 900 23px/1 var(--display); }
+.results-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.results-stats div { min-width: 0; padding: 8px; background: rgba(255, 255, 255, .42); border: 2px solid rgba(120, 70, 14, .35); }
+.results-stats dt { font: 900 13px/1.1 var(--mono); text-transform: uppercase; }
+.results-stats dd { margin: 4px 0 0; font: 900 20px/1 var(--display); }
+.results-review-group { display: grid; gap: 10px; margin-top: 12px; }
+.results-review-item { padding: 12px; background: rgba(255, 255, 255, .46); border-left: 5px solid #8b4f08; }
+.results-review-item h3 { margin: 0 0 6px; font: 900 19px/1 var(--display); }
+.results-review-item p { margin: 0 0 8px; }
+.results-empty-review { margin: 0; font-weight: 900; }
 .results-wizard-note { position: absolute; right: 22px; bottom: 22px; width: 415px; height: 164px; }
 .results-wizard-note img { position: absolute; right: 0; bottom: -3px; width: 140px; height: 136px; object-fit: contain; transform: rotate(6deg); filter: drop-shadow(5px 5px 0 #080008); }
 .small-result-bubble { right: 92px; bottom: 24px; width: 285px; height: 110px; font-size: 16px; }
@@ -1510,6 +1523,35 @@ body {
   #results-screen .results-content ul {
     margin: 8px 0 12px 20px;
     padding: 0;
+  }
+
+  #results-screen .results-debrief {
+    gap: 12px;
+  }
+
+  #results-screen .results-card {
+    padding: 12px;
+    background: rgba(255, 248, 217, .08);
+    border-color: rgba(255, 197, 74, .72);
+  }
+
+  #results-screen .results-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #results-screen .results-stats div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  #results-screen .results-stats div,
+  #results-screen .results-review-item {
+    background: rgba(255, 248, 217, .1);
+    border-color: rgba(255, 197, 74, .55);
+  }
+
+  #results-screen .results-card h2,
+  #results-screen .results-review-item h3 {
+    color: #ffc84a;
   }
 
   .mobile-results-score,

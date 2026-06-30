@@ -28,8 +28,14 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
 
   function getScore(choice) {
     if (typeof choice.score === 'number') return choice.score;
+    if (typeof choice.score === 'string') return Number(choice.score) || 0;
     if (typeof choice.delta === 'number') return choice.delta;
+    if (typeof choice.delta === 'string') return Number(choice.delta) || 0;
     return 0;
+  }
+
+  function scoreValue(value) {
+    return Number(value || 0);
   }
 
   function stepMax(step) {
@@ -91,6 +97,19 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
       return `<span class="scene-label">Scene:</span>${MR.escapeHTML(clean.replace(/^Scene:\s*/, ''))}`;
     }
     return MR.escapeHTML(clean);
+  }
+
+  function shortText(text, limit = 220) {
+    const clean = String(text || '').replace(/\s+/g, ' ').trim();
+    if (clean.length <= limit) return clean;
+    return `${clean.slice(0, limit).trim()}...`;
+  }
+
+  function bestChoiceForStep(step) {
+    const choices = getChoiceArray(step);
+    if (!choices.length) return null;
+    const max = Math.max(...choices.map(getScore));
+    return choices.find(choice => getScore(choice) === max) || null;
   }
 
   function branchStateForStep(stepId) {
@@ -219,15 +238,21 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
 
     current.score += score;
     current.maxScore += maxScore;
+    const bestChoice = bestChoiceForStep(step);
     current.history.push({
       stepId: current.stepId,
+      stepIndex: current.history.length + 1,
       prompt: splitScenarioText(step.text || ''),
+      context: splitScenarioText(step.text || ''),
       choiceKey,
       choiceText: choice.text || '',
       score,
       maxScore,
       feedback: choice.feedback || '',
       wizard: choice.wizard || '',
+      bestChoiceKey: bestChoice ? bestChoice.key : '',
+      bestChoiceText: bestChoice ? bestChoice.text || '' : '',
+      bestChoiceFeedback: bestChoice ? bestChoice.feedback || '' : '',
       meta: choice.meta || {},
       heartsBefore: heartChange.before,
       heartsAfter: heartChange.after
@@ -385,65 +410,106 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     });
   }
 
-  function missedAnswerReview(run) {
+  function answeredQuestions(run) {
     const history = Array.isArray(run.history) ? run.history : [];
-    const missed = history.filter(item => Number(item.score) === 0);
-    if (!missed.length) {
-      return '<p><strong>Missed-answer review:</strong><br />No incorrect answers to review &mdash; nice work!</p>';
-    }
-
-    return `
-      <p><strong>Missed-answer review:</strong></p>
-      ${missed.map(item => `
-        <div class="missed-answer-review">
-          <p><strong>Scene:</strong> ${MR.escapeHTML(item.prompt || item.stepId || 'Review step')}</p>
-          <p><strong>Your answer:</strong> ${MR.escapeHTML(item.choiceText || 'No answer text saved')}</p>
-          <p><strong>Feedback:</strong> ${MR.escapeHTML(item.wizard || item.feedback || 'No feedback saved')}</p>
-        </div>
-      `).join('')}
-    `;
+    return history.map((item, index) => Object.assign({}, item, {
+      stepIndex: Number(item.stepIndex || index + 1),
+      score: scoreValue(item.score)
+    }));
   }
 
-  function isMobileView() {
-    return Boolean(window.matchMedia && window.matchMedia('(max-width: 700px)').matches);
-  }
-
-  function feedbackParts(feedback) {
-    const parts = String(feedback || '').split(/\n\s*\n/);
+  function scoreBuckets(run) {
+    const answered = answeredQuestions(run);
     return {
-      title: parts.shift() || 'Mission Results',
-      body: parts.join(' ').trim()
+      answered,
+      bestChoices: answered.filter(item => item.score === 10),
+      refineChoices: answered.filter(item => item.score === 5),
+      mismatchChoices: answered.filter(item => item.score === 0),
+      missedQuestions: answered.filter(item => item.score < 10)
     };
   }
 
-  function mobileResultsHTML(run, summary) {
-    const history = Array.isArray(run.history) ? run.history : [];
-    const strongCount = history.filter(item => Number(item.score || 0) >= 10).length;
-    const partialCount = history.filter(item => {
-      const score = Number(item.score || 0);
-      return score > 0 && score < 10;
-    }).length;
-    const missedCount = history.filter(item => Number(item.score || 0) === 0).length;
-    const feedback = feedbackParts(summary.feedback);
-    const reminder = Number(run.accuracy || 0) < 80
-      ? '<p class="mobile-results-reminder"><strong>Quick reminder:</strong> Review the BIP Briefing or Resources before playing again.</p>'
-      : '';
+  function coachingSummary(run, buckets) {
+    if (!buckets.missedQuestions.length) {
+      return 'Excellent work. Your choices consistently matched the plan and supported prevention, replacement behavior teaching, reinforcement, and calm error correction.';
+    }
+    if (buckets.refineChoices.length && !buckets.mismatchChoices.length) {
+      return 'Strong work. Your choices mostly stayed aligned with the plan. A few responses were workable, but could be tightened by prompting and reinforcing the replacement behavior more directly.';
+    }
+    return 'You identified some helpful responses, but a few choices moved away from the student’s plan. Review the coaching notes below to strengthen plan-aligned responding during tricky moments.';
+  }
 
+  function reviewItemHTML(item) {
+    const coachNote = item.feedback || item.wizard || 'Review how this choice connects to the student’s plan.';
+    const strongerMove = item.bestChoiceText || 'Use the most plan-aligned option available: prevent, prompt, reinforce, and return calmly.';
     return `
-      <section class="mobile-results-summary">
-        <h1>${MR.escapeHTML(summary.title || feedback.title)}</h1>
-        <p class="mobile-results-score"><strong>Score:</strong> ${run.score} / ${run.maxScore} (${run.accuracy}%)</p>
-        <p>${MR.escapeHTML(summary.message || feedback.body || summary.feedback)}</p>
-        <p><strong>${MR.escapeHTML(summary.summary || '')}</strong></p>
-        <h2>Quick feedback</h2>
-        <ul>
-          <li>Strong choices: ${strongCount}</li>
-          <li>Partial choices: ${partialCount}</li>
-          <li>Missed choices: ${missedCount}</li>
-        </ul>
-        ${reminder}
+      <article class="results-review-item">
+        <h3>Moment ${MR.escapeHTML(String(item.stepIndex || ''))}</h3>
+        <p><strong>Context:</strong> ${MR.escapeHTML(shortText(item.context || item.prompt || item.stepId || 'Practice moment'))}</p>
+        <p><strong>Your Choice:</strong> ${MR.escapeHTML(item.choiceText || 'No choice text saved')}</p>
+        <p><strong>Coach Note:</strong> ${MR.escapeHTML(coachNote)}</p>
+        <p><strong>Stronger Plan-Aligned Move:</strong> ${MR.escapeHTML(strongerMove)}</p>
+      </article>
+    `;
+  }
+
+  function reviewGroupHTML(title, intro, items) {
+    if (!items.length) return '';
+    return `
+      <section class="results-review-group">
+        <h2>${MR.escapeHTML(title)}</h2>
+        <p>${MR.escapeHTML(intro)}</p>
+        ${items.map(reviewItemHTML).join('')}
       </section>
     `;
+  }
+
+  function coachingDebriefHTML(run, summary) {
+    const buckets = scoreBuckets(run);
+    const total = buckets.answered.length || Number(run.expectedSteps || 0) || 0;
+    const coaching = coachingSummary(run, buckets);
+    const reviewHTML = buckets.missedQuestions.length
+      ? `
+        ${reviewGroupHTML(
+          'Workable, but Refine',
+          'These choices were supportive or reasonable, but missed a chance to respond more directly from the plan.',
+          buckets.refineChoices
+        )}
+        ${reviewGroupHTML(
+          'Missed Opportunities',
+          'These choices moved away from the plan or missed a chance to teach, reinforce, or calmly return to the routine.',
+          buckets.mismatchChoices
+        )}
+      `
+      : '<p class="results-empty-review">No review items today — strong plan-aligned responding.</p>';
+
+    return `
+      <section class="results-debrief">
+        <h1>${MR.escapeHTML(summary.title)}</h1>
+        <section class="results-card results-summary-card">
+          <h2>Mission Summary</h2>
+          <dl class="results-stats">
+            <div><dt>Total Score</dt><dd>${MR.escapeHTML(String(run.score))} / ${MR.escapeHTML(String(run.maxScore))}</dd></div>
+            <div><dt>Percent</dt><dd>${MR.escapeHTML(String(run.accuracy))}%</dd></div>
+            <div><dt>Best Choice</dt><dd>${buckets.bestChoices.length} / ${total}</dd></div>
+            <div><dt>Workable, but Refine</dt><dd>${buckets.refineChoices.length}</dd></div>
+            <div><dt>Missed Opportunity</dt><dd>${buckets.mismatchChoices.length}</dd></div>
+          </dl>
+        </section>
+        <section class="results-card results-coaching-card">
+          <h2>Coaching Summary</h2>
+          <p>${MR.escapeHTML(coaching)}</p>
+        </section>
+        <section class="results-card results-review-card">
+          <h2>Review</h2>
+          ${reviewHTML}
+        </section>
+      </section>
+    `;
+  }
+
+  function mobileResultsHTML(run, summary) {
+    return coachingDebriefHTML(run, summary);
   }
 
   function wizardSpriteForAccuracy(accuracy) {
@@ -674,7 +740,7 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
       choiceHistory: history,
       scoreHistory: scores,
       branchPath: history.map(item => item.stepId),
-      missedReviewCount: scores.filter(score => score === 0).length,
+      missedReviewCount: scores.filter(score => score < 10).length,
       neutralChoiceCount: scores.filter(score => score > 0 && score < 10).length,
       incorrectChoiceCount: scores.filter(score => score === 0).length,
       correctChoiceCount: scores.filter(score => score >= 10).length
@@ -778,16 +844,7 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     MR.$('#results-xp-fill').style.width = `${xp.behaviorXPPct}%`;
     MR.$('#results-score-label').textContent = `${run.score}`;
 
-    MR.$('#results-content').innerHTML = isMobileView() ? mobileResultsHTML(run, summary) : `
-      <h1>${MR.escapeHTML(summary.title)}</h1>
-      <p><strong>Score:</strong> ${run.score} / ${run.maxScore} (${run.accuracy}%)</p>
-      <p><strong>Overall feedback:</strong><br />${MR.escapeHTML(summary.message)}</p>
-      <p><strong>${MR.escapeHTML(summary.summary)}</strong></p>
-      <p>${MR.escapeHTML(summary.lastText)}</p>
-      <p><strong>Plan reminder:</strong></p>
-      ${summary.actions}
-      ${missedAnswerReview(run)}
-    `;
+    MR.$('#results-content').innerHTML = mobileResultsHTML(run, summary);
     updateResultsWizard(run);
     wireResultsSurveyInvite(run);
     if (shouldPlayCompletion) {
