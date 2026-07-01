@@ -1205,7 +1205,7 @@ p {
 .coach-dashboard {
   padding: 44px 0 58px;
   background:
-    linear-gradient(180deg, rgba(16, 36, 63, .98) 0%, rgba(18, 48, 82, .95) 330px, rgba(247, 249, 252, 1) 331px);
+    linear-gradient(180deg, rgba(16, 36, 63, .98) 0%, rgba(18, 48, 82, .95) 520px, rgba(247, 249, 252, 1) 521px);
 }
 
 .coach-hero,
@@ -1219,7 +1219,7 @@ p {
   grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
   gap: 26px;
   align-items: end;
-  padding: 18px 0 34px;
+  padding: 18px 0 70px;
 }
 
 .coach-hero .eyebrow {
@@ -1232,8 +1232,9 @@ p {
 }
 
 .coach-hero .page-title {
-  max-width: 780px;
-  font-size: clamp(2.25rem, 5.2vw, 4.2rem);
+  max-width: 880px;
+  font-size: clamp(2.25rem, 4.7vw, 4rem);
+  line-height: 1;
 }
 
 .coach-hero .subtitle {
@@ -1242,8 +1243,8 @@ p {
 }
 
 .coach-template-note {
-  max-width: 760px;
-  margin: 18px 0 0;
+  max-width: 820px;
+  margin: 24px 0 0;
   color: #d8e5f0;
   font-weight: 700;
 }
