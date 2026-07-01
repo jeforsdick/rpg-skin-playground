@@ -504,6 +504,40 @@ p {
   line-height: 1.5;
 }
 
+.dashboard-preview-section {
+  padding-top: 8px;
+}
+
+.dashboard-preview-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  padding: 24px 26px;
+  border: 1px solid rgba(240, 201, 90, .58);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .96), rgba(255, 248, 226, .9));
+  box-shadow: 0 18px 42px rgba(16, 36, 63, .1);
+}
+
+.dashboard-preview-card h2 {
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+}
+
+.dashboard-preview-card p:not(.eyebrow) {
+  max-width: 780px;
+  margin: 10px 0 0;
+  color: #3f5062;
+}
+
+.dashboard-preview-card .eyebrow {
+  margin-bottom: 10px;
+}
+
+.dashboard-preview-card .button {
+  white-space: nowrap;
+}
+
 .inside-game {
   padding-top: 18px;
 }
@@ -1721,6 +1755,14 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .dashboard-preview-card {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-preview-card .button {
+    width: fit-content;
+  }
+
   .process-strip article + article {
     border-left: 0;
     border-top: 1px solid #dfe7ee;
@@ -1901,6 +1943,15 @@ p {
 
   .briefing-wizard {
     display: none;
+  }
+
+  .dashboard-preview-card {
+    padding: 20px;
+  }
+
+  .dashboard-preview-card .button {
+    width: 100%;
+    white-space: normal;
   }
 
   .coach-dashboard {
