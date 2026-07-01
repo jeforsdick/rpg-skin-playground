@@ -2,6 +2,7 @@
   'use strict';
 
   const MR = window.MR = window.MR || {};
+  const TEACHER_CONTENT_VERSION = '20260630-wizard-hints';
 
   const DEFAULT_CONFIG = {
     teacherId: 'olson',
@@ -73,7 +74,7 @@
     window.MR_TEACHER_CONFIG = null;
 
     const folder = `teachers/${teacherId}`;
-    await MR.loadScript(`${folder}/config.js`);
+    await MR.loadScript(`${folder}/config.js?v=${TEACHER_CONTENT_VERSION}`);
 
     const teacherConfig = deepMerge(DEFAULT_CONFIG, window.MR_TEACHER_CONFIG || {});
     teacherConfig.teacherId = teacherConfig.teacherId || teacherId;

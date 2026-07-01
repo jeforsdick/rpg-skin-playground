@@ -34,7 +34,7 @@ window.MR_TEACHER_CONFIG = {
   resourcesFile: 'content/resources.js',
 
   missionFiles: [
-    'content/daily-mission-1.js',
+    'content/daily-mission-1.js?v=20260630-wizard-hints',
     'content/wildcard-mission-1.js',
     'content/crisis-mission-1.js'
   ]

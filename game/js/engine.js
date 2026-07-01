@@ -20,6 +20,8 @@ Your job is to choose responses that follow the plan:
 * stay calm and private,
 * guide Jordan back to one small step.
 Avoid public correction, arguing, threats, or making the task feel bigger.`;
+  const DEFAULT_HINT_PROMPT = 'Stuck? Ask the wizard for a plan hint.';
+  const DEFAULT_BSP_HINT = 'Jordan’s plan focuses on small writing steps, help or break requests, and quick reinforcement for returning to the task.';
 
   function getChoiceArray(step) {
     const entries = Object.entries(step.choices || {}).map(([key, value]) => Object.assign({ key }, value));
@@ -121,25 +123,54 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     return 'start';
   }
 
+  function currentStep() {
+    return current && current.mission && current.mission.steps ? current.mission.steps[current.stepId] : null;
+  }
+
+  function bspHintForCurrentStep() {
+    const step = currentStep();
+    if (step && step.hint) return step.hint;
+    if (current && current.mission && current.mission.hint) return current.mission.hint;
+    return DEFAULT_BSP_HINT;
+  }
+
   function wizardHintForCurrentStep() {
-    if (!current) return 'Choose the move that best follows Jordan’s plan.';
-    const history = Array.isArray(current.history) ? current.history : [];
-    if (!history.length) return 'Choose your move carefully. Your decision changes what happens next.';
+    if (!current || !current.hintOpenedForStep) return DEFAULT_HINT_PROMPT;
+    return bspHintForCurrentStep();
+  }
 
-    const missedCount = history.filter(item => Number(item.score) < 5).length;
-    if (missedCount >= 2) return 'The plan is your compass: help, break, small step, calm return.';
+  function updateWizardHintTrigger() {
+    const trigger = MR.$('#wizard-hint-trigger');
+    if (!trigger) return;
+    const opened = Boolean(current && current.hintOpenedForStep);
+    trigger.classList.toggle('is-open', opened);
+    trigger.setAttribute('aria-expanded', opened ? 'true' : 'false');
+  }
 
-    const branchState = branchStateForStep(current.stepId);
-    if (branchState === 'supported') return 'You’re keeping the path steady. Keep looking for calm, private support.';
-    if (branchState === 'wobbly') return 'Jordan is unsure. Look for help, a short break, or one small step.';
-    if (branchState === 'escalated') return 'Careful — the situation is getting bigger. Look for a lower-pressure response.';
-    return 'Choose the move that best follows Jordan’s plan.';
+  function revealWizardHint() {
+    if (!current) return;
+    current.hintOpenedForStep = true;
+    playAudioCue('click', 0.18);
+    renderWizardHint();
+  }
+
+  function wireWizardHintTrigger() {
+    const trigger = MR.$('#wizard-hint-trigger');
+    if (!trigger || trigger.dataset.hintWired === 'true') return;
+    trigger.dataset.hintWired = 'true';
+    trigger.addEventListener('click', revealWizardHint);
+    trigger.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      revealWizardHint();
+    });
   }
 
   function renderWizardHint() {
     const hint = MR.$('#wizard-hint');
     if (!hint) return;
     hint.textContent = wizardHintForCurrentStep();
+    updateWizardHintTrigger();
   }
 
   function wizardSpriteForScore(score) {
@@ -207,13 +238,15 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
   }
 
   function renderStep() {
-    const step = current.mission.steps[current.stepId];
+    const step = currentStep();
     if (!step) {
       finishMission();
       return;
     }
 
     renderHUD();
+    current.hintOpenedForStep = false;
+    wireWizardHintTrigger();
     MR.$('#scenario-text').innerHTML = scenarioHTML(step.text || '');
     renderWizardHint();
     const choices = getChoiceArray(step);
@@ -250,6 +283,8 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
       maxScore,
       feedback: choice.feedback || '',
       wizard: choice.wizard || '',
+      hintOpened: Boolean(current.hintOpenedForStep),
+      hintText: current.hintOpenedForStep ? bspHintForCurrentStep() : '',
       bestChoiceKey: bestChoice ? bestChoice.key : '',
       bestChoiceText: bestChoice ? bestChoice.text || '' : '',
       bestChoiceFeedback: bestChoice ? bestChoice.feedback || '' : '',

@@ -31,9 +31,8 @@
 
 The class just finished talking about favorite animals. Now everyone is supposed to write one sentence about an animal they like.
 
-Jordan sits at their desk and looks at the blank paper. Their pencil is still on the table. They are quiet, but their shoulders look tense.
-
-The plan says Jordan does best when the first step is small and clear.`,
+Jordan sits at their desk and looks at the blank paper. Their pencil is still on the table. They are quiet, but their shoulders look tense.`,
+        hint: `Jordan does best when the first writing step is small, clear, and paired with help if needed.`,
         choices: {
           A: {
             text: `Quietly point to the sentence starter and say, "First, write one animal. You can ask for help if you get stuck."`,
@@ -80,9 +79,8 @@ The plan says Jordan does best when the first step is small and clear.`,
       daily_step2_supported: {
         text: `Jordan looks at the sentence starter and touches the pencil. They are not writing yet, but they are still looking at the paper.
 
-After a few seconds, Jordan whispers, "What animal should I pick?"
-
-This is a chance to prompt Jordan to ask for help and take one small step.`,
+After a few seconds, Jordan whispers, "What animal should I pick?"`,
+        hint: `Prompt Jordan to use the replacement skill: asking for help, then taking one small writing step.`,
         choices: {
           A: {
             text: `Say, "You can ask for help. Try saying, 'Can you help me pick one animal?'"`,
@@ -129,9 +127,8 @@ This is a chance to prompt Jordan to ask for help and take one small step.`,
       daily_step2_wobbly: {
         text: `Jordan looks at the paper, then looks around the room. A few students have already started writing.
 
-Jordan taps the pencil and says quietly, "I don't know what to write."
-
-Jordan is not refusing yet, but the task still feels too big.`,
+Jordan taps the pencil and says quietly, "I don't know what to write."`,
+        hint: `This is still a prevention moment. Make the task smaller or prompt Jordan to ask for help before refusal grows.`,
         choices: {
           A: {
             text: `Move close and say, "You can write 'My animal is...' or ask me for help picking one."`,
@@ -178,9 +175,8 @@ Jordan is not refusing yet, but the task still feels too big.`,
       daily_step2_escalated: {
         text: `Jordan pushes the paper a few inches away and sinks lower in the chair. A nearby student looks over.
 
-Jordan mutters, "I'm not doing this."
-
-The writing task is starting to feel public and stressful.`,
+Jordan mutters, "I'm not doing this."`,
+        hint: `Keep it private and low-pressure. Offer the planned help or break option instead of adding attention.`,
         choices: {
           A: {
             text: `Move close, keep your voice quiet, and say, "You can ask for help or take a short break."`,
@@ -227,9 +223,8 @@ The writing task is starting to feel public and stressful.`,
       daily_step3_supported: {
         text: `Jordan says, "Can you help me pick one animal?"
 
-They are still not writing, but they used the help request from the plan. Their pencil is in their hand.
-
-Now the response should reinforce the help request and keep the next step small.`,
+They are still not writing, but they used the help request from the plan. Their pencil is in their hand.`,
+        hint: `Reinforce the help request right away, then keep the next writing move small and doable.`,
         choices: {
           A: {
             text: `Say, "Great job asking for help. Pick dog or shark, then write just that first word."`,
@@ -277,6 +272,7 @@ Now the response should reinforce the help request and keep the next step small.
         text: `Jordan is still seated, but their paper is blank. They press the pencil hard into the desk and say, "I can't do it."
 
 They have not fully refused, but they are getting closer.`,
+        hint: `Prompt a help request and one small writing step before frustration turns into full refusal.`,
         choices: {
           A: {
             text: `Say, "You can ask for help. Try, 'Can you help me start with one word?'"`,
@@ -323,9 +319,8 @@ They have not fully refused, but they are getting closer.`,
       daily_step3_escalated: {
         text: `Jordan puts their head down on the desk. The paper is pushed away. Another student whispers, "Jordan is not doing it."
 
-Jordan says, "Leave me alone."
-
-This is a high-risk moment for a power struggle.`,
+Jordan says, "Leave me alone."`,
+        hint: `Avoid a public power struggle. Stay calm, offer a short break, and include a clear return to one small writing step.`,
         choices: {
           A: {
             text: `Quietly say, "You can take a short break. Then we will come back and write one word."`,
@@ -372,9 +367,8 @@ This is a high-risk moment for a power struggle.`,
       daily_step4_supported: {
         text: `Jordan chooses "shark" and writes the word "shark" on the paper. It is only one word, but it is the first step.
 
-Jordan looks up as if checking whether this counts.
-
-This is the moment to reinforce the small step and keep momentum going.`,
+Jordan looks up as if checking whether this counts.`,
+        hint: `Reinforce the first small step, then give one simple next move or a way to ask for help.`,
         choices: {
           A: {
             text: `Say, "You wrote the first word. That is the start. Now add 'is cool' or ask for help."`,
@@ -421,9 +415,8 @@ This is the moment to reinforce the small step and keep momentum going.`,
       daily_step4_wobbly: {
         text: `Jordan is still near the task, but they are unsure. They write one letter, erase it, and then stop.
 
-Jordan says, "I don't know if this is right."
-
-The next choice can either build confidence or make writing feel risky again.`,
+Jordan says, "I don't know if this is right."`,
+        hint: `Reduce perfection pressure. Bring Jordan back to one small step and make help available.`,
         choices: {
           A: {
             text: `Say, "Starting is what matters. Write one word first, and I can help with the sentence."`,
@@ -470,9 +463,8 @@ The next choice can either build confidence or make writing feel risky again.`,
       daily_step4_escalated: {
         text: `Jordan leaves the writing area and stands near the bookshelf. The paper is still on the desk.
 
-A few students are watching. Jordan says, "I'm not writing."
-
-The plan says to stay calm, avoid public correction, and redirect to help or a short break.`,
+A few students are watching. Jordan says, "I'm not writing."`,
+        hint: `Stay calm and private. Redirect to the planned help or break option with a small return step.`,
         choices: {
           A: {
             text: `Walk nearby and quietly say, "You can take a short break here, then come back for one word."`,
@@ -519,9 +511,8 @@ The plan says to stay calm, avoid public correction, and redirect to help or a s
       daily_step5_supported: {
         text: `Jordan has written one word and is looking at the sentence starter. They quietly say, "Can you help me finish it?"
 
-Jordan is using the plan and is still connected to writing.
-
-This is the final decision of the mission.`,
+Jordan is using the plan and is still connected to writing.`,
+        hint: `This is a replacement behavior success. Reinforce asking for help and keep the finish line simple.`,
         choices: {
           A: {
             text: `Say, "Yes. Great asking for help. Add two words, then you are done with this sentence."`,
@@ -565,9 +556,8 @@ This is the final decision of the mission.`,
       daily_step5_wobbly: {
         text: `Jordan is back near the paper, but progress is fragile. They have either written one word, asked for help, or returned from a short break.
 
-Jordan says, "Do I have to write the whole thing?"
-
-This is the final decision of the mission.`,
+Jordan says, "Do I have to write the whole thing?"`,
+        hint: `Keep the demand small and specific. A clear first word with help is more plan-aligned than a vague reduced demand.`,
         choices: {
           A: {
             text: `Say, "First write one word. Then I will help you add two more words."`,
@@ -611,9 +601,8 @@ This is the final decision of the mission.`,
       daily_step5_escalated: {
         text: `Jordan is away from the writing task or has their head down. The paper is still mostly blank.
 
-The class is moving on soon, and the adult feels pressure to get Jordan to comply quickly.
-
-This is the final decision of the mission.`,
+The class is moving on soon, and the adult feels pressure to get Jordan to comply quickly.`,
+        hint: `Even near the end, avoid pressure. Offer a calm break-and-return path with one small writing step.`,
         choices: {
           A: {
             text: `Quietly say, "Take a short break. Then come back and write one word with help."`,

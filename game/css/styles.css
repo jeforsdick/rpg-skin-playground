@@ -803,6 +803,18 @@ body {
   height: 300px;
   top: -14px;
   right: 0;
+  cursor: pointer;
+}
+
+.wizard-hint-wrap:hover .scenario-hint,
+.wizard-hint-wrap:focus-visible .scenario-hint,
+.wizard-hint-wrap.is-open .scenario-hint {
+  filter: drop-shadow(7px 7px 0 #080008) brightness(1.06);
+}
+
+.wizard-hint-wrap:focus-visible {
+  outline: 4px solid #fff1a3;
+  outline-offset: 4px;
 }
 
 .scenario-hint {
@@ -2175,10 +2187,13 @@ body {
   z-index: 2;
 }
 
-.wizard-hint-wrap,
 .scenario-hint,
 .wizard-sidekick {
   pointer-events: none;
+}
+
+.wizard-hint-wrap {
+  pointer-events: auto;
 }
 
 .choice-list {
