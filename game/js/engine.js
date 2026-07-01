@@ -40,6 +40,31 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     return Number(value || 0);
   }
 
+  function choiceTypeForScore(score) {
+    const value = scoreValue(score);
+    if (value === 10) return 'best';
+    if (value === 5) return 'refine';
+    if (value === 0) return 'missed';
+    return value >= 10 ? 'best' : value > 0 ? 'refine' : 'missed';
+  }
+
+  function choiceLabelForType(type) {
+    if (type === 'best') return 'Best Choice';
+    if (type === 'refine') return 'Workable, but Refine';
+    return 'Missed Opportunity';
+  }
+
+  function countSummaryForHistory(history) {
+    const scores = (Array.isArray(history) ? history : []).map(item => scoreValue(item.score));
+    return {
+      totalQuestions: scores.length,
+      bestChoiceCount: scores.filter(score => score === 10).length,
+      refineChoiceCount: scores.filter(score => score === 5).length,
+      missedOpportunityCount: scores.filter(score => score === 0).length,
+      missedReviewCount: scores.filter(score => score < 10).length
+    };
+  }
+
   function stepMax(step) {
     const scores = Object.values(step.choices || {}).map(getScore);
     return scores.length ? Math.max(...scores, 10) : 10;
@@ -290,6 +315,11 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     const timeFromHintToAnswerMs = hintTracking.hintOpenedAt && hintTracking.timeFromQuestionStartToHintMs != null
       ? Math.max(0, answerTime - Date.parse(hintTracking.hintOpenedAt))
       : null;
+    const responseTimeMs = hintTracking.questionStartTime
+      ? Math.max(0, answerTime - hintTracking.questionStartTime)
+      : null;
+    const selectedScore = scoreValue(score);
+    const selectedType = choiceTypeForScore(selectedScore);
     playAudioCue(soundForScore(score));
 
     current.score += score;
@@ -298,22 +328,31 @@ Avoid public correction, arguing, threats, or making the task feel bigger.`;
     current.history.push({
       stepId: current.stepId,
       stepIndex: current.history.length + 1,
+      scenarioTitle: step.title || current.mission.title || '',
       prompt: splitScenarioText(step.text || ''),
       context: splitScenarioText(step.text || ''),
       choiceKey,
       choiceText: choice.text || '',
+      selectedAnswerText: choice.text || '',
       score,
+      selectedScore,
+      selectedType,
+      isBestChoice: selectedScore === 10,
+      isReviewItem: selectedScore < 10,
       maxScore,
       feedback: choice.feedback || '',
+      feedbackText: choice.feedback || choice.wizard || '',
       wizard: choice.wizard || '',
       hintOpened: Boolean(hintTracking.hintOpened),
       hintOpenCount: Number(hintTracking.hintOpenCount || 0),
       hintOpenedAt: hintTracking.hintOpenedAt || null,
       timeFromQuestionStartToHintMs: hintTracking.timeFromQuestionStartToHintMs != null ? hintTracking.timeFromQuestionStartToHintMs : null,
       timeFromHintToAnswerMs,
+      responseTimeMs,
       hintText: current.hintOpenedForStep ? bspHintForCurrentStep() : '',
       bestChoiceKey: bestChoice ? bestChoice.key : '',
       bestChoiceText: bestChoice ? bestChoice.text || '' : '',
+      bestAnswerText: bestChoice ? bestChoice.text || '' : '',
       bestChoiceFeedback: bestChoice ? bestChoice.feedback || '' : '',
       meta: choice.meta || {},
       heartsBefore: heartChange.before,
@@ -611,19 +650,123 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     };
   }
 
+  function choiceLogForAppsScript(item, run) {
+    const selectedScore = scoreValue(item.selectedScore != null ? item.selectedScore : item.score);
+    const selectedType = item.selectedType || choiceTypeForScore(selectedScore);
+    const selectedAnswerText = item.selectedAnswerText || item.choiceText || '';
+    const bestAnswerText = item.bestAnswerText || item.bestChoiceText || '';
+    const feedbackText = item.feedbackText || item.feedback || item.wizard || '';
+
+    return {
+      sessionId: run.id,
+      teacherId: run.teacherId,
+      missionId: run.missionId,
+      stepIndex: item.stepIndex,
+      stepId: item.stepId,
+      scenarioTitle: item.scenarioTitle || run.missionTitle || '',
+      selectedAnswerText,
+      selectedScore,
+      selectedType,
+      isBestChoice: selectedScore === 10,
+      isReviewItem: selectedScore < 10,
+      hintOpened: Boolean(item.hintOpened),
+      hintOpenCount: Number(item.hintOpenCount || 0),
+      timeFromQuestionStartToHintMs: item.timeFromQuestionStartToHintMs != null ? item.timeFromQuestionStartToHintMs : null,
+      timeFromHintToAnswerMs: item.timeFromHintToAnswerMs != null ? item.timeFromHintToAnswerMs : null,
+      responseTimeMs: item.responseTimeMs != null ? item.responseTimeMs : null,
+      feedbackText,
+      bestAnswerText,
+
+      t: run.timestamp,
+      delta: selectedScore,
+      result_label: choiceLabelForType(selectedType),
+      nodeId: item.stepId || '',
+      choice: item.choiceKey || selectedAnswerText,
+      selected_answer: selectedAnswerText,
+      correct_answer: bestAnswerText,
+      wizard_feedback: feedbackText,
+      wizard_narration: item.wizard || '',
+      scenario_title: item.scenarioTitle || run.missionTitle || '',
+      scenario_text: item.context || item.prompt || '',
+      scene_text: item.context || item.prompt || '',
+      question_prompt: item.context || item.prompt || '',
+      mission_title: run.missionTitle || '',
+      mission_focus: run.missionFocus || '',
+      routine: run.routine || '',
+      function_pressure: Array.isArray(run.functionPressure) ? run.functionPressure.join(', ') : (run.functionPressure || ''),
+      bip_targets: Array.isArray(run.bipTargets) ? run.bipTargets.join(', ') : (run.bipTargets || '')
+    };
+  }
+
+  function missionRunPayload(run) {
+    const choices = (Array.isArray(run.history) ? run.history : []).map(item => choiceLogForAppsScript(item, run));
+    const session = {
+      sessionId: run.id,
+      timestamp: run.timestamp,
+      teacherId: run.teacherId,
+      teacherName: run.teacherName,
+      mode: run.mode,
+      modeLabel: run.modeLabel,
+      missionId: run.missionId,
+      missionTitle: run.missionTitle,
+      score: run.score,
+      maxScore: run.maxScore,
+      accuracy: run.accuracy,
+      durationSeconds: run.durationSeconds,
+      activeDurationSeconds: run.activeDurationSeconds,
+      totalQuestions: run.totalQuestions,
+      bestChoiceCount: run.bestChoiceCount,
+      refineChoiceCount: run.refineChoiceCount,
+      missedOpportunityCount: run.missedOpportunityCount,
+      missedReviewCount: run.missedReviewCount,
+      hintsUsed: run.hintsUsed,
+      totalHintsOpened: run.totalHintsOpened,
+      questionsWithHints: run.questionsWithHints,
+      hintUseRate: run.hintUseRate,
+      screenWidth: window.innerWidth,
+      screenHeight: window.innerHeight,
+      userAgent: navigator.userAgent
+    };
+
+    return Object.assign({}, run, {
+      action: 'missionRun',
+      session,
+      choices,
+      rawRun: run,
+      teacher_code: run.teacherId || '',
+      student: MR.teacherConfig.studentAlias || '',
+      session_id: run.id || '',
+      points: run.score,
+      max_possible: run.maxScore,
+      percent: run.accuracy,
+      log: choices
+    });
+  }
+
   function finishMission() {
     const accuracy = current.maxScore ? Math.round((current.score / current.maxScore) * 100) : 0;
     const xp = behaviorXPFor(current.score, current.expectedSteps || 3, current.xpMax);
     const timing = MR.SessionTimer && MR.SessionTimer.stop ? MR.SessionTimer.stop() : null;
-    const hintSummary = hintSummaryForHistory(current.history);
+    const runId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const history = current.history.map(item => Object.assign({}, item, {
+      sessionId: runId,
+      teacherId: MR.teacherConfig.teacherId,
+      missionId: current.mission.id
+    }));
+    const hintSummary = hintSummaryForHistory(history);
+    const countSummary = countSummaryForHistory(history);
     const run = {
-      id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      id: runId,
       teacherId: MR.teacherConfig.teacherId,
       teacherName: MR.teacherConfig.displayName,
       mode: current.mode,
       modeLabel: MODE_LABELS[current.mode] || current.mode,
       missionId: current.mission.id,
       missionTitle: current.mission.title,
+      missionFocus: current.mission.focus || '',
+      routine: current.mission.routine || '',
+      functionPressure: current.mission.functionPressure || current.mission.function_pressure || '',
+      bipTargets: current.mission.bipTargets || current.mission.bip_targets || '',
       dateKey: MR.todayKey(),
       timestamp: new Date().toISOString(),
       score: current.score,
@@ -644,7 +787,12 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
       questionsWithHints: hintSummary.questionsWithHints,
       hintUseRate: hintSummary.hintUseRate,
       perQuestionHintData: hintSummary.perQuestionHintData,
-      history: current.history
+      totalQuestions: countSummary.totalQuestions,
+      bestChoiceCount: countSummary.bestChoiceCount,
+      refineChoiceCount: countSummary.refineChoiceCount,
+      missedOpportunityCount: countSummary.missedOpportunityCount,
+      missedReviewCount: countSummary.missedReviewCount,
+      history
     };
 
     MR.storage.saveRun(run);
@@ -654,13 +802,22 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
 
   function sendRun(run) {
     const endpoint = MR.teacherConfig.resultEndpoint || '';
-    if (!endpoint || endpoint.includes('PASTE_')) return;
+    if (!endpoint || endpoint.includes('PASTE_')) {
+      console.info('Remote logging skipped because endpoint is blank');
+      return;
+    }
+    const payload = missionRunPayload(run);
+    console.info('Remote logging endpoint present');
+    console.info('Mission run payload', payload);
     try {
+      console.info('Remote logging attempted');
+      // Apps Script receives this in no-cors mode, so the browser can only confirm
+      // that the request was sent, not that the spreadsheet write succeeded.
       fetch(endpoint, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(run)
+        body: JSON.stringify(payload)
       }).catch(error => console.warn('Remote logging failed:', error));
     } catch (error) {
       console.warn('Remote logging failed:', error);
@@ -784,8 +941,9 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
   function betaSurveyPayload(run, form) {
     const data = new FormData(form);
     const history = Array.isArray(run.history) ? run.history : [];
-    const scores = history.map(item => Number(item.score || 0));
+    const scores = history.map(item => scoreValue(item.score));
     const hintSummary = hintSummaryForHistory(history);
+    const countSummary = countSummaryForHistory(history);
 
     return {
       action: 'betaSurvey',
@@ -834,16 +992,21 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
       questionsWithHints: run.questionsWithHints != null ? run.questionsWithHints : hintSummary.questionsWithHints,
       hintUseRate: run.hintUseRate != null ? run.hintUseRate : hintSummary.hintUseRate,
       perQuestionHintData: JSON.stringify(run.perQuestionHintData || hintSummary.perQuestionHintData),
-      missedReviewCount: scores.filter(score => score < 10).length,
-      neutralChoiceCount: scores.filter(score => score > 0 && score < 10).length,
-      incorrectChoiceCount: scores.filter(score => score === 0).length,
-      correctChoiceCount: scores.filter(score => score >= 10).length
+      totalQuestions: run.totalQuestions != null ? run.totalQuestions : countSummary.totalQuestions,
+      bestChoiceCount: run.bestChoiceCount != null ? run.bestChoiceCount : countSummary.bestChoiceCount,
+      refineChoiceCount: run.refineChoiceCount != null ? run.refineChoiceCount : countSummary.refineChoiceCount,
+      missedOpportunityCount: run.missedOpportunityCount != null ? run.missedOpportunityCount : countSummary.missedOpportunityCount,
+      missedReviewCount: run.missedReviewCount != null ? run.missedReviewCount : countSummary.missedReviewCount,
+      neutralChoiceCount: run.refineChoiceCount != null ? run.refineChoiceCount : countSummary.refineChoiceCount,
+      incorrectChoiceCount: run.missedOpportunityCount != null ? run.missedOpportunityCount : countSummary.missedOpportunityCount,
+      correctChoiceCount: run.bestChoiceCount != null ? run.bestChoiceCount : countSummary.bestChoiceCount
     };
   }
 
   function submitBetaSurvey(run, form, status, button) {
     const endpoint = MR.teacherConfig.resultEndpoint || '';
     if (!endpoint || endpoint.includes('PASTE_')) {
+      console.info('Remote logging skipped because endpoint is blank');
       status.textContent = 'Something went wrong and your survey was not submitted. Please check your connection and try again.';
       return;
     }
@@ -852,8 +1015,12 @@ After the mission, tap the wizard on the Results screen to complete the beta sur
     status.textContent = 'Submitting beta feedback...';
 
     const payload = betaSurveyPayload(run, form);
-    console.info('Beta survey payload final', payload);
+    console.info('Remote logging endpoint present');
+    console.info('Beta survey payload', payload);
 
+    console.info('Remote logging attempted');
+    // Apps Script receives this in no-cors mode, so the browser can only confirm
+    // that the request was sent, not that the spreadsheet write succeeded.
     fetch(endpoint, {
       method: 'POST',
       mode: 'no-cors',
