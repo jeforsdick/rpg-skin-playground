@@ -245,14 +245,14 @@ button:focus-visible, input:focus-visible { outline: 4px solid #fff1a3; outline-
 .map-hotspot:focus-visible::after,
 .map-hotspot.is-active::after { transform: translate(6px, 10px) rotate(45deg) scale(1); }
 .map-hotspot:focus-visible { outline: 3px solid #fff4a4; outline-offset: 4px; }
-.map-hotspot-prevention { left: 38%; top: 58%; width: 27%; height: 7%; }
-.map-hotspot-replacement { left: 78%; top: 52%; width: 20%; height: 8%; }
-.map-hotspot-reinforcement { left: 31%; top: 7%; width: 22%; height: 7%; }
-.map-hotspot-error-correction { left: 61%; top: 78%; width: 30%; height: 8%; }
-.map-hotspot-library { left: 4%; top: 65%; width: 26%; height: 8%; }
-.map-hotspot-function { left: 9%; top: 25%; width: 19%; height: 8%; }
-.map-hotspot-coaching { left: 5%; top: 90%; width: 20%; height: 7%; }
-.map-hotspot-fidelity { left: 52%; top: 13%; width: 28%; height: 7%; }
+.map-hotspot-prevention { left: 33%; top: 48%; width: 32%; height: 8%; }
+.map-hotspot-replacement { left: 63.5%; top: 38%; width: 28%; height: 9%; }
+.map-hotspot-reinforcement { left: 23.5%; top: 5.3%; width: 28%; height: 8%; }
+.map-hotspot-error-correction { left: 62.5%; top: 78.8%; width: 34%; height: 8%; }
+.map-hotspot-library { left: 3%; top: 61%; width: 31%; height: 7%; }
+.map-hotspot-function { left: 17%; top: 27%; width: 24%; height: 8%; }
+.map-hotspot-coaching { left: 6.5%; top: 88.2%; width: 25%; height: 7%; }
+.map-hotspot-fidelity { left: 50.5%; top: 16.5%; width: 34%; height: 8%; }
 .resources-contact { margin: 0 auto; max-width: 900px; text-align: center; color: #fff5d2; font: 800 15px/1.25 var(--mono); text-shadow: 2px 2px 0 #050005; }
 .resources-contact a { color: #ffc54a; text-decoration: underline; }
 .bip-section { margin: 0 0 22px; }
